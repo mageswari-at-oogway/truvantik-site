@@ -1,0 +1,111 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const industries = [
+  {
+    id: "healthcare", n: "01", name: "Healthcare",
+    stat: 25, prefix: "", suffix: "%", statLabel: "of clinical time recovered for higher-value patient care",
+    range: "15–25%",
+    body: "Clinical and administrative workload sits on documentation, triage and coordination — repetitive but consequential, so accuracy and auditability matter more than speed alone.",
+    work: ["Clinical documentation & summarization support", "Patient intake, triage and scheduling", "Care-coordination and follow-up automation"],
+  },
+  {
+    id: "retail", n: "02", name: "Retail & e-commerce",
+    stat: 15, prefix: "", suffix: "%", statLabel: "lift in conversion, with lower cost per transaction",
+    range: "5–15%",
+    body: "Margin lives in assortment, pricing, content operations and service volume — high-frequency decisions where a small quality gain compounds across a catalogue.",
+    work: ["Catalogue enrichment & content at scale", "Demand and assortment forecasting", "Service triage and agent assistance"],
+  },
+  {
+    id: "manufacturing", n: "03", name: "Manufacturing & industrial",
+    stat: 35, prefix: "", suffix: "%", statLabel: "reduction in unplanned downtime through early detection",
+    range: "20–35%",
+    body: "Sensor and maintenance data already exists but rarely reaches the person making the call on the floor in time to change the outcome.",
+    work: ["Quality inspection from images & sensor data", "Exception detection and resolution", "Capacity and ETA forecasting"],
+  },
+  {
+    id: "consumer-tech", n: "04", name: "Consumer technology",
+    stat: 100, prefix: "<", suffix: "ms", statLabel: "latency targets, with predictable per-user cost",
+    range: "sub-100ms",
+    body: "Product teams need AI features that feel reliable at consumer scale, where latency, cost per request and failure behaviour are product decisions.",
+    work: ["In-product assistants and search", "Personalisation and ranking", "Content moderation and safety"],
+  },
+];
+---
+<Base
+  title="Industries — cross-industry AI, adapted to your constraints | Truvantik"
+  description="We are not a single-vertical firm. Document-heavy review, exception handling and knowledge retrieval look similar across industries — the constraints, language and risk profile are what change."
+>
+  <section class="snap ind-intro gridbg">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="kicker reveal">Industries</p>
+      <h1 class="reveal" style="--d:60ms">Expertise that <span class="grad-text">transfers</span> between sectors.</h1>
+      <p class="lead reveal" style="--d:140ms">Document-heavy review, exception handling and knowledge retrieval look similar across industries. The constraints, language and risk profile are what change — so we bring the working pattern and adapt it, instead of rediscovering it on your budget.</p>
+      <p class="ind-note reveal" style="--d:200ms">Ranges below are typical outcomes from work of this type. We confirm the number that matters for your case before any build.</p>
+    </div>
+  </section>
+
+  {industries.map((ind, i) => (
+    <section class="snap ind" id={ind.id}>
+      <div class="wrap ind__in" data-flip={i % 2 === 1 ? "true" : "false"}>
+        <div class="ind__stat reveal">
+          <div class="ind__statcard card">
+            <span class="ind__statnum grad-text" data-count-to={ind.stat} data-prefix={ind.prefix} data-suffix={ind.suffix}>{ind.prefix}0{ind.suffix}</span>
+            <span class="ind__statlabel">{ind.statLabel}</span>
+            <span class="ind__range">Typical range · {ind.range}</span>
+          </div>
+        </div>
+        <div class="ind__copy reveal" style="--d:120ms">
+          <div class="ind__meta"><span class="ind__n">{ind.n}</span><h2>{ind.name}</h2></div>
+          <p class="lead">{ind.body}</p>
+          <h3 class="ind__sub">Typical work</h3>
+          <ul class="ind__list">{ind.work.map((w) => <li>{w}</li>)}</ul>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="snap ind-more">
+    <div class="wrap ind-more__in reveal">
+      <p class="kicker">Don't see your sector?</p>
+      <h2>The approach travels further<br />than the vertical.</h2>
+      <p class="lead">If your work involves repetitive judgement over messy data inside systems people already use, the method applies. Tell us the problem and we will tell you honestly whether AI is the right tool for it.</p>
+      <a href="/contact" class="btn btn--grad" data-magnetic>Discuss your situation <span class="arw">→</span></a>
+    </div>
+  </section>
+
+  <CtaBand title="Bring us your sector." />
+</Base>
+
+<style>
+  .ind-intro h1 { margin: 1rem 0 1.4rem; }
+  .ind-note { font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-3); margin-top: 1.4rem; max-width: 60ch; line-height: 1.5; }
+
+  .ind__in { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  .ind__in[data-flip="true"] .ind__stat { order: 2; }
+  .ind__statcard { padding: clamp(1.8rem, 4vw, 3rem); display: grid; gap: 0.9rem; position: relative; overflow: hidden; }
+  .ind__statcard::before { content: ""; position: absolute; inset: 0; background: var(--grad-soft); opacity: 0.6; pointer-events: none; }
+  .ind__statcard > * { position: relative; }
+  .ind__statnum { font-family: var(--font-display); font-weight: 700; font-size: clamp(3.5rem, 8vw, 6rem); line-height: 0.9; letter-spacing: -0.04em; }
+  .ind__statlabel { font-size: var(--step-1); color: var(--ink); line-height: 1.4; max-width: 24ch; }
+  .ind__range { font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-3); letter-spacing: 0.04em; }
+
+  .ind__meta { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; }
+  .ind__n { font-family: var(--font-mono); font-size: 1rem; color: var(--accent); }
+  .ind__copy h2 { font-size: var(--step-3); }
+  .ind__sub { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-3); margin: 1.6rem 0 0.8rem; font-weight: 500; }
+  .ind__list { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
+  .ind__list li { position: relative; padding-left: 1.4rem; color: var(--ink-2); }
+  .ind__list li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; border-radius: 2px; background: var(--grad); }
+
+  .ind-more__in { max-width: 60ch; display: grid; gap: 1.2rem; justify-items: start; }
+  .ind-more__in h2 { margin-top: 0.2rem; }
+  .ind-more__in .btn { margin-top: 0.6rem; }
+
+  @media (max-width: 860px) {
+    .ind__in, .ind__in[data-flip="true"] { grid-template-columns: 1fr; }
+    .ind__in[data-flip="true"] .ind__stat { order: -1; }
+  }
+</style>

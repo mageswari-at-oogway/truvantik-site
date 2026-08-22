@@ -1,0 +1,119 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const structure = [
+  { name: "Truvantik", role: "The AI consulting brand — the parent brand under which strategy, build and integration work is delivered directly to clients." },
+  { name: "Prabhaavi Solutions", role: "The legal entity. Truvantik is its AI consulting brand." },
+  { name: "3BP Labs", role: "Engineering partnership — senior engineering capacity on engagements without a hiring cycle." },
+  { name: "Kron Health", role: "A digital clinic platform built by our team with 3BP Labs. Its own product brand, not a Truvantik service line." },
+];
+
+const commitments = [
+  { n: "01", t: "Cross-industry depth", d: "Pattern-matching across sectors is the edge; expertise transfers rather than resetting with every client.", e: "Document-heavy review looks much the same in underwriting, clinical intake and customs clearance. We bring the working pattern and adapt it to your constraints." },
+  { n: "02", t: "Practical AI", d: "Solutions that ship and get used, not proofs-of-concept that stall.", e: "Every engagement defines what 'good enough to ship' means in numbers before building, and we instrument that measure in production so adoption is visible rather than assumed." },
+  { n: "03", t: "Trusted partner", d: "Advisory-grade rigor. Clients bring real operational problems, not experiments.", e: "We will tell you to buy a tool, fix a process, or stop a project when that is the right answer — and assessments regularly end with a shorter funded list than the client arrived with." },
+  { n: "04", t: "Outcome-driven", d: "Framed around a measurable business result, not a technology for its own sake.", e: "Scope starts from the business measure — review time, exception rate, service load — and the same measure is reported after launch alongside model-level evaluation." },
+];
+
+const wont = [
+  "Sell a build when a process fix or an existing tool solves the problem for a fraction of the cost.",
+  "Ship a proof-of-concept as a finished result. If it is not integrated and being used, the engagement is not done.",
+  "Quote a business case built on numbers we cannot substantiate — ours or anyone else's.",
+];
+---
+<Base
+  title="About — founder-led, engineering-led AI consulting | Truvantik"
+  description="Truvantik is the AI consulting brand of Prabhaavi Solutions. It exists because too many AI projects stop at the demo — and the gap is rarely the model."
+>
+  <section class="snap ab-intro gridbg">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="kicker reveal">About</p>
+      <h1 class="reveal" style="--d:60ms">Founder-led. Engineering-led.<br />Deliberately <span class="grad-text">cross-industry.</span></h1>
+      <p class="lead reveal" style="--d:140ms">Truvantik is the AI consulting brand of Prabhaavi Solutions. It exists because too many AI projects stop at the demo — and the gap is rarely the model.</p>
+    </div>
+  </section>
+
+  <section class="snap ab-story">
+    <div class="wrap ab-story__in">
+      <div class="ab-story__col reveal">
+        <p>We started Truvantik after watching the same pattern repeat: an organization commits to AI, funds a pilot, and a year later has a working notebook nobody uses. The modelling was rarely the hard part. Integration, ownership, evaluation and adoption were.</p>
+        <p>So the firm is built around the whole path instead of one slice of it. We assess where value actually is, we build, we integrate into the systems people already work in, and we stay long enough for your team to own it. When the honest answer is to buy a tool or stop the project, we say so.</p>
+        <p>We work across sectors on purpose. A team that has solved document-heavy review in underwriting brings that pattern to clinical intake and customs clearance instead of starting from nothing. That transfer is the advantage — the reason for <em>your true advantage</em>.</p>
+      </div>
+      <aside class="ab-struct reveal" style="--d:120ms">
+        <h2 class="ab-struct__h">How we are set up</h2>
+        <ul class="ab-struct__list">
+          {structure.map((s) => (
+            <li class="card ab-struct__item"><b>{s.name}</b><span class="muted">{s.role}</span></li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="snap ab-commit gridbg">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="kicker">Why us</p>
+        <h2>Four commitments, each with<br />something behind it.</h2>
+        <p class="lead">Claims are easy. Here is the reasoning and the evidence attached to each of ours.</p>
+      </div>
+      <div class="ab-commit__grid">
+        {commitments.map((c, i) => (
+          <article class="ab-commit__card card reveal" style={`--d:${i * 80}ms`}>
+            <span class="ab-commit__n grad-text">{c.n}</span>
+            <h3>{c.t}</h3>
+            <p class="ab-commit__d">{c.d}</p>
+            <p class="ab-commit__e muted">{c.e}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="snap ab-wont">
+    <div class="wrap ab-wont__in">
+      <div class="ab-wont__head reveal">
+        <p class="kicker">What we will not do</p>
+        <h2>The line we hold.</h2>
+      </div>
+      <ul class="ab-wont__list reveal" style="--d:120ms">
+        {wont.map((w) => <li><span class="ab-wont__x" aria-hidden="true">✕</span>{w}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .ab-intro h1 { margin: 1rem 0 1.4rem; }
+  em { font-style: italic; color: var(--accent); }
+
+  .ab-story__in { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .ab-story__col { display: grid; gap: 1.3rem; font-size: var(--step-1); color: var(--ink-2); line-height: 1.55; }
+  .ab-struct__h { font-size: var(--step-1); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 1.1rem; font-weight: 500; }
+  .ab-struct__list { list-style: none; padding: 0; display: grid; gap: 0.7rem; }
+  .ab-struct__item { padding: 1.1rem 1.2rem; display: grid; gap: 0.35rem; }
+  .ab-struct__item b { font-family: var(--font-display); font-size: 1.05rem; }
+  .ab-struct__item span { font-size: 0.9rem; line-height: 1.45; }
+
+  .ab-commit__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
+  .ab-commit__card { padding: 1.8rem; display: grid; gap: 0.6rem; }
+  .ab-commit__n { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; }
+  .ab-commit__card h3 { font-size: var(--step-1); }
+  .ab-commit__d { color: var(--ink); font-weight: 500; }
+  .ab-commit__e { font-size: 0.92rem; line-height: 1.5; }
+
+  .ab-wont__in { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .ab-wont__head h2 { margin-top: 0.6rem; }
+  .ab-wont__list { list-style: none; padding: 0; display: grid; gap: 1rem; }
+  .ab-wont__list li { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; font-size: var(--step-1); color: var(--ink-2); border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+  .ab-wont__x { color: var(--highlight); font-weight: 700; }
+
+  @media (max-width: 860px) {
+    .ab-story__in, .ab-commit__grid, .ab-wont__in { grid-template-columns: 1fr; }
+  }
+</style>

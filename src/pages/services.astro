@@ -1,0 +1,195 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const services = [
+  {
+    id: "assessment", n: "01", phase: "Assess",
+    title: "AI strategy & assessment",
+    promise: "Find where AI creates measurable value before you commit budget.",
+    body: "A structured assessment of your operations, data and constraints that ends in a ranked, costed roadmap — not a slide deck of possibilities.",
+    who: ["Asked for an AI plan, unsure where to start", "Several competing ideas, no way to rank them", "Need a defensible business case before funding"],
+    get: ["Opportunity register with a success measure per use case", "Data & systems readiness assessment", "Build / buy / integrate call per opportunity", "Sequenced roadmap with effort & cost ranges"],
+    proof: "Assessments regularly end with fewer funded projects than the client expected.",
+    visual: "rank",
+  },
+  {
+    id: "build", n: "02", phase: "Build",
+    title: "Custom AI product development",
+    promise: "Build the product or feature end to end, and get it into users' hands.",
+    body: "Engineering-led delivery of AI products and features — from data pipeline and model selection through interface, evaluation and launch.",
+    who: ["The use case is clear and the business case is made", "You need a team that ships, not a prototype", "Users must be able to rely on it day one"],
+    get: ["A working product, integrated and instrumented", "Evaluation set and success measure agreed up front", "Interface your users actually adopt", "Monitoring and handover built in"],
+    proof: "We define what 'good enough to ship' means in numbers before building starts.",
+    visual: "sprint",
+  },
+  {
+    id: "integration", n: "03", phase: "Deploy",
+    title: "AI integration & deployment",
+    promise: "Move a working model into the systems and workflows people actually use.",
+    body: "The unglamorous work that decides whether AI gets used: integration with core systems, access control, evaluation in production, and change management with the teams involved.",
+    who: ["A model that works in a notebook, not the business", "A pilot stalled on integration or ownership", "Adoption is the blocker, not the model"],
+    get: ["Integration with your core systems", "Access control and configurable data handling", "In-production evaluation and monitoring", "A named owner and a team that can run it"],
+    proof: "If it is not integrated and being used, we do not consider the engagement done.",
+    visual: "nodes",
+  },
+  {
+    id: "advisory", n: "04", phase: "Ongoing",
+    title: "Ongoing AI advisory",
+    promise: "A trusted technical partner on retainer as your AI portfolio grows.",
+    body: "Continuing advisory for teams that now own AI systems: architecture review, vendor and model decisions, evaluation discipline, and hiring the right people.",
+    who: ["Your team owns AI systems and wants a sounding board", "Vendor and model decisions keep recurring", "You want evaluation discipline to stick"],
+    get: ["Architecture and model review", "Vendor and build/buy decisions", "Evaluation practice your team keeps", "Help hiring the right people"],
+    proof: "Advisory-grade rigor — clients bring real operational problems, not experiments.",
+    visual: "orbit",
+  },
+];
+---
+<Base
+  title="Services — AI consulting, build and advisory | Truvantik"
+  description="Four service lines covering the full path: deciding what is worth building, building it, getting it into the workflow, and running it well afterwards."
+>
+  <!-- intro -->
+  <section class="snap svc-intro gridbg">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="kicker reveal">Services</p>
+      <h1 class="svc-intro__h reveal" style="--d:60ms">From first assessment<br />to <span class="grad-text">production.</span></h1>
+      <p class="lead reveal" style="--d:140ms">Four service lines that cover the full path: deciding what is worth building, building it, getting it into the workflow, and running it well afterwards. Each is scoped around a business outcome.</p>
+      <ol class="svc-nav reveal" style="--d:220ms">
+        {services.map((s) => (
+          <li><a href={`#${s.id}`}><span>{s.n}</span>{s.title}</a></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {services.map((s, i) => (
+    <section class="snap svc" id={s.id}>
+      <div class="wrap svc__in" data-flip={i % 2 === 1 ? "true" : "false"}>
+        <div class="svc__copy reveal">
+          <div class="svc__meta"><span class="svc__n">{s.n}</span><span class="pill">{s.phase}</span></div>
+          <h2>{s.title}</h2>
+          <p class="lead svc__promise">{s.promise}</p>
+          <p class="muted">{s.body}</p>
+          <div class="svc__cols">
+            <div>
+              <h3 class="svc__sub">Who it's for</h3>
+              <ul class="svc__list">{s.who.map((w) => <li>{w}</li>)}</ul>
+            </div>
+            <div>
+              <h3 class="svc__sub">What you get</h3>
+              <ul class="svc__list svc__list--check">{s.get.map((g) => <li>{g}</li>)}</ul>
+            </div>
+          </div>
+          <p class="svc__proof">{s.proof}</p>
+          <a href="/contact" class="btn btn--grad" data-magnetic>Get a proposal <span class="arw">→</span></a>
+        </div>
+
+        <div class="svc__art reveal" style="--d:120ms" aria-hidden="true">
+          <div class="viz card" data-viz={s.visual}>
+            {s.visual === "rank" && (
+              <div class="viz-rank">
+                <span class="viz-t">Opportunities · ranked</span>
+                <i style="--w:100%"></i><i style="--w:88%"></i><i class="cut" style="--w:74%"></i><i class="cut" style="--w:61%"></i><i class="cut" style="--w:47%"></i>
+                <span class="viz-cap">Funded list ← shorter than you arrived with</span>
+              </div>
+            )}
+            {s.visual === "sprint" && (
+              <div class="viz-sprint">
+                <span class="viz-t">Sprint 4 / 8</span>
+                <div class="viz-track"><b style="--p:52%"></b></div>
+                <div class="viz-chips"><span>data</span><span>model</span><span class="on">interface</span><span>evals</span><span>launch</span></div>
+                <span class="viz-cap">"Good enough to ship" defined in numbers</span>
+              </div>
+            )}
+            {s.visual === "nodes" && (
+              <div class="viz-nodes">
+                <span class="viz-t">Into your stack</span>
+                <div class="viz-map"><span class="hub">AI</span><span class="node n1">CRM</span><span class="node n2">BI</span><span class="node n3">Ops tool</span><span class="node n4">Data</span></div>
+                <span class="viz-cap">Surfaced where people already work</span>
+              </div>
+            )}
+            {s.visual === "orbit" && (
+              <div class="viz-orbit">
+                <span class="viz-t">On retainer</span>
+                <div class="viz-orbit__ring"><span class="viz-orbit__core">You</span><i></i><i></i><i></i></div>
+                <span class="viz-cap">A partner as the portfolio grows</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CtaBand />
+</Base>
+
+<style>
+  .svc-intro__h { margin: 1rem 0 1.4rem; }
+  .svc-nav { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .svc-nav a { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.55em 1em; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); backdrop-filter: var(--glass); font-family: var(--font-display); font-weight: 500; font-size: 0.92rem; color: var(--ink-2); transition: border-color 0.2s, color 0.2s, transform 0.25s var(--ease); }
+  [data-theme="bauhaus"] .svc-nav a { border-radius: 0; border-width: 1.5px; border-color: var(--ink); }
+  .svc-nav a:hover { color: var(--ink); border-color: var(--border-strong); transform: translateY(-2px); }
+  .svc-nav span { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); }
+
+  .svc__in { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  .svc__in[data-flip="true"] { grid-template-columns: 0.85fr 1.15fr; }
+  .svc__in[data-flip="true"] .svc__copy { order: 2; }
+  .svc__meta { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+  .svc__n { font-family: var(--font-mono); font-size: 1rem; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 600; }
+  .svc__copy h2 { font-size: var(--step-3); }
+  .svc__promise { margin: 0.9rem 0 0.7rem; color: var(--ink); }
+  .svc__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 2rem; margin: 1.6rem 0; }
+  .svc__sub { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-3); margin-bottom: 0.7rem; font-weight: 500; }
+  .svc__list { list-style: none; padding: 0; display: grid; gap: 0.5rem; }
+  .svc__list li { position: relative; padding-left: 1.3rem; font-size: 0.92rem; color: var(--ink-2); line-height: 1.45; }
+  .svc__list li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 2px; background: var(--ink-3); }
+  .svc__list--check li::before { background: var(--grad); }
+  .svc__proof { font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-2); border-left: 2px solid var(--accent); padding-left: 0.9rem; margin-bottom: 1.6rem; line-height: 1.5; }
+
+  /* --- visuals --- */
+  .svc__art { position: sticky; top: 90px; }
+  .viz { padding: 1.6rem; min-height: 340px; display: grid; align-content: center; gap: 1rem; position: relative; overflow: hidden; }
+  .viz::before { content: ""; position: absolute; inset: 0; background: var(--grad-soft); opacity: 0.5; pointer-events: none; }
+  .viz > * { position: relative; }
+  .viz-t { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-3); }
+  .viz-cap { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); margin-top: 0.4rem; }
+
+  .viz-rank { display: grid; gap: 0.6rem; }
+  .viz-rank i { height: 30px; width: var(--w); border-radius: var(--radius-sm); background: var(--surface-3); display: block; transition: width 0.9s var(--ease); }
+  .viz-rank i:not(.cut) { background: var(--grad); }
+  .viz-rank .cut { opacity: 0.32; }
+
+  .viz-sprint { display: grid; gap: 0.9rem; }
+  .viz-track { height: 12px; border-radius: 999px; background: var(--surface-3); overflow: hidden; }
+  .viz-track b { display: block; height: 100%; width: var(--p); background: var(--grad); border-radius: 999px; }
+  .viz-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .viz-chips span { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.3em 0.7em; border: 1px solid var(--border); border-radius: 999px; color: var(--ink-3); }
+  .viz-chips .on { color: var(--accent-ink); background: var(--accent); border-color: transparent; }
+  [data-theme="bauhaus"] .viz-chips span { border-radius: 0; }
+
+  .viz-nodes { display: grid; gap: 1rem; }
+  .viz-map { position: relative; height: 200px; }
+  .viz-map .hub { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 62px; height: 62px; display: grid; place-items: center; border-radius: 50%; background: var(--grad); color: #fff; font-weight: 700; font-family: var(--font-display); z-index: 2; }
+  .viz-map .node { position: absolute; padding: 0.4em 0.8em; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface-solid); font-family: var(--font-mono); font-size: 0.72rem; }
+  .viz-map .n1 { left: 2%; top: 8%; } .viz-map .n2 { right: 4%; top: 18%; } .viz-map .n3 { right: 8%; bottom: 8%; } .viz-map .n4 { left: 6%; bottom: 12%; }
+  [data-theme="bauhaus"] .viz-map .hub, [data-theme="bauhaus"] .viz-map .node { border-radius: 0; }
+
+  .viz-orbit { display: grid; gap: 1rem; justify-items: start; }
+  .viz-orbit__ring { position: relative; width: 200px; height: 200px; margin: 0.5rem auto; border: 1px dashed var(--border-strong); border-radius: 50%; animation: spin 26s linear infinite; }
+  .viz-orbit__core { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 66px; height: 66px; display: grid; place-items: center; border-radius: 50%; background: var(--surface-solid); border: 1px solid var(--border-strong); font-family: var(--font-display); font-weight: 700; animation: spin 26s linear infinite reverse; }
+  .viz-orbit__ring i { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--grad); top: -7px; left: 50%; margin-left: -7px; }
+  .viz-orbit__ring i:nth-child(3) { top: auto; bottom: -7px; } .viz-orbit__ring i:nth-child(4) { top: 50%; left: -7px; margin-top: -7px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  [data-theme="bauhaus"] .viz-orbit__ring, [data-theme="bauhaus"] .viz-orbit__core, [data-theme="bauhaus"] .viz-orbit__ring i { border-radius: 0; }
+
+  @media (max-width: 860px) {
+    .svc__in, .svc__in[data-flip="true"] { grid-template-columns: 1fr; }
+    .svc__in[data-flip="true"] .svc__copy { order: 0; }
+    .svc__art { position: static; order: -1; }
+    .viz { min-height: 240px; }
+    .svc__cols { grid-template-columns: 1fr; }
+  }
+</style>

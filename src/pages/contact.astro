@@ -1,0 +1,153 @@
+---
+import Base from "../layouts/Base.astro";
+
+const steps = [
+  { n: "1", t: "We reply within two business days." },
+  { n: "2", t: "A 30-minute call to understand the problem." },
+  { n: "3", t: "A written view on whether and how to proceed." },
+];
+---
+<Base
+  title="Contact — book a free AI assessment | Truvantik"
+  description="A 30-minute call is usually enough to tell whether there is a real opportunity, and what a sensible first step looks like. No pitch deck required."
+>
+  <section class="snap contact gridbg">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap contact__in">
+      <div class="contact__copy reveal">
+        <p class="kicker">Contact</p>
+        <h1>Tell us what you're<br />trying to <span class="grad-text">solve.</span></h1>
+        <p class="lead">A 30-minute call is usually enough to tell whether there is a real opportunity, and what a sensible first step looks like. No pitch deck required.</p>
+
+        <ol class="contact__steps">
+          {steps.map((s) => (
+            <li><span class="contact__stepn">{s.n}</span>{s.t}</li>
+          ))}
+        </ol>
+
+        <div class="contact__alt">
+          <span class="muted">Prefer email?</span>
+          <a href="mailto:hello@truvantik.com" class="contact__mail">hello@truvantik.com</a>
+        </div>
+      </div>
+
+      <div class="contact__formwrap reveal" style="--d:120ms">
+        <form class="contact__form card" id="lead-form" novalidate>
+          <h2 class="contact__formh">Tell us about your situation</h2>
+          <p class="contact__req">Fields marked <span aria-hidden="true">*</span> are required.</p>
+
+          <div class="field">
+            <label for="name">Name <span aria-hidden="true">*</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" required aria-required="true" />
+            <span class="err" data-err></span>
+          </div>
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <label for="email">Work email <span aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required aria-required="true" placeholder="you@organization.com" />
+            <span class="err" data-err></span>
+          </div>
+          <div class="field">
+            <label for="start">Your starting point</label>
+            <select id="start" name="start">
+              <option value="">Choose one (optional)</option>
+              <option>Not sure where AI fits</option>
+              <option>I know what I want to build</option>
+              <option>My pilot has stalled</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="msg">What are you working on? <span aria-hidden="true">*</span></label>
+            <textarea id="msg" name="message" rows="4" required aria-required="true"></textarea>
+            <span class="err" data-err></span>
+          </div>
+
+          <button type="submit" class="btn btn--grad contact__submit">Send message <span class="arw">→</span></button>
+          <p class="contact__privacy muted">See our <a href="/privacy">privacy policy</a> for how we handle what you send.</p>
+        </form>
+
+        <div class="contact__success card" id="success" hidden>
+          <span class="contact__tick" aria-hidden="true">✓</span>
+          <h2>Thanks — that's in.</h2>
+          <p class="muted">We reply within two business days with a short, honest read on whether there is a real opportunity and what the first step should be.</p>
+          <a href="/" class="btn btn--ghost">Back to home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact__in { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; padding-top: 2rem; }
+  .contact__copy h1 { font-size: var(--step-4); margin: 1rem 0 1.3rem; }
+  .contact__steps { list-style: none; padding: 0; display: grid; gap: 0.9rem; margin: 2rem 0; }
+  .contact__steps li { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: center; color: var(--ink-2); }
+  .contact__stepn { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--border-strong); font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); }
+  [data-theme="bauhaus"] .contact__stepn { border-radius: 0; }
+  .contact__alt { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; padding-top: 1.4rem; border-top: 1px solid var(--border); }
+  .contact__mail { font-family: var(--font-mono); color: var(--accent); }
+  .contact__mail:hover { text-decoration: underline; }
+
+  .contact__form { padding: clamp(1.5rem, 3vw, 2.4rem); display: grid; gap: 1.1rem; }
+  .contact__formh { font-size: var(--step-2); }
+  .contact__req { font-size: 0.84rem; color: var(--ink-3); margin-top: -0.4rem; }
+  .field { display: grid; gap: 0.4rem; }
+  .field label { font-family: var(--font-display); font-weight: 500; font-size: 0.9rem; }
+  .field input, .field select, .field textarea {
+    font: inherit; font-size: 0.95rem; color: var(--ink);
+    background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 0.75em 0.9em; width: 100%; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  [data-theme="bauhaus"] .field input, [data-theme="bauhaus"] .field select, [data-theme="bauhaus"] .field textarea { border-radius: 0; border-width: 1.5px; }
+  .field textarea { resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+  .field.invalid input, .field.invalid textarea { border-color: var(--highlight); }
+  .err { font-size: 0.8rem; color: var(--highlight); min-height: 0; }
+  .err:empty { display: none; }
+  .contact__submit { justify-self: start; margin-top: 0.4rem; }
+  .contact__privacy { font-size: 0.82rem; }
+  .contact__privacy a { color: var(--accent); text-decoration: underline; }
+
+  .contact__success { padding: clamp(2rem, 4vw, 3rem); display: grid; gap: 1rem; justify-items: start; text-align: left; }
+  .contact__tick { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--grad); color: #fff; font-weight: 700; font-size: 1.3rem; }
+  [data-theme="bauhaus"] .contact__tick { border-radius: 0; }
+
+  @media (max-width: 860px) { .contact__in { grid-template-columns: 1fr; padding-top: 3.5rem; } }
+</style>
+
+<script is:inline>
+  (() => {
+    const form = document.getElementById("lead-form");
+    const success = document.getElementById("success");
+    if (!form) return;
+    const setErr = (field, msg) => {
+      field.classList.toggle("invalid", !!msg);
+      const el = field.querySelector("[data-err]");
+      if (el) el.textContent = msg || "";
+      const input = field.querySelector("input,textarea,select");
+      if (input) input.setAttribute("aria-invalid", msg ? "true" : "false");
+    };
+    const validate = () => {
+      let ok = true;
+      const name = form.name, email = form.email, msg = form.message;
+      if (!name.value.trim()) { setErr(name.closest(".field"), "Please add your name."); ok = false; } else setErr(name.closest(".field"), "");
+      if (!email.value.trim()) { setErr(email.closest(".field"), "Please add a work email."); ok = false; }
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) { setErr(email.closest(".field"), "That email doesn't look right."); ok = false; }
+      else setErr(email.closest(".field"), "");
+      if (!msg.value.trim()) { setErr(msg.closest(".field"), "Tell us a little about the problem."); ok = false; } else setErr(msg.closest(".field"), "");
+      return ok;
+    };
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!validate()) { form.querySelector(".invalid input, .invalid textarea")?.focus(); return; }
+      // NOTE: wire to CRM / form endpoint here. Demo shows success state.
+      form.hidden = true;
+      success.hidden = false;
+      success.querySelector("h2")?.focus?.();
+      success.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  })();
+</script>
