@@ -142,7 +142,11 @@ const phases = [
       </div>
       <div class="proof__art reveal" style="--d:120ms" aria-hidden="true">
         <div class="draft card" id="proof-draft">
-          <div class="draft__top"><span class="draft__ai">AI draft</span><span class="draft__t">Clinical note · intake summary</span></div>
+          <div class="draft__top">
+            <span class="draft__ai">AI draft</span>
+            <span class="draft__t">Clinical note · intake summary</span>
+            <span class="draft__intake"><span class="draft__idot"></span>Intake</span>
+          </div>
           <div class="draft__lines">
             <i style="--w:92%"></i><i style="--w:78%"></i><i style="--w:85%"></i><i style="--w:60%"></i>
           </div>
@@ -150,9 +154,12 @@ const phases = [
             <span class="draft__check">
               <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 L10 17.5 L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <div><b>Clinician review</b><small>Approved before it enters the record</small></div>
+            <div><b>Clinician review</b><small>Approved at the right point</small></div>
           </div>
-          <div class="draft__audit"><span class="dot2"></span>Auditable · every step logged</div>
+          <div class="draft__audit">
+            <svg class="draft__rec" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6M9 12h6M9 15.5h3.5"/></svg>
+            <span class="dot2"></span>Auditable · every step logged
+          </div>
         </div>
       </div>
     </div>
@@ -262,43 +269,74 @@ const phases = [
   .proof__copy .btn { margin-top: 1.7rem; }
   .proof__note { font-size: 0.82rem; margin-top: 1.5rem; max-width: 46ch; padding-left: 0.9rem; border-left: 2px solid var(--border-strong); }
 
-  /* Kron Health single card — calm settle-in */
+  /* Kron Health single card — animates through the 4 clinical steps */
   .draft { padding: 1.5rem 1.6rem; display: grid; gap: 1.1rem; }
   .draft__top { display: flex; align-items: center; gap: 0.7rem; }
-  .draft__ai { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-ink); background: var(--accent); padding: 0.3em 0.7em; border-radius: 999px; }
+  .draft__ai { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.3em 0.7em; border-radius: 999px;
+    color: var(--ink-3); background: var(--surface-3); }
   [data-theme="bauhaus"] .draft__ai { border-radius: 0; }
   .draft__t { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); }
+  /* step 1 — patient intake indicator (top-right) */
+  .draft__intake { margin-left: auto; display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); opacity: 0.4; }
+  .draft__idot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); }
+  [data-theme="bauhaus"] .draft__idot { border-radius: 0; }
 
+  /* step 2 — AI note lines write themselves in */
   .draft__lines { display: grid; gap: 0.6rem; }
-  .draft__lines i { height: 9px; border-radius: 5px; background: var(--surface-3); width: var(--w); opacity: 0; transform: translateY(6px); }
+  .draft__lines i { height: 9px; border-radius: 5px; background: var(--surface-3); width: 0; }
   [data-theme="bauhaus"] .draft__lines i { border-radius: 0; }
-  .draft.play .draft__lines i { animation: settleIn 0.5s var(--ease) both; }
-  .draft.play .draft__lines i:nth-child(1) { animation-delay: 0.1s; }
-  .draft.play .draft__lines i:nth-child(2) { animation-delay: 0.2s; }
-  .draft.play .draft__lines i:nth-child(3) { animation-delay: 0.3s; }
-  .draft.play .draft__lines i:nth-child(4) { animation-delay: 0.4s; }
-  @keyframes settleIn { to { opacity: 1; transform: none; } }
+  .draft.play .draft__lines i { animation: writeIn 0.4s var(--ease) both; }
+  .draft.play .draft__lines i:nth-child(1) { animation-delay: 0.95s; }
+  .draft.play .draft__lines i:nth-child(2) { animation-delay: 1.15s; }
+  .draft.play .draft__lines i:nth-child(3) { animation-delay: 1.35s; }
+  .draft.play .draft__lines i:nth-child(4) { animation-delay: 1.55s; }
+  @keyframes writeIn { from { width: 0; } to { width: var(--w); } }
 
+  /* step 3 — clinician review, check draws */
   .draft__gate { display: flex; gap: 0.85rem; align-items: center; padding: 0.95rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); opacity: 0; transform: translateY(8px); }
   [data-theme="bauhaus"] .draft__gate { border-radius: 0; }
-  .draft.play .draft__gate { animation: settleIn 0.55s var(--ease) 0.7s both; }
+  .draft.play .draft__gate { animation: settleIn 0.55s var(--ease) 1.9s both; }
+  @keyframes settleIn { to { opacity: 1; transform: none; } }
   .draft__gate b { font-family: var(--font-display); display: block; font-size: 0.95rem; }
   .draft__gate small { color: var(--ink-3); font-size: 0.78rem; }
   .draft__check { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--accent-ink); transform: scale(0); }
   [data-theme="bauhaus"] .draft__check { border-radius: 0; }
   .draft__check svg { width: 19px; height: 19px; }
-  .draft.play .draft__check { animation: pop 0.45s var(--ease-spring) 1.05s both; }
+  .draft__check svg path { stroke-dasharray: 26; stroke-dashoffset: 26; }
+  .draft.play .draft__check { animation: pop 0.4s var(--ease-spring) 2.15s both; }
+  .draft.play .draft__check svg path { animation: draw 0.4s var(--ease) 2.45s both; }
   @keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
 
+  /* step 4 — into the record / auditable lights + pulses */
   .draft__audit { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-3); opacity: 0; }
-  .draft.play .draft__audit { animation: settleIn 0.45s var(--ease) 1.3s both; }
-  .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); animation: aud 2.4s var(--ease-in-out) 1.8s infinite; }
+  .draft.play .draft__audit { animation: settleIn 0.45s var(--ease) 2.9s both; }
+  .draft__rec { width: 15px; height: 15px; color: var(--ink-3); }
+  .draft.play .draft__rec { animation: recOn 0.4s var(--ease) 3.1s both; }
+  @keyframes recOn { to { color: var(--highlight); } }
+  .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); }
   [data-theme="bauhaus"] .dot2 { border-radius: 0; }
+  .draft.play .dot2 { animation: aud 2.4s var(--ease-in-out) 3.3s infinite; }
   @keyframes aud { 0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--highlight) 45%, transparent); } 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--highlight) 0%, transparent); } }
 
+  /* step 1 — intake lights first, then AI DRAFT activates */
+  .draft.play .draft__intake { animation: intakeOn 0.4s var(--ease) 0.25s both; }
+  @keyframes intakeOn { to { opacity: 1; color: var(--accent); } }
+  .draft.play .draft__idot { animation: idotOn 0.4s var(--ease) 0.25s both; }
+  @keyframes idotOn { to { background: var(--accent); } }
+  .draft.play .draft__ai { animation: aiOn 0.4s var(--ease) 0.8s both; }
+  @keyframes aiOn { to { color: var(--accent-ink); background: var(--accent); } }
+
   @media (prefers-reduced-motion: reduce) {
-    .draft__lines i, .draft__gate, .draft__audit { opacity: 1; transform: none; }
+    .draft__lines i { width: var(--w); }
+    .draft__gate, .draft__audit { opacity: 1; transform: none; }
     .draft__check { transform: scale(1); }
+    .draft__check svg path { stroke-dashoffset: 0; }
+    .draft__ai { color: var(--accent-ink); background: var(--accent); }
+    .draft__intake, .draft__idot { opacity: 1; }
+    .draft__intake { color: var(--accent); }
+    .draft__idot { background: var(--accent); }
+    .draft__rec { color: var(--highlight); }
     .dot2 { animation: none; }
   }
 
