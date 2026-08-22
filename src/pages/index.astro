@@ -111,16 +111,59 @@ const phases = [
         <h2>Assess · Build · Deploy</h2>
         <p class="lead">Every engagement sits somewhere on the same three phases. Service steps are the detail inside them.</p>
       </div>
-      <ol class="flow__track reveal" style="--d:120ms" data-flow>
-        <span class="flow__rail" aria-hidden="true"><span class="flow__rail-fill" data-rail></span></span>
-        {phases.map((p) => (
-          <li class="flow__step">
-            <span class="flow__node" aria-hidden="true">{p.n}</span>
-            <h3 class="flow__k">{p.k}</h3>
-            <p class="muted flow__d">{p.d}</p>
-            <p class="flow__note">{p.note}</p>
-          </li>
-        ))}
+      <ol class="plp reveal" style="--d:120ms">
+        <li class="plp__col">
+          <div class="plp__viz" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <circle class="plp__ripple" cx="60" cy="60" r="30" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <circle class="plp__ripple plp__ripple--2" cx="60" cy="60" r="30" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <rect class="plp__pt" x="50" y="50" width="20" height="20" rx="4" transform="rotate(45 60 60)" fill="var(--accent)"/>
+            </svg>
+            <span class="plp__glabel">point</span>
+          </div>
+          <div class="plp__body">
+            <span class="plp__n">01</span>
+            <h3>Assess</h3>
+            <p class="muted">Understand the work, the data and the constraints. Decide what is worth building and what is not.</p>
+            <p class="plp__note">Reduce the problem to its essential elements.</p>
+          </div>
+        </li>
+
+        <li class="plp__col">
+          <div class="plp__viz" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <line class="plp__ln" x1="18" y1="60" x2="102" y2="60" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+              <rect class="plp__end" x="12" y="54" width="12" height="12" rx="3" transform="rotate(45 18 60)" fill="var(--accent)"/>
+              <rect class="plp__end plp__end--2" x="96" y="54" width="12" height="12" rx="3" transform="rotate(45 102 60)" fill="var(--accent)"/>
+            </svg>
+            <span class="plp__glabel">line</span>
+          </div>
+          <div class="plp__body">
+            <span class="plp__n">02</span>
+            <h3>Build</h3>
+            <p class="muted">Build the smallest system that proves the outcome, then harden it against real data and real users.</p>
+            <p class="plp__note">The shortest path through the build, reviewed with you directly.</p>
+          </div>
+        </li>
+
+        <li class="plp__col">
+          <div class="plp__viz" aria-hidden="true">
+            <svg viewBox="0 0 120 120">
+              <g class="plp__plane">
+                <rect x="30" y="30" width="60" height="60" rx="10" transform="rotate(45 60 60)" fill="color-mix(in srgb, var(--accent) 14%, transparent)" stroke="var(--accent)" stroke-width="2"/>
+                <line class="plp__grid" x1="60" y1="24" x2="60" y2="96" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
+                <line class="plp__grid" x1="24" y1="60" x2="96" y2="60" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
+              </g>
+            </svg>
+            <span class="plp__glabel">plane</span>
+          </div>
+          <div class="plp__body">
+            <span class="plp__n">03</span>
+            <h3>Deploy</h3>
+            <p class="muted">Deploy into your stack, measure it against the outcome, and hand over the knowledge to keep it running.</p>
+            <p class="plp__note">The system running whole: deployed, observed, documented, handed over.</p>
+          </div>
+        </li>
       </ol>
     </div>
   </section>
@@ -253,16 +296,50 @@ const phases = [
   .ep__cta .arw { color: var(--accent); transition: transform 0.25s var(--ease); flex: none; }
   .ep:hover .ep__cta .arw { transform: translateX(4px); }
 
-  /* ---- flow ---- */
-  .flow__track { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 3rem; position: relative; }
-  .flow__rail { position: absolute; top: 22px; left: 8%; right: 8%; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .flow__rail-fill { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, var(--accent), var(--highlight)); transition: width 1.4s var(--ease); }
-  .flow__track.in .flow__rail-fill { width: 100%; }
-  .flow__step { display: grid; gap: 0.5rem; position: relative; }
-  .flow__node { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--surface); border: 1px solid var(--border-strong); font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); position: relative; z-index: 1; }
-  [data-theme="bauhaus"] .flow__node { border-radius: 0; border-width: 1.5px; }
-  .flow__k { font-size: var(--step-2); margin-top: 0.3rem; }
-  .flow__note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); line-height: 1.5; }
+  /* ---- point · line · plane ---- */
+  .plp { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 3rem); }
+  .plp__col { display: grid; gap: 1.2rem; align-content: start; }
+  .plp__viz { position: relative; height: 128px; border-bottom: 1px solid var(--border); display: grid; place-items: center; }
+  .plp__viz svg { width: 128px; height: 128px; overflow: visible; }
+  .plp__glabel { position: absolute; bottom: 0.5rem; right: 0.1rem; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-3); }
+
+  /* point */
+  .plp__pt { transform-box: fill-box; transform-origin: center; opacity: 0; transform: scale(0); }
+  .plp.in .plp__pt { animation: ptIn 0.5s var(--ease-spring) 0.15s both; }
+  @keyframes ptIn { to { opacity: 1; transform: scale(1); } }
+  .plp__ripple { transform-box: fill-box; transform-origin: center; opacity: 0; }
+  .plp.in .plp__ripple { animation: ripple 2.6s var(--ease-out, ease-out) 0.5s infinite; }
+  .plp.in .plp__ripple--2 { animation-delay: 1.5s; }
+  @keyframes ripple { 0% { opacity: 0.6; transform: scale(0.3); } 100% { opacity: 0; transform: scale(1.3); } }
+
+  /* line */
+  .plp__ln { stroke-dasharray: 84; stroke-dashoffset: 84; }
+  .plp.in .plp__ln { animation: draw 0.7s var(--ease) 0.3s both; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .plp__end { transform-box: fill-box; transform-origin: center; opacity: 0; transform: scale(0); }
+  .plp.in .plp__end { animation: ptIn 0.4s var(--ease-spring) 0.25s both; }
+  .plp.in .plp__end--2 { animation-delay: 0.9s; }
+
+  /* plane */
+  .plp__plane { transform-box: fill-box; transform-origin: center; opacity: 0; transform: scale(0.6) rotate(-8deg); }
+  .plp.in .plp__plane { animation: planeIn 0.7s var(--ease-spring) 0.3s both; }
+  @keyframes planeIn { to { opacity: 1; transform: scale(1) rotate(0); } }
+  .plp__grid { stroke-dasharray: 72; stroke-dashoffset: 72; }
+  .plp.in .plp__grid { animation: draw 0.6s var(--ease) 0.9s both; }
+
+  [data-theme="bauhaus"] .plp__pt, [data-theme="bauhaus"] .plp__end { border-radius: 0; }
+
+  .plp__n { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent); }
+  .plp__col h3 { font-size: var(--step-2); margin: 0.1rem 0 0.2rem; }
+  .plp__col p.muted { font-size: 0.92rem; line-height: 1.55; }
+  .plp__note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); line-height: 1.5; padding-left: 0.9rem; border-left: 2px solid var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plp__pt, .plp__end, .plp__plane { opacity: 1; transform: none; }
+    .plp__ln, .plp__grid { stroke-dashoffset: 0; }
+    .plp__ripple { display: none; }
+  }
+  @media (max-width: 860px) { .plp { grid-template-columns: 1fr; gap: 2rem; } }
 
   /* ---- proof ---- */
   .proof__in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
