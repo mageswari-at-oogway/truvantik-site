@@ -2,10 +2,17 @@
 import Base from "../layouts/Base.astro";
 import BrandGraphic from "../components/BrandGraphic.astro";
 
-const diffs = [
-  { k: "01", t: "Engineering-led, not sales-led", d: "The people who scope your engagement are the people who build it. No account managers, no handoff decks." },
-  { k: "02", t: "From first assessment to production", d: "One partner across strategy, build, integration and the deployment that follows." },
-  { k: "03", t: "Cross-industry by design", d: "Patterns proven in one sector, adapted rather than reinvented in yours." },
+const commitments = [
+  { k: "01", t: "Cross-industry depth", claim: "Expertise transfers rather than resetting with every client.", ev: "Document-heavy review looks the same in underwriting, clinical intake and customs clearance. We bring the pattern and adapt it — not rediscover it on your budget." },
+  { k: "02", t: "Practical AI", claim: "Solutions that ship and get used, not proofs-of-concept that stall.", ev: "We define what “good enough to ship” means in numbers before building, and instrument it in production so adoption is measured, not assumed." },
+  { k: "03", t: "Trusted partner", claim: "Advisory-grade rigor on real problems, not experiments.", ev: "We’ll tell you to buy a tool, fix a process, or stop a project when that’s right — assessments often end with a shorter funded list than you arrived with." },
+  { k: "04", t: "Outcome-driven", claim: "Framed around a measurable business result, not technology for its own sake.", ev: "Scope starts from the business measure — review time, exception rate, service load — and the same measure is reported after launch." },
+];
+
+const wont = [
+  "Sell a build when a process fix or an existing tool solves it for less.",
+  "Ship a proof-of-concept as a finished result.",
+  "Quote a business case on numbers we can’t substantiate.",
 ];
 
 const entries = [
@@ -58,15 +65,22 @@ const phases = [
       <div class="why__lead">
         <p class="kicker reveal">Why Truvantik</p>
         <h2 class="reveal" style="--d:60ms">Most AI stalls at the demo.<br />We build the part after.</h2>
-        <p class="lead reveal" style="--d:120ms">The gap is rarely the model. It is integration, ownership, evaluation and adoption — so that is what we are built around.</p>
+        <p class="lead reveal" style="--d:120ms">The gap is rarely the model — it is integration, ownership, evaluation and adoption. Four commitments, each with something behind it.</p>
+        <div class="why__wont reveal" style="--d:200ms">
+          <span class="why__wont-h">What we won't do</span>
+          <ul>
+            {wont.map((w) => <li><span class="why__x" aria-hidden="true">✕</span>{w}</li>)}
+          </ul>
+        </div>
       </div>
       <ol class="why__list">
-        {diffs.map((d, i) => (
-          <li class="why__item reveal card" style={`--d:${140 + i * 90}ms`}>
-            <span class="why__k">{d.k}</span>
-            <div>
-              <h3>{d.t}</h3>
-              <p class="muted">{d.d}</p>
+        {commitments.map((c, i) => (
+          <li class="why__item reveal card" style={`--d:${140 + i * 80}ms`}>
+            <span class="why__k">{c.k}</span>
+            <div class="why__body">
+              <h3>{c.t}</h3>
+              <p class="why__claim">{c.claim}</p>
+              <p class="why__ev muted">{c.ev}</p>
             </div>
           </li>
         ))}
@@ -205,13 +219,22 @@ const phases = [
   @keyframes cue { 0%,100% { opacity: 0.3; transform: scaleY(0.7); } 50% { opacity: 1; transform: scaleY(1); } }
 
   /* ---- why ---- */
-  .why__in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-  .why__lead h2 { margin: 1rem 0 1.2rem; }
-  .why__list { list-style: none; padding: 0; display: grid; gap: 0.9rem; }
-  .why__item { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; padding: 1.3rem 1.4rem; }
+  .why__in { display: grid; grid-template-columns: 0.88fr 1.12fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .why__lead h2 { margin: 1rem 0 1.1rem; }
+  .why__lead { position: sticky; top: 96px; }
+  .why__wont { margin-top: 1.9rem; padding-top: 1.4rem; border-top: 1px solid var(--border); }
+  .why__wont-h { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-3); }
+  .why__wont ul { list-style: none; padding: 0; margin: 0.9rem 0 0; display: grid; gap: 0.65rem; }
+  .why__wont li { display: grid; grid-template-columns: auto 1fr; gap: 0.65rem; align-items: start; font-size: 0.9rem; color: var(--ink-2); line-height: 1.4; }
+  .why__x { color: var(--highlight); font-weight: 700; }
+  .why__list { list-style: none; padding: 0; display: grid; gap: 0.7rem; }
+  .why__item { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; padding: 1.1rem 1.25rem; transition: border-color 0.25s var(--ease), transform 0.25s var(--ease); }
   .why__item h3 { font-size: var(--step-1); margin-bottom: 0.35rem; }
-  .why__k { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); padding-top: 0.3rem; }
-  .why__item:hover { border-color: var(--border-strong); }
+  .why__claim { color: var(--ink); font-weight: 500; font-size: 0.95rem; margin-bottom: 0.45rem; }
+  .why__ev { font-size: 0.85rem; line-height: 1.5; }
+  .why__k { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); padding-top: 0.25rem; }
+  .why__item:hover { border-color: var(--accent); transform: translateX(4px); }
+  @media (max-width: 860px) { .why__lead { position: static; } }
 
   /* ---- board section ---- */
   .board-sec__art { margin-top: 2.4rem; max-width: 1000px; margin-inline: auto; width: 100%; }
