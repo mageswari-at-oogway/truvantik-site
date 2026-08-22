@@ -129,21 +129,37 @@ const phases = [
   <section class="snap proof" id="proof">
     <div class="wrap proof__in">
       <div class="proof__copy reveal">
-        <p class="kicker">Featured proof point · built by our team</p>
+        <p class="kicker">Featured proof point</p>
         <h2>Kron Health — a digital clinic platform.</h2>
+        <div class="proof__tags">
+          <span class="pill">Healthcare</span>
+          <span class="pill">Completed engagement</span>
+          <span class="pill">Built with 3BP Labs</span>
+        </div>
         <p class="lead">A clinic platform where AI-assisted workflows had to fit clinical reality: careful handling of patient information, clinician review at the right point, and behaviour that is auditable rather than opaque.</p>
         <a href="/work" class="btn btn--ghost">Read our case studies <span class="arw">→</span></a>
         <p class="proof__note muted">Separate brand: Kron Health is its own product brand, built by our team with 3BP Labs. It is not a Truvantik service line.</p>
       </div>
       <div class="proof__art reveal" style="--d:120ms" aria-hidden="true">
-        <div class="clin card">
-          <div class="clin__row"><span class="clin__ai">AI draft</span><span class="clin__t">Clinical note · intake summary</span></div>
-          <div class="clin__lines"><i style="width:92%"></i><i style="width:78%"></i><i style="width:85%"></i><i style="width:60%"></i></div>
-          <div class="clin__gate">
-            <span class="clin__check">✓</span>
-            <div><b>Clinician review</b><small>Approved before it enters the record</small></div>
+        <div class="hitl card">
+          <div class="hitl__head">
+            <span class="hitl__k">Human-in-the-loop</span>
+            <span class="hitl__badge"><span class="dot2"></span>Auditable</span>
           </div>
-          <div class="clin__audit"><span class="dot2"></span>Auditable · every step logged</div>
+          <ol class="hitl__steps">
+            <li class="hitl__step">
+              <span class="hitl__ico">AI</span>
+              <div class="hitl__body"><b>AI draft</b><span>Clinical note & intake summary — patient data handled with care</span></div>
+            </li>
+            <li class="hitl__step hitl__step--gate">
+              <span class="hitl__ico hitl__ico--check">✓</span>
+              <div class="hitl__body"><b>Clinician review</b><span>Approved at the right point, before anything enters the record</span></div>
+            </li>
+            <li class="hitl__step">
+              <span class="hitl__ico hitl__ico--rec">▣</span>
+              <div class="hitl__body"><b>Patient record</b><span>Written — and every step is logged and auditable</span></div>
+            </li>
+          </ol>
         </div>
       </div>
     </div>
@@ -235,24 +251,27 @@ const phases = [
 
   /* ---- proof ---- */
   .proof__in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-  .proof__copy h2 { margin: 1rem 0 1.2rem; }
-  .proof__copy .btn { margin-top: 1.6rem; }
-  .proof__note { font-size: 0.82rem; margin-top: 1.4rem; max-width: 46ch; padding-left: 0.9rem; border-left: 2px solid var(--border-strong); }
-  .clin { padding: 1.4rem; display: grid; gap: 1rem; }
-  .clin__row { display: flex; align-items: center; gap: 0.7rem; }
-  .clin__ai { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-ink); background: var(--accent); padding: 0.25em 0.6em; border-radius: 999px; }
-  [data-theme="bauhaus"] .clin__ai { border-radius: 0; }
-  .clin__t { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); }
-  .clin__lines { display: grid; gap: 0.5rem; }
-  .clin__lines i { height: 8px; background: var(--surface-3); border-radius: 4px; display: block; animation: type 2.4s var(--ease) infinite; transform-origin: left; }
-  .clin__lines i:nth-child(2) { animation-delay: 0.2s; } .clin__lines i:nth-child(3) { animation-delay: 0.4s; } .clin__lines i:nth-child(4) { animation-delay: 0.6s; }
-  @keyframes type { 0% { transform: scaleX(0); opacity: 0.4; } 40%,100% { transform: scaleX(1); opacity: 1; } }
-  .clin__gate { display: flex; gap: 0.8rem; align-items: center; padding: 0.9rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); }
-  .clin__gate b { font-family: var(--font-display); display: block; font-size: 0.92rem; } .clin__gate small { color: var(--ink-3); font-size: 0.76rem; }
-  .clin__check { width: 30px; height: 30px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); font-weight: 700; }
-  [data-theme="bauhaus"] .clin__check { border-radius: 0; }
-  .clin__audit { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-3); }
+  .proof__copy h2 { margin: 1rem 0 1.1rem; }
+  .proof__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.3rem; }
+  .proof__copy .btn { margin-top: 1.7rem; }
+  .proof__note { font-size: 0.82rem; margin-top: 1.5rem; max-width: 46ch; padding-left: 0.9rem; border-left: 2px solid var(--border-strong); }
+
+  .hitl { padding: 1.5rem 1.6rem; display: grid; gap: 1.2rem; }
+  .hitl__head { display: flex; align-items: center; justify-content: space-between; }
+  .hitl__k { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-3); }
+  .hitl__badge { display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--highlight); }
   .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); box-shadow: 0 0 0 3px color-mix(in srgb, var(--highlight) 25%, transparent); }
+  [data-theme="bauhaus"] .dot2 { border-radius: 0; box-shadow: none; }
+  .hitl__steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; position: relative; }
+  .hitl__step { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: start; padding: 0.55rem 0; position: relative; }
+  .hitl__step:not(:last-child)::before { content: ""; position: absolute; left: 17px; top: 40px; bottom: -4px; width: 2px; background: var(--border); }
+  .hitl__ico { width: 36px; height: 36px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border-strong); font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; color: var(--ink-2); z-index: 1; }
+  [data-theme="bauhaus"] .hitl__ico { border-radius: 0; }
+  .hitl__ico--check { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-size: 1rem; font-weight: 700; }
+  .hitl__ico--rec { color: var(--highlight); }
+  .hitl__body b { font-family: var(--font-display); display: block; font-size: 0.98rem; margin-bottom: 0.15rem; }
+  .hitl__body span { color: var(--ink-3); font-size: 0.85rem; line-height: 1.45; }
+  .hitl__step--gate .hitl__body b { color: var(--accent); }
 
   /* ---- cta ---- */
   .cta__in { text-align: center; display: grid; justify-items: center; gap: 1.3rem; max-width: 44ch; margin-inline: auto; }
