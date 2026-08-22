@@ -60,6 +60,12 @@ monospace labels, small tight type. Flat, not glowing.
 - **paper** (default) — warm editorial light
 - **ink** — flat editorial dark (warm charcoal, not navy)
 - **bauhaus** — flat, sharp-cornered, hard offset shadows, primary red/blue/yellow
+- **terminal** — brutalist mono, black + acid-green, CRT scanlines, Space Grotesk / Space Mono
+- **nimbus** — soft organic, peach→lavender gradient, pastel blobs, rounded, Bricolage Grotesque
+
+Themes can restyle fonts, radius, shadows and decorative layers (grid, blobs, scanlines) —
+not just colour — via per-`[data-theme]` blocks in `tokens.css` plus a small flourish section
+at the end of `global.css`.
 
 **Adding a theme is one block:** copy a `[data-theme="x"] { … }` block in `tokens.css` and add
 the name to the `order`/`names` arrays in `src/components/ThemeToggle.astro`.

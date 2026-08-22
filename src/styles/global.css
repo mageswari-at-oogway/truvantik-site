@@ -176,3 +176,44 @@ button { font: inherit; cursor: pointer; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .skip-link { position: absolute; left: 0.5rem; top: -4rem; z-index: 200; background: var(--accent); color: var(--accent-ink); padding: 0.6em 1em; border-radius: var(--radius-sm); transition: top 0.2s var(--ease); }
 .skip-link:focus { top: 0.5rem; }
+
+/* ============================================================
+   Theme-specific flourishes (Terminal, Nimbus)
+   ============================================================ */
+
+/* ---- TERMINAL: CRT scanlines + green mono labels ---- */
+[data-theme="terminal"] body::after {
+  opacity: 0.5; mix-blend-mode: normal;
+  background-image: repeating-linear-gradient(0deg, rgb(0 255 156 / 0.035) 0 1px, transparent 1px 3px);
+}
+[data-theme="terminal"] .kicker { color: var(--accent); }
+[data-theme="terminal"] .kicker::before { background: var(--accent); }
+[data-theme="terminal"] .btn { border-width: 1px; }
+[data-theme="terminal"] .btn--grad { box-shadow: 0 0 24px -6px rgb(0 255 156 / 0.6); }
+[data-theme="terminal"] .card { box-shadow: none; }
+[data-theme="terminal"] .gridbg::before { background-size: 40px 40px; }
+
+/* ---- NIMBUS: soft gradient canvas + pastel blobs + rounded ---- */
+[data-theme="nimbus"] body {
+  background: linear-gradient(158deg, #fdf2ec 0%, #f5f0fb 52%, #eef0fb 100%);
+  background-attachment: fixed;
+}
+[data-theme="nimbus"] .aurora { overflow: visible; }
+[data-theme="nimbus"] .aurora::before {
+  width: 34vw; height: 34vw; top: -8%; right: 2%; border-radius: 50%;
+  background: radial-gradient(circle, #ffb59e, transparent 64%);
+  opacity: 0.6; filter: blur(12px);
+}
+[data-theme="nimbus"] .aurora::after {
+  content: ""; position: absolute; width: 28vw; height: 28vw; bottom: -10%; left: 3%;
+  border-radius: 50%; background: radial-gradient(circle, #c3b6f7, transparent 64%);
+  opacity: 0.5; filter: blur(12px);
+}
+[data-theme="nimbus"] .btn { border-radius: 999px; padding-inline: 1.5em; }
+[data-theme="nimbus"] .kicker {
+  background: var(--surface); padding: 0.5em 1em; border-radius: 999px;
+  color: var(--highlight); box-shadow: var(--shadow-card);
+}
+[data-theme="nimbus"] .kicker::before { display: none; }
+[data-theme="nimbus"] .pill { border-radius: 999px; }
+[data-theme="nimbus"] .snap { border-top: 0; }

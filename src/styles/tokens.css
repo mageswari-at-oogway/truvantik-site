@@ -104,6 +104,79 @@
   --logo-stroke: #121110;
 }
 
+/* ============ TERMINAL — brutalist mono, black + acid green ============ */
+[data-theme="terminal"] {
+  color-scheme: dark;
+  --font-display: "Space Grotesk", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --bg: #050505;
+  --bg-2: #080808;
+  --surface: #0d0d0d;
+  --surface-solid: #0d0d0d;
+  --surface-2: #121212;
+  --surface-3: #1c1c1c;
+  --ink: #ffffff;
+  --ink-2: #9a9a9a;
+  --ink-3: #575757;
+  --border: #262626;
+  --border-strong: #3a3a3a;
+  --rule: #1e1e1e;
+  --teal: #00ff9c;
+  --orange: #00ff9c;
+  --orange-2: #5affbe;
+  --accent: #00ff9c;
+  --accent-ink: #041a11;
+  --highlight: #00ff9c;
+  --highlight-ink: #041a11;
+  --grad: linear-gradient(96deg, #00ff9c, #5affbe);
+  --grad-soft: linear-gradient(135deg, rgb(0 255 156 / 0.08), rgb(0 255 156 / 0.03));
+  --grid-line: rgb(255 255 255 / 0.045);
+  --glass: none;
+  --shadow-card: none;
+  --shadow-lift: 0 0 0 1px #262626, 0 0 40px -20px rgb(0 255 156 / 0.5);
+  --radius-sm: 0px; --radius: 0px; --radius-lg: 0px; --radius-xl: 0px;
+  --logo-face: #ffffff;
+  --logo-corner: #00ff9c;
+  --logo-mark: #00c97c;
+  --logo-stroke: #050505;
+}
+
+/* ============ NIMBUS — soft organic, pastel + blobs ============ */
+[data-theme="nimbus"] {
+  color-scheme: light;
+  --font-display: "Bricolage Grotesque", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --bg: #fdf5f0;
+  --bg-2: #f2f0fb;
+  --surface: #ffffff;
+  --surface-solid: #ffffff;
+  --surface-2: #f6f2fb;
+  --surface-3: #ece7f8;
+  --ink: #2a2340;
+  --ink-2: #5b5470;
+  --ink-3: #8b84a0;
+  --border: rgb(42 35 64 / 0.12);
+  --border-strong: rgb(42 35 64 / 0.22);
+  --rule: rgb(42 35 64 / 0.1);
+  --teal: #35b8a0;
+  --orange: #f2733f;
+  --orange-2: #ff9466;
+  --accent: #f2733f;
+  --accent-ink: #ffffff;
+  --highlight: #7c6bd6;
+  --highlight-ink: #ffffff;
+  --grad: linear-gradient(96deg, #f2733f, #ff9466);
+  --grad-soft: linear-gradient(135deg, rgb(242 115 63 / 0.12), rgb(124 107 214 / 0.12));
+  --grid-line: rgb(42 35 64 / 0.045);
+  --glass: blur(14px) saturate(1.2);
+  --shadow-card: 0 14px 34px -22px rgb(42 35 64 / 0.4);
+  --shadow-lift: 0 22px 50px -26px rgb(124 107 214 / 0.5);
+  --radius-sm: 12px; --radius: 22px; --radius-lg: 30px; --radius-xl: 40px;
+  --logo-face: #2a2340;
+  --logo-corner: #7c6bd6;
+  --logo-mark: #f2733f;
+  --logo-stroke: #fdf5f0;
+}
+
 /* ============ BAUHAUS — bold, flat, primary ============ */
 [data-theme="bauhaus"] {
   color-scheme: light;
