@@ -53,10 +53,12 @@ geometry (`--radius-*`, `--maxw`, `--gutter`, easings), brand hues (`--teal`, `-
 
 ### Themes
 Three themes, switched by `data-theme` on `<html>`, persisted to `localStorage` (`tv-theme`),
-with a no-flash inline script in `Base.astro`:
+with a no-flash inline script in `Base.astro`. The system is an editorial "dossier" direction —
+warm paper, near-black ink, one orange accent, hairline rules, oversized index numerals,
+monospace labels, small tight type. Flat, not glowing.
 
-- **dark** (default) — warm near-black + gradient signature
-- **light** — warm editorial off-white
+- **paper** (default) — warm editorial light
+- **ink** — flat editorial dark (warm charcoal, not navy)
 - **bauhaus** — flat, sharp-cornered, hard offset shadows, primary red/blue/yellow
 
 **Adding a theme is one block:** copy a `[data-theme="x"] { … }` block in `tokens.css` and add

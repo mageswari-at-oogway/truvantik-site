@@ -3,7 +3,7 @@
 ---
 <button class="tt" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch theme">
   <span class="tt__dot" aria-hidden="true"></span>
-  <span class="tt__label" id="tt-label">Dark</span>
+  <span class="tt__label" id="tt-label">Paper</span>
 </button>
 
 <style>
@@ -28,14 +28,14 @@
 
 <script is:inline>
   (() => {
-    const order = ["dark", "light", "bauhaus"];
-    const names = { dark: "Dark", light: "Light", bauhaus: "Bauhaus" };
+    const order = ["paper", "ink", "bauhaus"];
+    const names = { paper: "Paper", ink: "Ink", bauhaus: "Bauhaus" };
     const btn = document.getElementById("theme-toggle");
     const label = document.getElementById("tt-label");
-    const cur = document.documentElement.getAttribute("data-theme") || "dark";
-    if (label) label.textContent = names[cur] || "Dark";
+    const cur = document.documentElement.getAttribute("data-theme") || "paper";
+    if (label) label.textContent = names[cur] || "Paper";
     btn?.addEventListener("click", () => {
-      const now = document.documentElement.getAttribute("data-theme") || "dark";
+      const now = document.documentElement.getAttribute("data-theme") || "paper";
       const next = order[(order.indexOf(now) + 1) % order.length];
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem("tv-theme", next); } catch (e) {}
