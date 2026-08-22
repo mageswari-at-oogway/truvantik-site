@@ -84,29 +84,21 @@ const phases = [
         <h2>Where are you today?</h2>
         <p class="lead">Most conversations start in one of three places. Each leads to a different first engagement.</p>
       </div>
-      <div class="entry__grid reveal" style="--d:100ms">
-        <div class="entry__tabs" role="tablist" aria-label="Starting points">
-          {entries.map((e, i) => (
-            <button class:list={["entry__tab", { active: i === 0 }]} role="tab"
-              id={`tab-${e.id}`} aria-selected={i === 0 ? "true" : "false"} aria-controls={`panel-${e.id}`} data-tab={e.id}>
-              <span class="entry__tag">{e.tag}</span>
-              <span class="entry__tt">{e.tab}</span>
-            </button>
-          ))}
-        </div>
-        <div class="entry__panels">
-          {entries.map((e, i) => (
-            <div class:list={["entry__panel card", { active: i === 0 }]} role="tabpanel"
-              id={`panel-${e.id}`} aria-labelledby={`tab-${e.id}`} data-panel={e.id} hidden={i !== 0}>
-              <p class="entry__body">{e.body}</p>
-              <div class="entry__meta">
-                <span class="pill entry__flow">{e.flow}</span>
-                <span class="pill">{e.time}</span>
-              </div>
-              <a href="/contact" class="btn btn--ghost entry__cta">Start here <span class="arw">→</span></a>
+      <div class="entry__cards reveal" style="--d:100ms">
+        {entries.map((e, i) => (
+          <article class:list={["ep card", { "ep--rec": i === 0 }]} style={`--d:${120 + i * 90}ms`}>
+            <div class="ep__top">
+              <span class="ep__tag">{e.tag}</span>
+              <span class="ep__time">{e.time}</span>
             </div>
-          ))}
-        </div>
+            <h3 class="ep__t">{e.tab}</h3>
+            <p class="ep__b muted">{e.body}</p>
+            <a href="/contact" class="ep__cta">
+              <span class="ep__flow">{e.flow}</span>
+              <span class="arw" aria-hidden="true">→</span>
+            </a>
+          </article>
+        ))}
       </div>
     </div>
   </section>
@@ -216,20 +208,19 @@ const phases = [
   .board-sec__art { margin-top: 2.4rem; max-width: 1000px; margin-inline: auto; width: 100%; }
 
   /* ---- entry ---- */
-  .entry__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 1.4rem; margin-top: 2.2rem; }
-  .entry__tabs { display: grid; gap: 0.6rem; align-content: start; }
-  .entry__tab { text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.05rem 1.2rem; display: grid; gap: 0.3rem; transition: border-color 0.25s, transform 0.25s var(--ease), background 0.25s; }
-  [data-theme="bauhaus"] .entry__tab { border: 1.5px solid var(--ink); }
-  .entry__tab:hover { transform: translateX(4px); border-color: var(--border-strong); }
-  .entry__tab.active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
-  .entry__tag { font-family: var(--font-mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); }
-  .entry__tt { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); letter-spacing: -0.02em; }
-  .entry__panel { padding: clamp(1.4rem, 3vw, 2.2rem); display: grid; gap: 1.3rem; align-content: center; }
-  .entry__panel[hidden] { display: none; }
-  .entry__body { font-size: var(--step-1); color: var(--ink-2); line-height: 1.5; }
-  .entry__meta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-  .entry__flow { color: var(--ink); border-color: var(--border-strong); }
-  .entry__cta { justify-self: start; }
+  .entry__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.4rem; }
+  .ep { display: flex; flex-direction: column; gap: 0.8rem; padding: 1.6rem; transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s; }
+  .ep:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-lift); }
+  .ep--rec { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); }
+  .ep__top { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
+  .ep__tag { font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); }
+  .ep__time { font-family: var(--font-mono); font-size: 0.66rem; color: var(--ink-3); white-space: nowrap; }
+  .ep__t { font-size: var(--step-2); letter-spacing: -0.02em; }
+  .ep__b { font-size: 0.92rem; line-height: 1.55; flex: 1; }
+  .ep__cta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; color: var(--ink); border-top: 1px solid var(--border); padding-top: 0.95rem; margin-top: 0.2rem; }
+  .ep__flow { color: var(--ink); }
+  .ep__cta .arw { color: var(--accent); transition: transform 0.25s var(--ease); flex: none; }
+  .ep:hover .ep__cta .arw { transform: translateX(4px); }
 
   /* ---- flow ---- */
   .flow__track { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 3rem; position: relative; }
@@ -271,7 +262,7 @@ const phases = [
 
   /* ---- responsive ---- */
   @media (max-width: 860px) {
-    .hero__in, .why__in, .proof__in, .entry__grid { grid-template-columns: 1fr; }
+    .hero__in, .why__in, .proof__in, .entry__cards { grid-template-columns: 1fr; }
     .hero { padding-top: 96px; }
     .hero__art { order: 2; }
     .scroll-cue { display: none; }
@@ -287,21 +278,3 @@ const phases = [
   }
 </style>
 
-<script is:inline>
-  // entry-point tabs
-  (() => {
-    const tabs = document.querySelectorAll(".entry__tab");
-    const panels = document.querySelectorAll(".entry__panel");
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const id = tab.getAttribute("data-tab");
-        tabs.forEach((t) => { t.classList.toggle("active", t === tab); t.setAttribute("aria-selected", String(t === tab)); });
-        panels.forEach((p) => {
-          const on = p.getAttribute("data-panel") === id;
-          p.classList.toggle("active", on);
-          if (on) p.removeAttribute("hidden"); else p.setAttribute("hidden", "");
-        });
-      });
-    });
-  })();
-</script>
