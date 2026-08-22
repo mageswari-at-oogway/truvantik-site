@@ -1,175 +1,263 @@
 ---
-// Signature product moment: a live opportunity roadmap.
-// A card advances Assess -> Build -> Deploy on a timer (JS state machine).
-// Respects reduced-motion (renders the settled end-state).
+// Signature product moment: the opportunity pipeline.
+// A ranked Assess list feeds a horizontal spine; a token travels
+// Assess -> Build -> Deploy on a loop. Value/effort meters make the
+// ranking tangible; a progress ring shows the active build.
+// Respects reduced-motion (renders a settled end-state).
 interface Props { compact?: boolean; id?: string }
 const { compact = false, id = "roadmap" } = Astro.props;
 
 const assess = [
-  "Customer support triage",
-  "Contract & document review",
-  "Returns exception handling",
-  "Onboarding data entry",
-  "Internal knowledge retrieval",
+  { t: "Customer support triage", v: 92, e: 38 },
+  { t: "Contract & document review", v: 84, e: 55 },
+  { t: "Returns exception handling", v: 76, e: 47 },
+  { t: "Onboarding data entry", v: 63, e: 34 },
+  { t: "Internal knowledge retrieval", v: 55, e: 61 },
 ];
 ---
-<div class:list={["board", { "board--compact": compact }]} id={id} data-roadmap>
-  <div class="board__bar" aria-hidden="true">
-    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-    <span class="board__tag">Illustrative · one client</span>
+<div class:list={["pipe", { "pipe--compact": compact }]} id={id} data-pipe>
+  <div class="pipe__bar" aria-hidden="true">
+    <span class="pipe__dots"><i></i><i></i><i></i></span>
+    <span class="pipe__legend"><b>value</b><em>effort</em></span>
+    <span class="pipe__tag">Illustrative · one client</span>
   </div>
 
-  <div class="board__cols">
-    <section class="col" data-col="assess">
-      <header class="col__h"><span class="col__k">Assess</span><span class="col__n" data-count>5</span></header>
-      <ul class="col__list">
-        {assess.map((t, i) => (
-          <li class="tk" data-tk={i === 0 ? "mover" : "static"} style={`--i:${i}`}>
-            <span class="tk__id">{String(i + 1).padStart(2, "0")}</span>
-            <span class="tk__t">{t}</span>
-            <span class="tk__ve" aria-hidden="true"><b>V</b><i>E</i></span>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section class="col" data-col="build">
-      <header class="col__h"><span class="col__k">Build</span><span class="col__st">S4/8</span></header>
-      <ul class="col__list">
-        <li class="tk tk--build" data-slot="build">
-          <span class="tk__id">06</span>
-          <span class="tk__t">Support triage copilot</span>
-          <span class="tk__note">↳ from Customer support triage</span>
-          <span class="prog" aria-hidden="true"><span class="prog__bar"></span></span>
-        </li>
-      </ul>
-    </section>
-
-    <section class="col" data-col="deploy">
-      <header class="col__h"><span class="col__k">Deploy</span><span class="col__st col__st--live">● Live</span></header>
-      <ul class="col__list">
-        <li class="tk tk--deploy">
-          <span class="tk__id">07</span>
-          <span class="tk__t">Document review agent</span>
-          <span class="tk__note">In production</span>
-        </li>
-      </ul>
-    </section>
+  <!-- stations + rail -->
+  <div class="pipe__track">
+    <div class="pipe__rail" aria-hidden="true">
+      <span class="pipe__flow"></span>
+      <span class="pipe__token" data-token></span>
+    </div>
+    <div class="pipe__stations">
+      <div class="st"><span class="st__name">Assess</span><span class="st__meta" data-count>5 queued</span><span class="st__dot"></span></div>
+      <div class="st"><span class="st__name">Build</span><span class="st__meta">sprint 4 / 8</span><span class="st__dot st__dot--mid"></span></div>
+      <div class="st"><span class="st__name">Deploy</span><span class="st__meta st__meta--live" data-live>● live</span><span class="st__dot st__dot--end"></span></div>
+    </div>
   </div>
-  <p class="board__foot" aria-hidden="true">Ranked by value → effort, in that order.</p>
+
+  <!-- panels -->
+  <div class="pipe__panels">
+    <!-- ASSESS -->
+    <ol class="col col--assess">
+      {assess.map((a, i) => (
+        <li class="op" data-op={i === 0 ? "lead" : ""} style={`--d:${i * 60}ms`}>
+          <div class="op__top"><span class="op__id">{String(i + 1).padStart(2, "0")}</span><span class="op__rank">#{i + 1}</span></div>
+          <p class="op__t">{a.t}</p>
+          <div class="op__meters">
+            <span class="mtr mtr--v" title="value"><i style={`--w:${a.v}%`}></i></span>
+            <span class="mtr mtr--e" title="effort"><i style={`--w:${a.e}%`}></i></span>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <!-- BUILD -->
+    <div class="col col--build">
+      <div class="ring" data-ring>
+        <svg viewBox="0 0 60 60" aria-hidden="true">
+          <circle class="ring__bg" cx="30" cy="30" r="25" />
+          <circle class="ring__fg" cx="30" cy="30" r="25" data-ringfg />
+        </svg>
+        <span class="ring__pct" data-ringpct>50%</span>
+      </div>
+      <p class="build__t">Support triage copilot</p>
+      <p class="build__from">↳ promoted from #1 Customer support triage</p>
+    </div>
+
+    <!-- DEPLOY -->
+    <div class="col col--deploy">
+      <div class="dep" data-dep>
+        <span class="dep__pulse" aria-hidden="true"></span>
+        <p class="build__t">Document review agent</p>
+        <p class="dep__meta">In production · handed over</p>
+      </div>
+    </div>
+  </div>
+  <p class="pipe__foot" aria-hidden="true">Ranked by value → effort. Promoted only when it earns it.</p>
 </div>
 
 <style>
-  .board {
+  .pipe {
     background: var(--surface-solid);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lift);
-    padding: 1rem 1rem 0.75rem;
-    overflow: hidden;
-    position: relative;
+    padding: 1rem 1.1rem 0.8rem;
+    position: relative; overflow: hidden;
   }
-  .board::before {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: var(--grad-soft); opacity: 0.6; mix-blend-mode: soft-light;
+  [data-theme="bauhaus"] .pipe, [data-theme="terminal"] .pipe { border-width: 2px; }
+  .pipe::before { content: ""; position: absolute; inset: 0; background: var(--grad-soft); opacity: 0.5; pointer-events: none; }
+  .pipe > * { position: relative; }
+
+  .pipe__bar { display: flex; align-items: center; gap: 0.7rem; padding-bottom: 0.9rem; }
+  .pipe__dots { display: inline-flex; gap: 0.35rem; }
+  .pipe__dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
+  [data-theme="bauhaus"] .pipe__dots i, [data-theme="terminal"] .pipe__dots i { border-radius: 0; }
+  .pipe__legend { display: inline-flex; gap: 0.7rem; margin-left: 0.4rem; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); }
+  .pipe__legend b, .pipe__legend em { display: inline-flex; align-items: center; gap: 0.3em; font-style: normal; font-weight: 400; }
+  .pipe__legend b::before, .pipe__legend em::before { content: ""; width: 8px; height: 8px; border-radius: 2px; }
+  .pipe__legend b::before { background: var(--accent); }
+  .pipe__legend em::before { background: var(--ink-3); }
+  .pipe__tag { margin-left: auto; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* ---- stations + rail ---- */
+  .pipe__track { position: relative; height: 58px; margin-bottom: 0.4rem; }
+  .pipe__rail { position: absolute; left: 16.6%; right: 16.6%; bottom: 6px; height: 2px; background: var(--border-strong); border-radius: 2px; }
+  .pipe__flow { position: absolute; inset: 0; border-radius: 2px; overflow: hidden; }
+  .pipe__flow::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 8px, transparent 8px 18px);
+    opacity: 0.55; animation: railflow 1.1s linear infinite;
   }
-  .board > * { position: relative; }
-  [data-theme="bauhaus"] .board { border: 2px solid var(--ink); }
-  .board__bar { display: flex; align-items: center; gap: 0.4rem; padding: 0.15rem 0.25rem 0.9rem; }
-  .board__bar .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
-  [data-theme="bauhaus"] .dot { border-radius: 0; }
-  .board__tag { margin-left: auto; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
-
-  .board__cols { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 0.6rem; }
-  .col { background: color-mix(in srgb, var(--bg) 60%, transparent); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.6rem; min-height: 100%; }
-  [data-theme="bauhaus"] .col { border: 1.5px solid var(--ink); }
-  .col__h { display: flex; align-items: baseline; justify-content: space-between; gap: 0.4rem; margin-bottom: 0.6rem; }
-  .col__k { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); white-space: nowrap; }
-  .col__n, .col__st { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-3); white-space: nowrap; }
-  .col__st--live { color: var(--highlight); }
-  .col__list { list-style: none; padding: 0; display: grid; gap: 0.4rem; }
-
-  .tk {
-    position: relative; display: grid; gap: 0.15rem;
-    background: var(--surface-solid); border: 1px solid var(--border);
-    border-radius: var(--radius-sm); padding: 0.5rem 0.6rem;
-    transition: transform 0.5s var(--ease), opacity 0.5s var(--ease), border-color 0.3s;
+  @keyframes railflow { to { transform: translateX(18px); } }
+  .pipe__token {
+    position: absolute; bottom: -4px; left: 16.6%; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
+    transform: translateX(-50%); transition: left 0.05s linear;
   }
-  [data-theme="bauhaus"] .tk { border: 1.5px solid var(--ink); }
-  .tk__id { font-family: var(--font-mono); font-size: 0.6rem; color: var(--ink-3); }
-  .tk__t { font-size: 0.82rem; font-weight: 600; font-family: var(--font-display); letter-spacing: -0.01em; line-height: 1.2; }
-  .tk__note { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-3); }
-  .tk__ve { position: absolute; top: 0.5rem; right: 0.55rem; display: inline-flex; gap: 2px; font-family: var(--font-mono); font-size: 0.56rem; }
-  .tk__ve b { color: var(--accent); } .tk__ve i { color: var(--ink-3); font-style: normal; }
-  .tk--build { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
-  .tk--deploy { border-color: color-mix(in srgb, var(--highlight) 40%, var(--border)); }
+  [data-theme="bauhaus"] .pipe__token, [data-theme="terminal"] .pipe__token { border-radius: 0; }
 
-  .prog { display: block; height: 3px; border-radius: 3px; background: var(--surface-3); margin-top: 0.4rem; overflow: hidden; }
-  .prog__bar { display: block; height: 100%; width: 50%; background: var(--accent); border-radius: 3px; }
+  .pipe__stations { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .st { display: grid; justify-items: center; align-content: end; gap: 0.15rem; position: relative; }
+  .st__name { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); }
+  .st__meta { font-family: var(--font-mono); font-size: 0.58rem; color: var(--ink-3); }
+  .st__meta--live { color: var(--highlight); }
+  .st__dot { width: 13px; height: 13px; border-radius: 50%; background: var(--surface-solid); border: 2px solid var(--border-strong); margin-top: 0.3rem; z-index: 2; }
+  .st__dot--mid { border-color: var(--accent); }
+  .st__dot--end { border-color: var(--highlight); }
+  [data-theme="bauhaus"] .st__dot, [data-theme="terminal"] .st__dot { border-radius: 0; }
 
-  /* the migrating card */
-  .tk[data-tk="mover"].is-lifting { transform: translateY(-6px) scale(1.015); border-color: var(--accent); box-shadow: var(--shadow-card); }
-  .tk[data-tk="mover"].is-gone { opacity: 0; transform: translateX(14px) scale(0.96); }
-  .tk--flash { animation: flashIn 0.6s var(--ease); }
-  @keyframes flashIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  /* ---- panels ---- */
+  .pipe__panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; }
+  .col { background: color-mix(in srgb, var(--bg) 55%, transparent); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.6rem; }
+  [data-theme="bauhaus"] .col, [data-theme="terminal"] .col { border-width: 1.5px; }
 
-  .board__foot { font-family: var(--font-mono); font-size: 0.64rem; color: var(--ink-3); text-align: center; padding: 0.75rem 0 0.35rem; letter-spacing: 0.03em; }
+  /* assess ranked list */
+  .col--assess { list-style: none; margin: 0; display: grid; gap: 0.4rem; align-content: start; }
+  .op { background: var(--surface-solid); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.45rem 0.55rem; display: grid; gap: 0.3rem; transition: transform 0.5s var(--ease), border-color 0.3s, opacity 0.5s; }
+  [data-theme="bauhaus"] .op, [data-theme="terminal"] .op { border-width: 1.5px; }
+  .op__top { display: flex; justify-content: space-between; align-items: center; }
+  .op__id { font-family: var(--font-mono); font-size: 0.58rem; color: var(--ink-3); }
+  .op__rank { font-family: var(--font-mono); font-size: 0.56rem; color: var(--accent); }
+  .op__t { font-family: var(--font-display); font-weight: 600; font-size: 0.78rem; line-height: 1.15; letter-spacing: -0.01em; }
+  .op__meters { display: grid; gap: 3px; margin-top: 0.15rem; }
+  .mtr { height: 4px; border-radius: 3px; background: var(--surface-3); overflow: hidden; }
+  [data-theme="bauhaus"] .mtr, [data-theme="terminal"] .mtr { border-radius: 0; }
+  .mtr i { display: block; height: 100%; width: var(--w); border-radius: 3px; }
+  .mtr--v i { background: var(--accent); }
+  .mtr--e i { background: var(--ink-3); }
+  .op[data-op="lead"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .op.is-promoting { transform: translateY(-4px) scale(1.02); }
 
-  .board--compact .board__cols { grid-template-columns: 1.2fr 0.9fr 0.9fr; }
-  .board--compact .tk__t { font-size: 0.76rem; }
-  .board--compact .board__foot { display: none; }
+  /* build ring */
+  .col--build { display: grid; align-content: center; justify-items: center; gap: 0.5rem; text-align: center; }
+  .ring { position: relative; width: 82px; height: 82px; }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring__bg { fill: none; stroke: var(--surface-3); stroke-width: 5; }
+  .ring__fg { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 157; stroke-dashoffset: 78; transition: stroke-dashoffset 0.9s var(--ease); }
+  [data-theme="bauhaus"] .ring__fg, [data-theme="terminal"] .ring__fg { stroke-linecap: butt; }
+  .ring__pct { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+  .build__t { font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; line-height: 1.2; }
+  .build__from { font-family: var(--font-mono); font-size: 0.58rem; color: var(--ink-3); line-height: 1.4; }
 
-  @media (max-width: 620px) {
-    .board__cols { grid-template-columns: 1fr; }
-    .col { }
+  /* deploy */
+  .col--deploy { display: grid; align-content: center; }
+  .dep { display: grid; gap: 0.35rem; text-align: center; justify-items: center; position: relative; }
+  .dep__pulse { width: 14px; height: 14px; border-radius: 50%; background: var(--highlight); position: relative; }
+  .dep__pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--highlight); animation: pulse 2s var(--ease-in-out) infinite; }
+  @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 70%,100% { transform: scale(2.6); opacity: 0; } }
+  [data-theme="bauhaus"] .dep__pulse, [data-theme="terminal"] .dep__pulse { border-radius: 0; }
+  .dep.is-flash { animation: depflash 0.7s var(--ease); }
+  @keyframes depflash { 0% { transform: scale(1); } 40% { transform: scale(1.06); } 100% { transform: scale(1); } }
+  .dep__meta { font-family: var(--font-mono); font-size: 0.58rem; color: var(--ink-3); }
+
+  .pipe__foot { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-3); text-align: center; padding: 0.7rem 0 0.3rem; letter-spacing: 0.02em; }
+
+  /* compact (hero) */
+  .pipe--compact .op:nth-child(n+4) { display: none; }
+  .pipe--compact .pipe__foot { display: none; }
+  .pipe--compact .ring { width: 66px; height: 66px; }
+
+  /* responsive */
+  @media (max-width: 640px) {
+    .pipe__track { height: 46px; }
+    .pipe__rail { left: 10%; right: 10%; }
+    .pipe__panels { grid-template-columns: 1fr; }
+    .pipe__stations { grid-template-columns: 1fr; }
+    .st:not(:first-child) { display: none; }
+    .pipe__rail, .pipe__token { display: none; }
+    .pipe__track { height: auto; margin-bottom: 0.6rem; }
+    .st { align-content: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pipe__flow::before, .dep__pulse::after { animation: none; }
   }
 </style>
 
 <script is:inline define:vars={{ id }}>
   (() => {
-    const board = document.getElementById(id);
-    if (!board) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const root = document.getElementById(id);
+    if (!root) return;
+    const token = root.querySelector("[data-token]");
+    const ringFg = root.querySelector("[data-ringfg]");
+    const ringPct = root.querySelector("[data-ringpct]");
+    const count = root.querySelector("[data-count]");
+    const dep = root.querySelector("[data-dep]");
+    const lead = root.querySelector('[data-op="lead"]');
+    if (!token) return;
 
-    const mover = board.querySelector('[data-tk="mover"]');
-    const buildSlot = board.querySelector('[data-slot="build"]');
-    const prog = board.querySelector(".prog__bar");
-    const count = board.querySelector("[data-count]");
-    if (!mover) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
 
-    let timer;
-    const run = () => {
-      // 1. lift the top Assess card
-      mover.classList.add("is-lifting");
-      setTimeout(() => {
-        // 2. send it away
-        mover.classList.remove("is-lifting");
-        mover.classList.add("is-gone");
-        if (count) count.textContent = "4";
-      }, 900);
-      setTimeout(() => {
-        // 3. flash a refreshed Build progress + reset
-        if (prog) { prog.style.width = "72%"; }
-        buildSlot?.classList.add("tk--flash");
-      }, 1500);
-      setTimeout(() => {
-        buildSlot?.classList.remove("tk--flash");
-        if (prog) prog.style.width = "50%";
-      }, 2300);
-      setTimeout(() => {
-        // 4. reset the mover back into Assess
-        mover.classList.remove("is-gone");
-        if (count) count.textContent = "5";
-      }, 4200);
+    const CIRC = 157;
+    const A = 16.6, B = 83.4;           // rail start / end (%)
+    let raf, running = false, t0 = 0;
+    const DUR = 4200, HOLD = 2000;
+
+    const ease = (x) => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+
+    let midDone = false, endDone = false;
+    const frame = (ts) => {
+      if (!t0) t0 = ts;
+      const el = ts - t0;
+      if (el < DUR) {
+        const p = ease(el / DUR);
+        const pos = A + (B - A) * p;
+        token.style.left = pos + "%";
+        if (!midDone && pos >= 50) {           // reached Build
+          midDone = true;
+          if (count) count.textContent = "4 queued";
+          if (lead) lead.classList.add("is-promoting");
+          if (ringFg) ringFg.style.strokeDashoffset = String(CIRC * (1 - 0.72));
+          if (ringPct) ringPct.textContent = "72%";
+        }
+        if (!endDone && pos >= 82) {            // reached Deploy
+          endDone = true;
+          dep?.classList.add("is-flash");
+        }
+        raf = requestAnimationFrame(frame);
+      } else if (el < DUR + HOLD) {
+        raf = requestAnimationFrame(frame);
+      } else {
+        // reset
+        t0 = 0; midDone = false; endDone = false;
+        token.style.left = A + "%";
+        if (count) count.textContent = "5 queued";
+        if (lead) lead.classList.remove("is-promoting");
+        if (ringFg) ringFg.style.strokeDashoffset = String(CIRC * (1 - 0.5));
+        if (ringPct) ringPct.textContent = "50%";
+        dep?.classList.remove("is-flash");
+        raf = requestAnimationFrame(frame);
+      }
     };
 
-    // only animate while visible
     const io = new IntersectionObserver((es) => {
       es.forEach((e) => {
-        if (e.isIntersecting) { run(); timer = setInterval(run, 6000); }
-        else { clearInterval(timer); }
+        if (e.isIntersecting && !running) { running = true; t0 = 0; raf = requestAnimationFrame(frame); }
+        else if (!e.isIntersecting && running) { running = false; cancelAnimationFrame(raf); }
       });
-    }, { threshold: 0.35 });
-    io.observe(board);
+    }, { threshold: 0.3 });
+    io.observe(root);
   })();
 </script>
