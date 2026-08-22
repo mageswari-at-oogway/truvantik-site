@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import BrandGraphic from "../components/BrandGraphic.astro";
+import WorkflowOrbit from "../components/WorkflowOrbit.astro";
 
 const commitments = [
   { k: "01", t: "Cross-industry depth", claim: "Expertise transfers rather than resetting with every client.", ev: "Document-heavy review looks the same in underwriting, clinical intake and customs clearance. We bring the pattern and adapt it, not rediscover it on your budget." },
@@ -10,7 +10,7 @@ const commitments = [
 ];
 
 const entries = [
-  { id: "unsure", tab: "Not sure where AI fits", body: "You have been asked for a plan, or you suspect there is value here but cannot yet name it. Begin with an assessment that ends in a ranked, costed roadmap.", flow: "Assessment → Ranked roadmap", time: "4–6 weeks", tag: "Start here" },
+  { id: "unsure", tab: "Not sure where AI fits", body: "You have been asked for a plan, or you suspect there is value here but cannot yet name it. Begin with a discovery conversation to understand your goals and decide the right next step.", flow: "Discovery conversation → Next step", time: "30 minutes", tag: "Start here" },
   { id: "build", tab: "You know what to build", body: "The use case is clear and the business case is made. You need a team that can take it from data to a deployed product your users rely on.", flow: "Build → Shipped product", time: "3–5 months", tag: "Ready to build" },
   { id: "stalled", tab: "Your pilot has stalled", body: "It works in a demo but not in the business. Usually the blocker is integration, ownership or adoption rather than the model itself.", flow: "Unstick → Production system", time: "6–8 weeks", tag: "Unstick it" },
 ];
@@ -42,7 +42,7 @@ const entries = [
         </p>
       </div>
       <div class="hero__art reveal" style="--d:180ms">
-        <BrandGraphic compact id="hero-graphic" />
+        <WorkflowOrbit />
       </div>
     </div>
   </section>

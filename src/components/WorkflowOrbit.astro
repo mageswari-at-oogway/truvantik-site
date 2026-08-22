@@ -1,0 +1,241 @@
+---
+const id = `workflow-orbit-${Math.random().toString(36).slice(2, 8)}`;
+const clip = `${id}-clip`;
+---
+
+<div class="workflow-orbit" role="img" aria-label="A customer request and supporting documents become a workflow that works in the team's existing systems.">
+  <svg class="workflow-orbit__paths" viewBox="0 0 520 500" aria-hidden="true">
+    <ellipse class="workflow-orbit__outer" cx="260" cy="250" rx="218" ry="205" />
+    <ellipse class="workflow-orbit__inner" cx="260" cy="250" rx="174" ry="162" />
+    <path class="workflow-orbit__arc workflow-orbit__arc--orange" d="M83 184 C142 98 358 86 437 180" />
+    <path class="workflow-orbit__arc workflow-orbit__arc--teal" d="M100 333 C173 411 346 410 420 326" />
+    <g class="workflow-orbit__input-links">
+      <path d="M135 184 C181 189 204 214 229 231" />
+      <path d="M135 294 C181 289 204 274 229 261" />
+    </g>
+    <g class="workflow-orbit__system-links">
+      <path d="M291 235 C329 218 354 207 387 203" />
+      <path d="M295 250 C338 250 355 250 387 250" />
+      <path d="M291 265 C329 282 354 293 387 297" />
+    </g>
+    <g class="workflow-orbit__float workflow-orbit__float--orange"><circle class="workflow-orbit__dot workflow-orbit__dot--orange" cx="109" cy="132" r="10" /></g>
+    <g class="workflow-orbit__float workflow-orbit__float--violet"><rect class="workflow-orbit__dot workflow-orbit__dot--violet" x="410" y="127" width="17" height="17" rx="4" transform="rotate(42 418.5 135.5)" /></g>
+    <g class="workflow-orbit__float workflow-orbit__float--teal"><path class="workflow-orbit__dot workflow-orbit__dot--teal" d="M128 354 l13 -22 l13 22 Z" /></g>
+  </svg>
+
+  <div class="workflow-orbit__inputs" aria-hidden="true">
+    <span class="workflow-orbit__signal workflow-orbit__signal--request"><i></i><span><strong>Customer request</strong><small>The work that needs attention.</small></span></span>
+    <span class="workflow-orbit__signal workflow-orbit__signal--documents"><i></i><span><strong>Documents + data</strong><small>The context behind it.</small></span></span>
+  </div>
+
+  <span class="workflow-orbit__systems" aria-hidden="true"><i></i>Existing systems</span>
+  <div class="workflow-orbit__system-map" aria-hidden="true">
+    <span><i></i>CRM</span>
+    <span><i></i>Operations</span>
+    <span><i></i>Knowledge base</span>
+  </div>
+
+  <div class="workflow-orbit__core" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <defs><clipPath id={clip}><rect x="10" y="10" width="44" height="44" rx="9" transform="rotate(45 32 32)" /></clipPath></defs>
+      <g clip-path={`url(#${clip})`}>
+        <rect width="64" height="64" fill="var(--logo-face)" />
+        <path d="M40 0 L64 24 L64 64 L40 64 Z" fill="var(--logo-corner)" />
+      </g>
+      <path d="M32 15 L47 31 H38.5 V51 H25.5 V31 H17 Z" fill="var(--logo-mark)" />
+      <rect x="10" y="10" width="44" height="44" rx="9" transform="rotate(45 32 32)" fill="none" stroke="var(--logo-stroke)" stroke-width="3" />
+    </svg>
+  </div>
+
+  <article class="workflow-orbit__solution" aria-hidden="true">
+    <strong>A workflow the team can use.</strong>
+    <p>Clearer review, decisions and next actions inside the tools already in use.</p>
+  </article>
+</div>
+
+<style>
+  .workflow-orbit {
+    position: relative;
+    width: 116%;
+    max-width: none;
+    margin-left: -7%;
+    aspect-ratio: 1.04;
+    margin-inline: auto;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .workflow-orbit::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    left: 50%; top: 50%;
+    width: 42%; aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent), transparent 68%);
+    pointer-events: none;
+  }
+
+  .workflow-orbit__paths { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .workflow-orbit__outer { fill: none; stroke: var(--border); stroke-width: 1.4; }
+  .workflow-orbit__inner { fill: none; stroke: var(--border-strong); stroke-width: 1.8; stroke-dasharray: 6 11; }
+  .workflow-orbit__arc { fill: none; stroke-width: 3; stroke-dasharray: 7 14; stroke-linecap: round; }
+  .workflow-orbit__arc--orange { stroke: var(--accent); animation: orbit-dash 11s linear infinite; }
+  .workflow-orbit__arc--teal { stroke: var(--teal); animation: orbit-dash 13s linear infinite reverse; }
+  .workflow-orbit__input-links path, .workflow-orbit__system-links path { fill: none; stroke-width: 1.6; stroke-linecap: round; }
+  .workflow-orbit__input-links path { stroke: color-mix(in srgb, var(--accent) 60%, transparent); stroke-dasharray: 4 7; animation: input-links-stage 12s var(--ease-in-out) infinite; }
+  .workflow-orbit__input-links path:nth-child(2) { stroke: color-mix(in srgb, var(--teal) 65%, transparent); animation-delay: -0.18s; }
+  .workflow-orbit__system-links path { stroke: color-mix(in srgb, var(--highlight) 56%, transparent); stroke-dasharray: 3 6; animation: system-links-stage 12s var(--ease-in-out) infinite; }
+  .workflow-orbit__system-links path:nth-child(2) { stroke: color-mix(in srgb, var(--accent) 55%, transparent); }
+  .workflow-orbit__system-links path:nth-child(3) { stroke: color-mix(in srgb, var(--teal) 62%, transparent); }
+  .workflow-orbit__dot--orange { fill: var(--accent); }
+  .workflow-orbit__dot--violet { fill: var(--highlight); }
+  .workflow-orbit__dot--teal { fill: var(--teal); }
+  .workflow-orbit__float { transform-box: view-box; transform-origin: center; }
+  .workflow-orbit__float--orange { animation: marker-float 6s var(--ease-in-out) infinite; }
+  .workflow-orbit__float--violet { animation: marker-float 7.2s var(--ease-in-out) -2.4s infinite reverse; }
+  .workflow-orbit__float--teal { animation: marker-float 6.6s var(--ease-in-out) -4.1s infinite; }
+
+  .workflow-orbit__core {
+    position: absolute;
+    z-index: 2;
+    top: 50%; left: 50%;
+    width: 84px; height: 84px;
+    display: grid; place-items: center;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--surface) 80%, transparent);
+    box-shadow: 0 16px 32px -25px color-mix(in srgb, var(--ink) 55%, transparent);
+    transform-style: preserve-3d;
+    animation: core-settle 12s var(--ease-in-out) infinite;
+  }
+  .workflow-orbit__core svg { width: 50px; height: 50px; transform: rotate(-45deg); }
+
+  .workflow-orbit__signal, .workflow-orbit__systems {
+    position: absolute;
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    color: var(--ink-2);
+    font-size: clamp(0.76rem, 2vw, 0.92rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  .workflow-orbit__signal i, .workflow-orbit__systems i { width: 9px; height: 9px; flex: none; margin-top: 0.35rem; border-radius: 50%; background: var(--accent); }
+  .workflow-orbit__signal > span { position: relative; display: grid; gap: 0.35rem; }
+  .workflow-orbit__signal > span::before { content: ""; position: absolute; z-index: -1; inset: -0.8rem -0.95rem; background: radial-gradient(circle at 12% 50%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 74%); }
+  .workflow-orbit__signal strong { color: var(--ink); font-family: var(--font-display); font-size: clamp(1rem, 2.6vw, 1.35rem); font-weight: 650; line-height: 1.05; letter-spacing: -0.035em; }
+  .workflow-orbit__signal small { max-width: 17ch; color: var(--ink-2); font-size: clamp(0.68rem, 1.6vw, 0.8rem); font-weight: 500; line-height: 1.4; }
+  .workflow-orbit__inputs { position: absolute; z-index: 3; inset: 0; animation: inputs-stage 12s var(--ease-in-out) infinite; }
+  .workflow-orbit__signal--request { left: 7%; top: 22%; }
+  .workflow-orbit__signal--documents { left: 7%; top: 52%; }
+  .workflow-orbit__signal--documents i { background: var(--teal); }
+  .workflow-orbit__signal--documents > span::before { background: radial-gradient(circle at 12% 50%, color-mix(in srgb, var(--teal) 14%, transparent), transparent 74%); }
+
+  .workflow-orbit__systems {
+    z-index: 3;
+    top: 34%; left: 62%;
+    padding: 0.65rem 0.85rem;
+    margin: -0.65rem -0.85rem;
+    transform: translateX(-50%);
+    background: radial-gradient(circle at 24% 50%, color-mix(in srgb, var(--highlight) 15%, transparent), transparent 72%);
+    animation: systems-stage 12s var(--ease-in-out) infinite;
+  }
+  .workflow-orbit__systems i { background: var(--highlight); }
+  .workflow-orbit__system-map {
+    position: absolute;
+    z-index: 3;
+    top: 45%; right: 3%;
+    display: grid;
+    gap: 0.45rem;
+    padding: 0.9rem 0.85rem 0.9rem 1.7rem;
+    margin: -0.9rem -0.85rem;
+    color: var(--ink-2);
+    font-size: clamp(0.68rem, 1.75vw, 0.8rem);
+    font-weight: 600;
+    background: radial-gradient(circle at 17% 50%, color-mix(in srgb, var(--highlight) 11%, transparent), transparent 74%);
+    animation: systems-map-stage 12s var(--ease-in-out) infinite;
+  }
+  .workflow-orbit__system-map::before { content: ""; position: absolute; left: 0; top: 0.35rem; bottom: 0.35rem; width: 1px; background: var(--border-strong); }
+  .workflow-orbit__system-map span { display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
+  .workflow-orbit__system-map i { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+  .workflow-orbit__system-map span:nth-child(2) i { background: var(--accent); }
+  .workflow-orbit__system-map span:nth-child(3) i { background: var(--highlight); }
+
+  .workflow-orbit__solution {
+    position: absolute;
+    z-index: 3;
+    right: 0; bottom: 25%;
+    width: min(46%, 220px);
+    display: grid; gap: 0.45rem;
+    animation: solution-stage 12s var(--ease-in-out) infinite;
+  }
+  .workflow-orbit__solution::before { content: ""; position: absolute; z-index: -1; inset: -1.15rem -0.85rem; background: radial-gradient(circle at 10% 52%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 72%); opacity: 0.9; }
+  .workflow-orbit__solution strong { font-family: var(--font-display); font-size: clamp(1.12rem, 3vw, 1.5rem); line-height: 1.04; letter-spacing: -0.035em; color: var(--ink); }
+  .workflow-orbit__solution p { font-size: clamp(0.72rem, 1.75vw, 0.84rem); line-height: 1.42; color: var(--ink-2); }
+
+  @keyframes inputs-stage {
+    0%, 7% { opacity: 0; transform: translateX(-12px); }
+    14%, 25% { opacity: 1; transform: translateX(0); }
+    34%, 100% { opacity: 0; transform: translateX(72px); }
+  }
+  @keyframes systems-stage {
+    0%, 39% { opacity: 0; transform: translate(-50%, -10px); }
+    46%, 61% { opacity: 1; transform: translate(-50%, 0); }
+    68%, 100% { opacity: 0; transform: translate(-50%, 7px); }
+  }
+  @keyframes solution-stage {
+    0%, 77% { opacity: 0; transform: translateY(10px); }
+    85%, 94% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-5px); }
+  }
+  @keyframes systems-map-stage {
+    0%, 43% { opacity: 0; transform: translateX(10px); }
+    51%, 62% { opacity: 1; transform: translateX(0); }
+    70%, 100% { opacity: 0; transform: translateX(-8px); }
+  }
+  @keyframes input-links-stage {
+    0%, 8% { opacity: 0; stroke-dashoffset: 18; }
+    14%, 26% { opacity: 1; stroke-dashoffset: 0; }
+    34%, 100% { opacity: 0; }
+  }
+  @keyframes system-links-stage {
+    0%, 42% { opacity: 0; stroke-dashoffset: 16; }
+    51%, 63% { opacity: 1; stroke-dashoffset: 0; }
+    70%, 100% { opacity: 0; }
+  }
+  @keyframes core-settle {
+    0%, 39%, 100% { transform: translate(-50%, calc(-50% + 2px)) rotate(45deg) rotateY(0deg) scale(1); }
+    20% { transform: translate(-50%, calc(-50% - 3px)) rotate(45deg) rotateY(0deg) scale(1.01); }
+    46% { transform: translate(-50%, calc(-50% - 2px)) rotate(45deg) rotateY(0deg) scale(1.03); }
+    61% { transform: translate(-50%, calc(-50% + 2px)) rotate(45deg) rotateY(180deg) scale(1.03); }
+    68%, 84% { transform: translate(-50%, calc(-50% - 3px)) rotate(45deg) rotateY(180deg) scale(1); }
+    92% { transform: translate(-50%, calc(-50% + 2px)) rotate(45deg) rotateY(180deg) scale(1.03); }
+  }
+  @keyframes orbit-dash { to { stroke-dashoffset: -105; } }
+  @keyframes marker-float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(5px, -8px); }
+  }
+
+  @media (max-width: 860px) {
+    .workflow-orbit { width: min(100%, 440px); max-width: 440px; margin-inline: auto; }
+  }
+
+  @media (max-width: 460px) {
+    .workflow-orbit { max-width: 380px; }
+    .workflow-orbit__signal--request { top: 20%; }
+    .workflow-orbit__signal--documents { top: 53%; }
+    .workflow-orbit__systems { top: 32%; left: 64%; }
+    .workflow-orbit__system-map { right: 1%; top: 44%; }
+    .workflow-orbit__solution { right: 0; bottom: 20%; width: 47%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .workflow-orbit__arc, .workflow-orbit__core, .workflow-orbit__float, .workflow-orbit__inputs, .workflow-orbit__systems, .workflow-orbit__system-map, .workflow-orbit__solution, .workflow-orbit__input-links path, .workflow-orbit__system-links path { animation: none; }
+    .workflow-orbit__inputs, .workflow-orbit__systems, .workflow-orbit__system-map, .workflow-orbit__solution { opacity: 1; transform: none; }
+    .workflow-orbit__systems { transform: translateX(-50%); }
+  }
+</style>

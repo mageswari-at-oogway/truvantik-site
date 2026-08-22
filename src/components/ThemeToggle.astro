@@ -6,9 +6,9 @@
     <span class="tt__current" aria-hidden="true"></span>
   </button>
   <div class="tt__menu" id="theme-menu" role="menu" hidden>
-    <button type="button" role="menuitemradio" data-theme-choice="paper" aria-checked="true"><span class="tt__swatch tt__swatch--paper"></span><span>Paper</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="paper" aria-checked="false"><span class="tt__swatch tt__swatch--paper"></span><span>Paper</span><span class="tt__check" aria-hidden="true">✓</span></button>
     <button type="button" role="menuitemradio" data-theme-choice="ink" aria-checked="false"><span class="tt__swatch tt__swatch--ink"></span><span>Ink</span><span class="tt__check" aria-hidden="true">✓</span></button>
-    <button type="button" role="menuitemradio" data-theme-choice="bauhaus" aria-checked="false"><span class="tt__swatch tt__swatch--bauhaus"></span><span>Bauhaus</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="bauhaus" aria-checked="true"><span class="tt__swatch tt__swatch--bauhaus"></span><span>Bauhaus</span><span class="tt__check" aria-hidden="true">✓</span></button>
     <button type="button" role="menuitemradio" data-theme-choice="terminal" aria-checked="false"><span class="tt__swatch tt__swatch--terminal"></span><span>Terminal</span><span class="tt__check" aria-hidden="true">✓</span></button>
     <button type="button" role="menuitemradio" data-theme-choice="nimbus" aria-checked="false"><span class="tt__swatch tt__swatch--nimbus"></span><span>Nimbus</span><span class="tt__check" aria-hidden="true">✓</span></button>
   </div>
@@ -46,14 +46,14 @@
       try { localStorage.setItem("tv-theme", next); } catch (e) {}
       choices.forEach((choice) => choice.setAttribute("aria-checked", String(choice.dataset.themeChoice === next)));
     };
-    setTheme(document.documentElement.getAttribute("data-theme") || "paper");
+    setTheme(document.documentElement.getAttribute("data-theme") || "bauhaus");
     const close = () => { menu?.setAttribute("hidden", ""); trigger?.setAttribute("aria-expanded", "false"); };
     trigger?.addEventListener("click", () => {
       const isClosed = menu?.hasAttribute("hidden");
       if (isClosed) { menu?.removeAttribute("hidden"); trigger.setAttribute("aria-expanded", "true"); }
       else close();
     });
-    choices.forEach((choice) => choice.addEventListener("click", () => { setTheme(choice.dataset.themeChoice || "paper"); close(); trigger?.focus(); }));
+    choices.forEach((choice) => choice.addEventListener("click", () => { setTheme(choice.dataset.themeChoice || "bauhaus"); close(); trigger?.focus(); }));
     document.addEventListener("click", (event) => { if (!document.getElementById("theme-switcher")?.contains(event.target)) close(); });
     document.addEventListener("keydown", (event) => { if (event.key === "Escape") { close(); trigger?.focus(); } });
   })();

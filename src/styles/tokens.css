@@ -4,13 +4,13 @@
    dark-SaaS: warm paper, near-black ink, ONE orange accent,
    hairline rules, oversized index numerals, monospace labels.
    Smaller, tighter type. Flat and precise - no glow.
-   Themes via [data-theme] on <html>: paper (default), ink, bauhaus.
+   Themes via [data-theme] on <html>: bauhaus (default), paper, ink.
    ============================================================ */
 
 :root {
   /* ---- type ---- */
-  --font-display: "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
-  --font-body: "Manrope", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-display: "Outfit", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-body: "Outfit", -apple-system, "Segoe UI", system-ui, sans-serif;
   --font-mono: var(--font-display);
 
   /* ---- type scale - refined, noticeably smaller than before ---- */
