@@ -1,0 +1,120 @@
+---
+// Abstract brand graphic (replaces the mock dashboard).
+// The Truvantik diamond at the core; an accent node orbits through three
+// phase points — Assess -> Build -> Deploy. Concentric diamonds + drifting
+// shapes give depth. Theme-aware, reduced-motion safe. Not a UI mockup.
+interface Props { compact?: boolean; id?: string }
+const { compact = false, id = "bg" } = Astro.props;
+const clip = `${id}-clip`;
+---
+<div class:list={["bg", { "bg--compact": compact }]} id={id}>
+  <div class="bg__glow" aria-hidden="true"></div>
+
+  <svg class="bg__svg" viewBox="0 0 400 400" role="img" aria-label="Truvantik — assess, build, deploy">
+    <!-- rotating structure -->
+    <g class="bg__spin">
+      <rect x="80" y="80" width="240" height="240" rx="26" transform="rotate(45 200 200)"
+        fill="none" stroke="var(--border-strong)" stroke-width="1.5" opacity="0.6" />
+      <rect x="120" y="120" width="160" height="160" rx="20" transform="rotate(45 200 200)"
+        fill="none" stroke="var(--border)" stroke-width="1.5" />
+      <circle cx="200" cy="200" r="150" fill="none" stroke="var(--border)" stroke-width="1.5"
+        stroke-dasharray="2 10" stroke-linecap="round" opacity="0.8" />
+    </g>
+
+    <!-- phase markers on the ring -->
+    <g class="bg__marks">
+      <circle cx="200" cy="50" r="5" class="mk mk--0" />
+      <circle cx="330" cy="275" r="5" class="mk mk--1" />
+      <circle cx="70" cy="275" r="5" class="mk mk--2" />
+    </g>
+
+    <!-- orbiting accent node -->
+    <g class="bg__arm">
+      <circle cx="200" cy="50" r="7" fill="var(--accent)" class="bg__node" />
+    </g>
+
+    <!-- core diamond mark -->
+    <g class="bg__core" transform="translate(200 200)">
+      <g transform="scale(2.1) translate(-32 -32)">
+        <defs><clipPath id={clip}><rect x="10" y="10" width="44" height="44" rx="9" transform="rotate(45 32 32)"/></clipPath></defs>
+        <g clip-path={`url(#${clip})`}>
+          <rect x="0" y="0" width="64" height="64" fill="var(--logo-face)" />
+          <path d="M40 0 L64 24 L64 64 L40 64 Z" fill="var(--logo-corner)" />
+        </g>
+        <path d="M32 15 L47 31 H38.5 V51 H25.5 V31 H17 Z" fill="var(--logo-mark)" />
+        <rect x="10" y="10" width="44" height="44" rx="9" transform="rotate(45 32 32)"
+          fill="none" stroke="var(--logo-stroke)" stroke-width="3" />
+      </g>
+    </g>
+
+    <!-- drifting micro shapes -->
+    <circle class="bg__f bg__f1" cx="60" cy="90" r="9" fill="var(--accent)" opacity="0.8" />
+    <rect class="bg__f bg__f2" x="330" y="70" width="16" height="16" rx="3" fill="var(--highlight)" opacity="0.7" transform="rotate(15 338 78)" />
+    <path class="bg__f bg__f3" d="M60 330 l12 -20 l12 20 Z" fill="var(--teal)" opacity="0.7" />
+  </svg>
+
+  <!-- phase labels -->
+  <span class="bg__lab bg__lab--0"><i></i>Assess</span>
+  <span class="bg__lab bg__lab--1"><i></i>Build</span>
+  <span class="bg__lab bg__lab--2"><i></i>Deploy</span>
+</div>
+
+<style>
+  .bg { position: relative; width: 100%; max-width: 480px; margin-inline: auto; aspect-ratio: 1 / 1; }
+  .bg--compact { max-width: 420px; }
+  .bg__glow {
+    position: absolute; inset: 6%; border-radius: 50%;
+    background: radial-gradient(circle at 50% 42%, var(--glow-a, color-mix(in srgb, var(--accent) 28%, transparent)), transparent 62%);
+    filter: blur(34px); opacity: 0.8;
+  }
+  [data-theme="bauhaus"] .bg__glow { display: none; }
+  .bg__svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+
+  .bg__spin { transform-box: view-box; transform-origin: 200px 200px; animation: spin 48s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .mk { fill: var(--surface-solid); stroke: var(--border-strong); stroke-width: 2; }
+  .mk--0 { animation: mkpulse 12s var(--ease-in-out) infinite 0s; }
+  .mk--1 { animation: mkpulse 12s var(--ease-in-out) infinite -8s; }
+  .mk--2 { animation: mkpulse 12s var(--ease-in-out) infinite -4s; }
+  @keyframes mkpulse { 0%,66%,100% { fill: var(--surface-solid); stroke: var(--border-strong); r: 5; } 8%,24% { fill: var(--accent); stroke: var(--accent); r: 7; } }
+
+  .bg__arm { transform-box: view-box; transform-origin: 200px 200px; animation: spin 12s linear infinite; }
+  .bg__node { filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 60%, transparent)); }
+
+  .bg__core { transform-box: view-box; transform-origin: 200px 200px; animation: bob 6s var(--ease-in-out) infinite; }
+  @keyframes bob { 0%,100% { transform: translate(200px,200px) scale(1); } 50% { transform: translate(200px,193px) scale(1.02); } }
+
+  .bg__f1 { animation: drift1 9s var(--ease-in-out) infinite; }
+  .bg__f2 { animation: drift2 11s var(--ease-in-out) infinite; }
+  .bg__f3 { animation: drift1 10s var(--ease-in-out) infinite reverse; }
+  @keyframes drift1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(6px,-10px); } }
+  @keyframes drift2 { 0%,100% { transform: translate(0,0) rotate(15deg); } 50% { transform: translate(-8px,8px) rotate(15deg); } }
+
+  /* phase labels */
+  .bg__lab {
+    position: absolute; display: inline-flex; align-items: center; gap: 0.4em;
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-2); background: var(--surface); border: 1px solid var(--border);
+    padding: 0.35em 0.75em; border-radius: 999px; backdrop-filter: var(--glass); white-space: nowrap;
+  }
+  [data-theme="bauhaus"] .bg__lab, [data-theme="terminal"] .bg__lab { border-radius: 0; }
+  .bg__lab i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); transition: background 0.3s; }
+  [data-theme="bauhaus"] .bg__lab i, [data-theme="terminal"] .bg__lab i { border-radius: 0; }
+  .bg__lab--0 { top: 1%; left: 50%; transform: translateX(-50%); }
+  .bg__lab--1 { top: 70%; right: -2%; }
+  .bg__lab--2 { top: 70%; left: -2%; }
+  .bg__lab--0 i { animation: labon 12s step-end infinite 0s; }
+  .bg__lab--1 i { animation: labon 12s step-end infinite -8s; }
+  .bg__lab--2 i { animation: labon 12s step-end infinite -4s; }
+  @keyframes labon { 0%,33% { background: var(--accent); } 34%,100% { background: var(--ink-3); } }
+
+  @media (max-width: 860px) { .bg { max-width: 360px; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg__spin, .bg__arm, .bg__core, .bg__f, .mk, .bg__lab i { animation: none; }
+    .bg__core { transform: translate(200px,200px); }
+    .mk--0 { fill: var(--accent); stroke: var(--accent); }
+    .bg__lab--0 i { background: var(--accent); }
+  }
+</style>

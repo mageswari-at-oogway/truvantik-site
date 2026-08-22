@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import RoadmapBoard from "../components/RoadmapBoard.astro";
+import BrandGraphic from "../components/BrandGraphic.astro";
 
 const diffs = [
   { k: "01", t: "Engineering-led, not sales-led", d: "The people who scope your engagement are the people who build it. No account managers, no handoff decks." },
@@ -47,7 +47,7 @@ const phases = [
         </p>
       </div>
       <div class="hero__art reveal" style="--d:180ms">
-        <RoadmapBoard compact id="hero-board" />
+        <BrandGraphic compact id="hero-graphic" />
       </div>
     </div>
     <a href="#why" class="scroll-cue" aria-hidden="true"><span></span>Scroll</a>
@@ -85,7 +85,7 @@ const phases = [
         <p class="lead">Every engagement runs on three phases. Opportunities are ranked by value → effort, then move Assess → Build → Deploy as they earn it.</p>
       </div>
       <div class="board-sec__art reveal" style="--d:120ms">
-        <RoadmapBoard id="main-board" />
+        <BrandGraphic id="main-graphic" />
       </div>
     </div>
   </section>
