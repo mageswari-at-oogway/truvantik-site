@@ -11,7 +11,7 @@
   /* ---- type ---- */
   --font-display: "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
   --font-body: "Manrope", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono: var(--font-display);
 
   /* ---- type scale - refined, noticeably smaller than before ---- */
   --step--2: clamp(0.68rem, 0.66rem + 0.1vw, 0.74rem);
@@ -22,6 +22,7 @@
   --step-3: clamp(1.6rem, 1.35rem + 1vw, 2.25rem);
   --step-4: clamp(2rem, 1.6rem + 1.6vw, 3rem);
   --step-5: clamp(2.4rem, 1.9rem + 2.2vw, 3.9rem);
+  --page-title: var(--step-5);
 
   /* ---- geometry ---- */
   --radius-sm: 6px;
@@ -107,8 +108,6 @@
 /* ============ TERMINAL - brutalist mono, black + acid green ============ */
 [data-theme="terminal"] {
   color-scheme: dark;
-  --font-display: "Space Grotesk", -apple-system, "Segoe UI", system-ui, sans-serif;
-  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --bg: #050505;
   --bg-2: #080808;
   --surface: #0d0d0d;
@@ -144,7 +143,6 @@
 /* ============ NIMBUS - soft organic, pastel + blobs ============ */
 [data-theme="nimbus"] {
   color-scheme: light;
-  --font-display: "Bricolage Grotesque", -apple-system, "Segoe UI", system-ui, sans-serif;
   --bg: #fdf5f0;
   --bg-2: #f2f0fb;
   --surface: #ffffff;

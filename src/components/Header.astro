@@ -23,7 +23,7 @@ const isActive = (h: string) => path === h;
 
     <div class="head-actions">
       <ThemeToggle />
-      <a href="/contact" class="btn head-cta">Free assessment <span class="arw">→</span></a>
+      <a href="/contact" class="btn head-cta">Let’s talk <span class="arw">→</span></a>
       <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
       </button>
@@ -33,7 +33,7 @@ const isActive = (h: string) => path === h;
   <div class="mobile-nav" id="mobile-nav" hidden>
     <nav class="wrap" aria-label="Mobile">
       {nav.map((n) => <a href={n.href} class="mnav-link">{n.label}</a>)}
-      <a href="/contact" class="btn mnav-cta">Start with a free assessment <span class="arw">→</span></a>
+      <a href="/contact" class="btn mnav-cta">Let’s talk <span class="arw">→</span></a>
     </nav>
   </div>
 </header>

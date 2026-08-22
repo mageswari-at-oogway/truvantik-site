@@ -9,7 +9,6 @@ const cases = [
     problem: "Delivering a clinic platform where AI-assisted workflows had to fit clinical reality: careful handling of patient information, review by a clinician at the right point, and behaviour that is auditable rather than opaque.",
     did: ["Product & platform engineering across clinical and patient-facing workflows", "AI-assisted documentation and intake with clinician review in the loop", "Evaluation and monitoring built in from the start, not retrofitted"],
     outcome: "A shipped, working product, and the clearest illustration of the depth of build work our team takes on when a domain demands care rather than speed.",
-    note: "Separate brand: Kron Health is its own product brand, built by our team with 3BP Labs. It is not a Truvantik service line, and its healthcare-specific claims belong to that product.",
   },
   {
     n: "02", sector: "Financial services", tag: "Representative scenario", real: false,
@@ -17,7 +16,6 @@ const cases = [
     problem: "An operations team spent most of its day extracting the same fields from inconsistent documents, then re-checking them, with a growing backlog and no way to see where errors originated.",
     did: ["Mapped the review workflow and built an evaluation set with the reviewers themselves", "Extraction with confidence thresholds that route uncertain cases to a person", "Integrated into the existing case system so reviewers never left their workflow"],
     outcome: "Reviewers moved from transcription to judgement on exceptions, with an audit trail on every automated decision.",
-    note: "A composite illustration of work of this type, not a specific client engagement, and no figures are attributed.",
   },
   {
     n: "03", sector: "Retail & e-commerce", tag: "Representative scenario", real: false,
@@ -25,7 +23,6 @@ const cases = [
     problem: "Content operations could not keep pace with new supplier ranges. Product data quality varied by supplier, and inconsistent listings were suppressing conversion.",
     did: ["Normalisation and enrichment pipeline over supplier feeds", "Generated copy and attributes held to a house style guide, with merchandiser approval before publish", "Quality measures reported per supplier so the worst inputs got fixed at source"],
     outcome: "A catalogue pipeline the merchandising team runs itself, with human approval kept where brand risk actually sits.",
-    note: "A composite illustration of work of this type, not a specific client engagement, and no figures are attributed.",
   },
   {
     n: "04", sector: "Manufacturing & industrial", tag: "Representative scenario", real: false,
@@ -33,7 +30,6 @@ const cases = [
     problem: "A promising inspection model had sat unused for two quarters. Nobody on the line could act on its output, and it had never passed internal security review.",
     did: ["Diagnosed the stall as integration and ownership rather than model quality", "Deployed inside the plant's own environment with monitoring and continuous evaluation", "Surfaced results in the tool operators already used, and named an owner for the decision"],
     outcome: "The capability moved from a parked notebook to a routine part of the shift, with the plant team owning it after handover.",
-    note: "A composite illustration of work of this type, not a specific client engagement, and no figures are attributed.",
   },
 ];
 ---
@@ -56,8 +52,8 @@ const cases = [
         <header class="wcase__head reveal">
           <span class="wcase__n grad-text">{c.n}</span>
           <div class="wcase__labels">
-            <span class="pill">{c.sector}</span>
-            <span class:list={["pill", c.real ? "pill--real" : "pill--rep"]}>{c.tag}</span>
+            <span class="wcase__tag">{c.sector}</span>
+            <span class:list={["wcase__tag", c.real ? "wcase__tag--real" : "wcase__tag--rep"]}>{c.tag}</span>
           </div>
           <h2>{c.title}</h2>
         </header>
@@ -75,7 +71,6 @@ const cases = [
             <p>{c.outcome}</p>
           </div>
         </div>
-        <p class="wcase__note reveal">{c.note}</p>
       </div>
     </section>
   ))}
@@ -86,24 +81,34 @@ const cases = [
 <style>
   .work-intro h1 { margin: 1rem 0 1.4rem; }
 
-  .wcase__in { display: grid; gap: 2rem; }
-  .wcase__head { display: grid; gap: 1rem; }
-  .wcase__n { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.5rem, 6vw, 4rem); line-height: 0.9; }
-  .wcase__labels { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-  .pill--real { color: var(--accent-ink); background: var(--accent); border-color: transparent; }
-  .pill--rep { color: var(--ink-3); }
-  .wcase__head h2 { font-size: var(--step-3); max-width: 20ch; }
+  .wcase { min-height: auto; scroll-snap-align: none; padding-block: clamp(5rem, 10vw, 9rem); border-top: 1px solid var(--rule); }
+  .wcase__in { position: relative; display: grid; grid-template-columns: clamp(4.5rem, 9vw, 8rem) minmax(0, 1fr); column-gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
+  .wcase__in::before { content: ""; position: absolute; left: calc(clamp(4.5rem, 9vw, 8rem) / 2); top: 1rem; bottom: 1rem; width: 1px; background: var(--border); }
+  .wcase__head { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; row-gap: 0.8rem; align-items: start; padding-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+  .wcase__n { grid-column: 1; grid-row: span 2; justify-self: center; position: relative; z-index: 1; width: 2.35rem; aspect-ratio: 1; display: grid; place-items: center; background: var(--bg); font-family: var(--font-display); font-weight: 650; font-size: 0.9rem; color: var(--accent); }
+  .wcase__labels { grid-column: 2; display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .wcase__tag { font-family: var(--font-display); font-size: 0.72rem; font-weight: 650; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); }
+  .wcase__tag + .wcase__tag::before { content: "•"; color: var(--accent); margin-right: 0.75rem; }
+  .wcase__tag--real { color: var(--accent); }
+  .wcase__head h2 { grid-column: 2; font-size: clamp(2.4rem, 2rem + 2.2vw, 4.5rem); line-height: 0.95; letter-spacing: -0.04em; max-width: 15ch; }
 
-  .wcase__grid { display: grid; grid-template-columns: 1.1fr 1.2fr 1fr; gap: 1.4rem; }
-  .wcase__block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; backdrop-filter: var(--glass); }
-  [data-theme="bauhaus"] .wcase__block { border: 2px solid var(--ink); backdrop-filter: none; box-shadow: var(--shadow-card); }
-  .wcase__block--out { background: var(--grad-soft); border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); }
-  .wcase__sub { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-3); margin-bottom: 0.8rem; font-weight: 500; }
-  .wcase__block--out p { color: var(--ink); font-weight: 500; }
-  .wcase__list { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
-  .wcase__list li { position: relative; padding-left: 1.3rem; color: var(--ink-2); font-size: 0.94rem; line-height: 1.45; }
+  .wcase__grid { grid-column: 2; display: grid; }
+  .wcase__block { display: grid; grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1fr); gap: 1.5rem; padding-block: clamp(1.5rem, 3vw, 2.4rem); border-top: 1px solid var(--border); }
+  .wcase__block--out { border-bottom: 1px solid var(--border); }
+  .wcase__sub { font-family: var(--font-display); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); margin: 0; font-weight: 650; }
+  .wcase__block p { max-width: 62ch; color: var(--ink-2); font-size: 1rem; line-height: 1.62; }
+  .wcase__block--out p { color: var(--ink); font-size: clamp(1.08rem, 1rem + 0.2vw, 1.2rem); font-weight: 500; }
+  .wcase__list { list-style: none; padding: 0; display: grid; gap: 0.7rem; max-width: 62ch; }
+  .wcase__list li { position: relative; padding-left: 1.25rem; color: var(--ink-2); font-size: 1rem; line-height: 1.5; }
   .wcase__list li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 2px; background: var(--grad); }
-  .wcase__note { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-3); border-left: 2px solid var(--border-strong); padding-left: 0.9rem; line-height: 1.5; max-width: 70ch; }
 
-  @media (max-width: 960px) { .wcase__grid { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) {
+    .wcase__in { grid-template-columns: 1fr; }
+    .wcase__in::before { display: none; }
+    .wcase__head, .wcase__grid { grid-column: 1; }
+    .wcase__head { grid-template-columns: 1fr; }
+    .wcase__n, .wcase__labels, .wcase__head h2 { grid-column: 1; grid-row: auto; justify-self: start; }
+    .wcase__n { width: auto; aspect-ratio: auto; background: none; font-size: 0.78rem; }
+    .wcase__block { grid-template-columns: 1fr; gap: 0.7rem; }
+  }
 </style>

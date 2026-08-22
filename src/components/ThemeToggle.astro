@@ -1,45 +1,60 @@
 ---
-// Cycles dark -> light -> bauhaus, persists to localStorage.
+// Theme choice, persisted to localStorage.
 ---
-<button class="tt" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch theme">
-  <span class="tt__dot" aria-hidden="true"></span>
-  <span class="tt__label" id="tt-label">Paper</span>
-</button>
+<div class="tt" id="theme-switcher">
+  <button class="tt__trigger" id="theme-toggle" type="button" aria-label="Choose colour theme" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+    <span class="tt__current" aria-hidden="true"></span>
+  </button>
+  <div class="tt__menu" id="theme-menu" role="menu" hidden>
+    <button type="button" role="menuitemradio" data-theme-choice="paper" aria-checked="true"><span class="tt__swatch tt__swatch--paper"></span><span>Paper</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="ink" aria-checked="false"><span class="tt__swatch tt__swatch--ink"></span><span>Ink</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="bauhaus" aria-checked="false"><span class="tt__swatch tt__swatch--bauhaus"></span><span>Bauhaus</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="terminal" aria-checked="false"><span class="tt__swatch tt__swatch--terminal"></span><span>Terminal</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="nimbus" aria-checked="false"><span class="tt__swatch tt__swatch--nimbus"></span><span>Nimbus</span><span class="tt__check" aria-hidden="true">✓</span></button>
+  </div>
+</div>
 
 <style>
-  .tt {
-    display: inline-flex; align-items: center; gap: 0.5em;
-    background: var(--surface); color: var(--ink-2);
-    border: 1px solid var(--border); border-radius: 999px;
-    padding: 0.4em 0.8em 0.4em 0.6em;
-    font-family: var(--font-mono); font-size: 0.72rem;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    transition: color 0.2s, border-color 0.2s, background 0.2s;
-  }
-  .tt:hover { color: var(--ink); border-color: var(--border-strong); }
-  [data-theme="bauhaus"] .tt { border-radius: 0; border-width: 1.5px; border-color: var(--ink); }
-  .tt__dot {
-    width: 0.8em; height: 0.8em; border-radius: 999px;
-    background: conic-gradient(var(--accent), var(--highlight), var(--accent));
-    box-shadow: 0 0 0 1px var(--border);
-  }
-  [data-theme="bauhaus"] .tt__dot { border-radius: 0; }
+  .tt { position: relative; display: inline-flex; font-family: var(--font-display); }
+  .tt__trigger { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; padding: 0; border: 1px solid var(--border); border-radius: 50%; background: var(--surface); color: var(--ink); cursor: pointer; transition: transform .2s var(--ease), border-color .2s, box-shadow .2s; }
+  .tt__trigger:hover, .tt__trigger[aria-expanded="true"] { border-color: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 10%, transparent); }
+  .tt__trigger:active { transform: scale(.94); }
+  .tt__trigger:focus-visible, .tt__menu button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .tt__current, .tt__swatch { display: inline-block; width: 1.18rem; height: 1.18rem; border: 2px solid color-mix(in srgb, var(--ink) 32%, transparent); border-radius: 50%; background: linear-gradient(135deg, var(--surface-2) 0 54%, var(--accent) 54%); }
+  .tt__menu { position: absolute; z-index: 120; top: calc(100% + .85rem); right: 0; width: min(16rem, calc(100vw - 2rem)); padding: .7rem; border: 1px solid var(--border); border-radius: 1.45rem; background: var(--surface-solid); box-shadow: var(--shadow-lift); }
+  .tt__menu[hidden] { display: none; }
+  .tt__menu button { width: 100%; display: grid; grid-template-columns: 1.45rem 1fr 1.25rem; align-items: center; gap: .9rem; min-height: 3.1rem; padding: .5rem .7rem; border: 0; border-radius: .85rem; background: transparent; color: var(--ink-2); font: inherit; font-size: 1rem; font-weight: 600; letter-spacing: -.02em; text-align: left; cursor: pointer; transition: background .18s var(--ease), color .18s var(--ease); }
+  .tt__menu button:hover, .tt__menu button[aria-checked="true"] { color: var(--ink); background: var(--surface-2); }
+  .tt__check { color: var(--accent); font-size: 1.35rem; font-weight: 700; opacity: 0; transform: translateX(-.2rem); transition: opacity .18s var(--ease), transform .18s var(--ease); }
+  .tt__menu button[aria-checked="true"] .tt__check { opacity: 1; transform: translateX(0); }
+  .tt__swatch--paper { background: linear-gradient(135deg, #f2efe7 0 54%, #e0481d 54%); }
+  .tt__swatch--ink { background: linear-gradient(135deg, #1a1917 0 54%, #f2652f 54%); }
+  .tt__swatch--bauhaus { background: linear-gradient(135deg, #f3efe4 0 48%, #d42a1e 48% 74%, #2b4cc7 74%); }
+  .tt__swatch--terminal { background: linear-gradient(135deg, #0d0d0d 0 54%, #00ff9c 54%); }
+  .tt__swatch--nimbus { background: linear-gradient(135deg, #fdf5f0 0 46%, #f2733f 46% 70%, #7c6bd6 70%); }
+  [data-theme="bauhaus"] .tt__trigger { border-radius: 0; border-width: 1.5px; border-color: var(--ink); }
+  [data-theme="bauhaus"] .tt__menu { border-radius: 0; border-width: 1.5px; border-color: var(--ink); }
 </style>
 
 <script is:inline>
   (() => {
-    const order = ["paper", "ink", "bauhaus", "terminal", "nimbus"];
-    const names = { paper: "Paper", ink: "Ink", bauhaus: "Bauhaus", terminal: "Terminal", nimbus: "Nimbus" };
-    const btn = document.getElementById("theme-toggle");
-    const label = document.getElementById("tt-label");
-    const cur = document.documentElement.getAttribute("data-theme") || "paper";
-    if (label) label.textContent = names[cur] || "Paper";
-    btn?.addEventListener("click", () => {
-      const now = document.documentElement.getAttribute("data-theme") || "paper";
-      const next = order[(order.indexOf(now) + 1) % order.length];
+    const trigger = document.getElementById("theme-toggle");
+    const menu = document.getElementById("theme-menu");
+    const choices = [...document.querySelectorAll("[data-theme-choice]")];
+    const setTheme = (next) => {
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem("tv-theme", next); } catch (e) {}
-      if (label) label.textContent = names[next];
+      choices.forEach((choice) => choice.setAttribute("aria-checked", String(choice.dataset.themeChoice === next)));
+    };
+    setTheme(document.documentElement.getAttribute("data-theme") || "paper");
+    const close = () => { menu?.setAttribute("hidden", ""); trigger?.setAttribute("aria-expanded", "false"); };
+    trigger?.addEventListener("click", () => {
+      const isClosed = menu?.hasAttribute("hidden");
+      if (isClosed) { menu?.removeAttribute("hidden"); trigger.setAttribute("aria-expanded", "true"); }
+      else close();
     });
+    choices.forEach((choice) => choice.addEventListener("click", () => { setTheme(choice.dataset.themeChoice || "paper"); close(); trigger?.focus(); }));
+    document.addEventListener("click", (event) => { if (!document.getElementById("theme-switcher")?.contains(event.target)) close(); });
+    document.addEventListener("keydown", (event) => { if (event.key === "Escape") { close(); trigger?.focus(); } });
   })();
 </script>

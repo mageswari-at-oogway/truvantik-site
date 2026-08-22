@@ -3,13 +3,13 @@ import Base from "../layouts/Base.astro";
 
 const steps = [
   { n: "1", t: "We reply within two business days." },
-  { n: "2", t: "A 30-minute call to understand the problem." },
-  { n: "3", t: "A written view on whether and how to proceed." },
+  { n: "2", t: "A short call to hear about your needs." },
+  { n: "3", t: "If useful, we will suggest next steps." },
 ];
 ---
 <Base
-  title="Contact: book a free AI assessment | Truvantik"
-  description="A 30-minute call is usually enough to tell whether there is a real opportunity, and what a sensible first step looks like. No pitch deck required."
+  title="Contact: start a conversation | Truvantik"
+  description="Tell us what you are working on. We will use the details to prepare for a short conversation."
 >
   <section class="snap contact gridbg">
     <div class="aurora" aria-hidden="true"></div>
@@ -17,7 +17,7 @@ const steps = [
       <div class="contact__copy reveal">
         <p class="kicker">Contact</p>
         <h1>Tell us what you're<br />trying to <span class="grad-text">solve.</span></h1>
-        <p class="lead">A 30-minute call is usually enough to tell whether there is a real opportunity, and what a sensible first step looks like. No pitch deck required.</p>
+        <p class="lead">Share a few details about what you are working on. We will use them to prepare for a short conversation. No pitch deck required.</p>
 
         <ol class="contact__steps">
           {steps.map((s) => (
@@ -72,7 +72,7 @@ const steps = [
         <div class="contact__success card" id="success" hidden>
           <span class="contact__tick" aria-hidden="true">✓</span>
           <h2>Thanks, that's in.</h2>
-          <p class="muted">We reply within two business days with a short, honest read on whether there is a real opportunity and what the first step should be.</p>
+          <p class="muted">We reply within two business days and use your message to prepare for our conversation.</p>
           <a href="/" class="btn btn--ghost">Back to home</a>
         </div>
       </div>
@@ -82,7 +82,7 @@ const steps = [
 
 <style>
   .contact__in { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; padding-top: 2rem; }
-  .contact__copy h1 { font-size: var(--step-4); margin: 1rem 0 1.3rem; }
+  .contact__copy h1 { font-size: var(--page-title); margin: 1rem 0 1.3rem; }
   .contact__steps { list-style: none; padding: 0; display: grid; gap: 0.9rem; margin: 2rem 0; }
   .contact__steps li { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: center; color: var(--ink-2); }
   .contact__stepn { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--border-strong); font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); }
