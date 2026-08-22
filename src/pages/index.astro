@@ -9,12 +9,6 @@ const commitments = [
   { k: "04", t: "Outcome-driven", claim: "Framed around a measurable business result, not technology for its own sake.", ev: "Scope starts from the business measure — review time, exception rate, service load — and the same measure is reported after launch." },
 ];
 
-const wont = [
-  "Sell a build when a process fix or an existing tool solves it for less.",
-  "Ship a proof-of-concept as a finished result.",
-  "Quote a business case on numbers we can’t substantiate.",
-];
-
 const entries = [
   { id: "unsure", tab: "Not sure where AI fits", body: "You have been asked for a plan, or you suspect there is value here but cannot yet name it. Begin with an assessment that ends in a ranked, costed roadmap.", flow: "Assessment → Ranked roadmap", time: "4–6 weeks", tag: "Start here" },
   { id: "build", tab: "You know what to build", body: "The use case is clear and the business case is made. You need a team that can take it from data to a deployed product your users rely on.", flow: "Build → Shipped product", time: "3–5 months", tag: "Ready to build" },
@@ -65,13 +59,8 @@ const phases = [
       <div class="why__lead">
         <p class="kicker reveal">Why Truvantik</p>
         <h2 class="reveal" style="--d:60ms">Most AI stalls at the demo.<br />We build the part after.</h2>
-        <p class="lead reveal" style="--d:120ms">The gap is rarely the model — it is integration, ownership, evaluation and adoption. Four commitments, each with something behind it.</p>
-        <div class="why__wont reveal" style="--d:200ms">
-          <span class="why__wont-h">What we won't do</span>
-          <ul>
-            {wont.map((w) => <li><span class="why__x" aria-hidden="true">✕</span>{w}</li>)}
-          </ul>
-        </div>
+        <p class="lead reveal" style="--d:120ms">The gap is rarely the model — it is integration, ownership, evaluation and adoption. That is what we are built around.</p>
+        <a href="/why-truvantik" class="why__more reveal" style="--d:200ms">Why teams choose us <span class="arw">→</span></a>
       </div>
       <ol class="why__list">
         {commitments.map((c, i) => (
@@ -80,26 +69,10 @@ const phases = [
             <div class="why__body">
               <h3>{c.t}</h3>
               <p class="why__claim">{c.claim}</p>
-              <p class="why__ev muted">{c.ev}</p>
             </div>
           </li>
         ))}
       </ol>
-    </div>
-  </section>
-
-  <!-- ============ 3 · ROADMAP (signature) ============ -->
-  <section class="snap board-sec gridbg" id="roadmap-sec">
-    <div class="aurora" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <p class="kicker">Opportunity roadmap</p>
-        <h2>From "we should do AI" to a ranked, sequenced portfolio.</h2>
-        <p class="lead">Every engagement runs on three phases. Opportunities are ranked by value → effort, then move Assess → Build → Deploy as they earn it.</p>
-      </div>
-      <div class="board-sec__art reveal" style="--d:120ms">
-        <BrandGraphic id="main-graphic" />
-      </div>
     </div>
   </section>
 
@@ -234,6 +207,9 @@ const phases = [
   .why__ev { font-size: 0.85rem; line-height: 1.5; }
   .why__k { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); padding-top: 0.25rem; }
   .why__item:hover { border-color: var(--accent); transform: translateX(4px); }
+  .why__more { display: inline-flex; align-items: center; gap: 0.5em; margin-top: 1.8rem; font-family: var(--font-display); font-weight: 600; color: var(--accent); }
+  .why__more .arw { transition: transform 0.25s var(--ease); }
+  .why__more:hover .arw { transform: translateX(4px); }
   @media (max-width: 860px) { .why__lead { position: static; } }
 
   /* ---- board section ---- */

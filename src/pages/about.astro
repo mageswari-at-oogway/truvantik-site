@@ -53,38 +53,6 @@ const wont = [
     </div>
   </section>
 
-  <section class="snap ab-commit gridbg">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <p class="kicker">Why us</p>
-        <h2>Four commitments, each with<br />something behind it.</h2>
-        <p class="lead">Claims are easy. Here is the reasoning and the evidence attached to each of ours.</p>
-      </div>
-      <div class="ab-commit__grid">
-        {commitments.map((c, i) => (
-          <article class="ab-commit__card card reveal" style={`--d:${i * 80}ms`}>
-            <span class="ab-commit__n grad-text">{c.n}</span>
-            <h3>{c.t}</h3>
-            <p class="ab-commit__d">{c.d}</p>
-            <p class="ab-commit__e muted">{c.e}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="snap ab-wont">
-    <div class="wrap ab-wont__in">
-      <div class="ab-wont__head reveal">
-        <p class="kicker">What we will not do</p>
-        <h2>The line we hold.</h2>
-      </div>
-      <ul class="ab-wont__list reveal" style="--d:120ms">
-        {wont.map((w) => <li><span class="ab-wont__x" aria-hidden="true">✕</span>{w}</li>)}
-      </ul>
-    </div>
-  </section>
-
   <CtaBand />
 </Base>
 

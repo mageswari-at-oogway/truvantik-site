@@ -210,10 +210,6 @@ button { font: inherit; cursor: pointer; }
   opacity: 0.5; filter: blur(12px);
 }
 [data-theme="nimbus"] .btn { border-radius: 999px; padding-inline: 1.5em; }
-[data-theme="nimbus"] .kicker {
-  background: var(--surface); padding: 0.5em 1em; border-radius: 999px;
-  color: var(--highlight); box-shadow: var(--shadow-card);
-}
-[data-theme="nimbus"] .kicker::before { display: none; }
+[data-theme="nimbus"] .kicker { color: var(--highlight); }
 [data-theme="nimbus"] .pill { border-radius: 999px; }
 [data-theme="nimbus"] .snap { border-top: 0; }

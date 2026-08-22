@@ -1,0 +1,88 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+
+const commitments = [
+  { k: "01", t: "Cross-industry depth", claim: "Pattern-matching across sectors is the edge. Expertise transfers rather than resetting with every client.", ev: "Document-heavy review looks much the same in underwriting, clinical intake and customs clearance. We bring the working pattern with us and adapt it to your constraints instead of rediscovering it on your budget." },
+  { k: "02", t: "Practical AI", claim: "Solutions that ship and get used, not proofs-of-concept that stall.", ev: "Every engagement defines what “good enough to ship” means in numbers before building starts, and we instrument that measure in production so adoption is visible rather than assumed." },
+  { k: "03", t: "Trusted partner", claim: "Advisory-grade rigor. Clients bring real operational problems, not experiments.", ev: "We will tell you to buy a tool, fix a process, or stop a project when that is the right answer — and assessments regularly end with a shorter funded list than the client arrived with." },
+  { k: "04", t: "Outcome-driven", claim: "Every engagement is framed around a measurable business result, not a technology for its own sake.", ev: "Scope starts from the business measure — review time, exception rate, service load — and the same measure is reported after launch alongside model-level evaluation." },
+];
+
+const wont = [
+  "Sell a build when a process fix or an existing tool solves the problem for a fraction of the cost.",
+  "Ship a proof-of-concept as a finished result. If it is not integrated and being used, the engagement is not done.",
+  "Quote a business case built on numbers we cannot substantiate — ours or anyone else's.",
+];
+---
+<Base
+  title="Why us — cross-industry, practical, outcome-driven AI | Truvantik"
+  description="Four commitments, each with the reasoning and evidence attached — plus the line we hold on what we will not do."
+>
+  <section class="snap wy-intro gridbg">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="kicker reveal">Why Truvantik</p>
+      <h1 class="reveal" style="--d:60ms">Four commitments,<br />each with <span class="grad-text">something behind it.</span></h1>
+      <p class="lead reveal" style="--d:140ms">Every consultancy claims to be practical and outcome-driven. These are ours, with the reasoning and the evidence attached rather than left implied.</p>
+    </div>
+  </section>
+
+  {commitments.map((c, i) => (
+    <section class="snap wy">
+      <div class="wrap wy__in" data-flip={i % 2 === 1 ? "true" : "false"}>
+        <div class="wy__head reveal">
+          <span class="wy__k grad-text">{c.k}</span>
+          <h2>{c.t}</h2>
+          <p class="lead wy__claim">{c.claim}</p>
+        </div>
+        <div class="wy__ev reveal" style="--d:120ms">
+          <span class="wy__ev-h">What that means in practice</span>
+          <p>{c.ev}</p>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="snap wy-wont gridbg">
+    <div class="wrap wy-wont__in">
+      <div class="wy-wont__head reveal">
+        <p class="kicker">The line we hold</p>
+        <h2>What we will not do.</h2>
+      </div>
+      <ul class="wy-wont__list reveal" style="--d:120ms">
+        {wont.map((w) => <li><span class="wy-wont__x" aria-hidden="true">✕</span>{w}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .wy-intro h1 { margin: 1rem 0 1.4rem; }
+
+  .wy__in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .wy__in[data-flip="true"] .wy__head { order: 2; }
+  .wy__k { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 0.9; display: block; margin-bottom: 0.6rem; }
+  .wy__head h2 { font-size: var(--step-3); }
+  .wy__claim { margin-top: 0.9rem; color: var(--ink); }
+  .wy__ev { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(1.4rem, 3vw, 2.2rem); position: relative; overflow: hidden; }
+  [data-theme="bauhaus"] .wy__ev, [data-theme="terminal"] .wy__ev { border-width: 1.5px; }
+  .wy__ev::before { content: ""; position: absolute; inset: 0; background: var(--grad-soft); opacity: 0.4; pointer-events: none; }
+  .wy__ev > * { position: relative; }
+  .wy__ev-h { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-3); display: block; margin-bottom: 0.8rem; }
+  .wy__ev p { font-size: var(--step-1); color: var(--ink-2); line-height: 1.55; }
+
+  .wy-wont__in { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .wy-wont__head h2 { margin-top: 0.6rem; }
+  .wy-wont__list { list-style: none; padding: 0; display: grid; gap: 1rem; }
+  .wy-wont__list li { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; font-size: var(--step-1); color: var(--ink-2); border-bottom: 1px solid var(--border); padding-bottom: 1rem; line-height: 1.45; }
+  .wy-wont__x { color: var(--highlight); font-weight: 700; }
+
+  @media (max-width: 860px) {
+    .wy__in, .wy__in[data-flip="true"] { grid-template-columns: 1fr; }
+    .wy__in[data-flip="true"] .wy__head { order: 0; }
+    .wy-wont__in { grid-template-columns: 1fr; }
+  }
+</style>
