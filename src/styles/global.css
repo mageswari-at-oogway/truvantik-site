@@ -1,9 +1,9 @@
 /* ============================================================
-   DESIGN THESIS (v3 — "Dossier")
+   DESIGN THESIS (v3 - "Dossier")
    1. A document, not a billboard. Warm paper, near-black ink, one
       orange accent. Precise hairline rules and oversized index
       numerals give structure instead of glow.
-   2. Type is smaller and tighter — confident, editorial, scannable.
+   2. Type is smaller and tighter - confident, editorial, scannable.
       Monospace labels flag every section like a technical dossier.
    3. Motion is quiet and physical: reveals, a live roadmap, count-ups.
       Nothing flashes. The restraint is the statement.
@@ -74,7 +74,7 @@ button { font: inherit; cursor: pointer; }
 .snap:first-of-type { border-top: 0; }
 .snap--auto { min-height: auto; scroll-snap-align: none; }
 
-/* eyebrow — mono label with a tick */
+/* eyebrow - mono label with a tick */
 .kicker {
   font-family: var(--font-mono); font-size: var(--step--1);
   text-transform: uppercase; letter-spacing: 0.18em; color: var(--ink-3);
@@ -88,7 +88,7 @@ button { font: inherit; cursor: pointer; }
 .muted { color: var(--ink-3); }
 .accent { color: var(--accent); }
 
-/* ---------------- buttons — flat, editorial ---------------- */
+/* ---------------- buttons - flat, editorial ---------------- */
 .btn {
   position: relative;
   display: inline-flex; align-items: center; gap: 0.55em;
@@ -116,7 +116,7 @@ button { font: inherit; cursor: pointer; }
 [data-theme="bauhaus"] .btn--grad { background: var(--bau-red); color: #fff; border-color: var(--ink); }
 [data-theme="bauhaus"] .btn:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-lift); }
 
-/* ---------------- card — flat, hairline ---------------- */
+/* ---------------- card - flat, hairline ---------------- */
 .card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); box-shadow: var(--shadow-card);

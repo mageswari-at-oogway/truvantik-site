@@ -1,9 +1,9 @@
 /* ============================================================
-   Truvantik — design tokens  (v3 — "Dossier" editorial system)
+   Truvantik - design tokens  (v3 - "Dossier" editorial system)
    A deliberate break from the reference sites and from generic
    dark-SaaS: warm paper, near-black ink, ONE orange accent,
    hairline rules, oversized index numerals, monospace labels.
-   Smaller, tighter type. Flat and precise — no glow.
+   Smaller, tighter type. Flat and precise - no glow.
    Themes via [data-theme] on <html>: paper (default), ink, bauhaus.
    ============================================================ */
 
@@ -13,7 +13,7 @@
   --font-body: "Manrope", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* ---- type scale — refined, noticeably smaller than before ---- */
+  /* ---- type scale - refined, noticeably smaller than before ---- */
   --step--2: clamp(0.68rem, 0.66rem + 0.1vw, 0.74rem);
   --step--1: clamp(0.78rem, 0.75rem + 0.12vw, 0.85rem);
   --step-0: clamp(0.96rem, 0.93rem + 0.16vw, 1.05rem);
@@ -42,7 +42,7 @@
   --grad-soft: linear-gradient(135deg, rgb(224 72 29 / 0.1), rgb(31 156 143 / 0.08));
 }
 
-/* ============ PAPER — default, editorial light ============ */
+/* ============ PAPER - default, editorial light ============ */
 :root,
 [data-theme="paper"] {
   color-scheme: light;
@@ -72,7 +72,7 @@
   --logo-stroke: #f2efe7;
 }
 
-/* ============ INK — editorial dark ============ */
+/* ============ INK - editorial dark ============ */
 [data-theme="ink"] {
   color-scheme: dark;
   --bg: #121110;
@@ -104,7 +104,7 @@
   --logo-stroke: #121110;
 }
 
-/* ============ TERMINAL — brutalist mono, black + acid green ============ */
+/* ============ TERMINAL - brutalist mono, black + acid green ============ */
 [data-theme="terminal"] {
   color-scheme: dark;
   --font-display: "Space Grotesk", -apple-system, "Segoe UI", system-ui, sans-serif;
@@ -141,7 +141,7 @@
   --logo-stroke: #050505;
 }
 
-/* ============ NIMBUS — soft organic, pastel + blobs ============ */
+/* ============ NIMBUS - soft organic, pastel + blobs ============ */
 [data-theme="nimbus"] {
   color-scheme: light;
   --font-display: "Bricolage Grotesque", -apple-system, "Segoe UI", system-ui, sans-serif;
@@ -177,7 +177,7 @@
   --logo-stroke: #fdf5f0;
 }
 
-/* ============ BAUHAUS — bold, flat, primary ============ */
+/* ============ BAUHAUS - bold, flat, primary ============ */
 [data-theme="bauhaus"] {
   color-scheme: light;
   --bg: #f3efe4;

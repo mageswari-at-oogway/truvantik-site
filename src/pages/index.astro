@@ -3,10 +3,10 @@ import Base from "../layouts/Base.astro";
 import BrandGraphic from "../components/BrandGraphic.astro";
 
 const commitments = [
-  { k: "01", t: "Cross-industry depth", claim: "Expertise transfers rather than resetting with every client.", ev: "Document-heavy review looks the same in underwriting, clinical intake and customs clearance. We bring the pattern and adapt it — not rediscover it on your budget." },
+  { k: "01", t: "Cross-industry depth", claim: "Expertise transfers rather than resetting with every client.", ev: "Document-heavy review looks the same in underwriting, clinical intake and customs clearance. We bring the pattern and adapt it, not rediscover it on your budget." },
   { k: "02", t: "Practical AI", claim: "Solutions that ship and get used, not proofs-of-concept that stall.", ev: "We define what “good enough to ship” means in numbers before building, and instrument it in production so adoption is measured, not assumed." },
-  { k: "03", t: "Trusted partner", claim: "Advisory-grade rigor on real problems, not experiments.", ev: "We’ll tell you to buy a tool, fix a process, or stop a project when that’s right — assessments often end with a shorter funded list than you arrived with." },
-  { k: "04", t: "Outcome-driven", claim: "Framed around a measurable business result, not technology for its own sake.", ev: "Scope starts from the business measure — review time, exception rate, service load — and the same measure is reported after launch." },
+  { k: "03", t: "Trusted partner", claim: "Advisory-grade rigor on real problems, not experiments.", ev: "We’ll tell you to buy a tool, fix a process, or stop a project when that’s right; assessments often end with a shorter funded list than you arrived with." },
+  { k: "04", t: "Outcome-driven", claim: "Framed around a measurable business result, not technology for its own sake.", ev: "Scope starts from the business measure (review time, exception rate, service load), and the same measure is reported after launch." },
 ];
 
 const entries = [
@@ -15,15 +15,10 @@ const entries = [
   { id: "stalled", tab: "Your pilot has stalled", body: "It works in a demo but not in the business. Usually the blocker is integration, ownership or adoption rather than the model itself.", flow: "Unstick → Production system", time: "6–8 weeks", tag: "Unstick it" },
 ];
 
-const phases = [
-  { n: "01", k: "Assess", d: "Understand the work, the data and the constraints. Decide what is worth building and what is not.", note: "The point — reduce the problem to its essential elements." },
-  { n: "02", k: "Build", d: "Build the smallest system that proves the outcome, then harden it against real data and real users.", note: "The line — the shortest path through the build, reviewed with you directly." },
-  { n: "03", k: "Deploy", d: "Deploy into your stack, measure it against the outcome, and hand over the knowledge to keep it running.", note: "The plane — the system running whole: deployed, observed, documented, handed over." },
-];
 ---
 <Base
-  title="Truvantik — AI strategy, shipped. Results, not prototypes."
-  description="Truvantik turns AI strategy into deployed, used-in-production systems — one partner from first assessment to live deployment, with nothing between you and the people who build it."
+  title="Truvantik: AI strategy, shipped. Results, not prototypes."
+  description="Truvantik turns AI strategy into deployed, used-in-production systems: one partner from first assessment to live deployment, with nothing between you and the people who build it."
 >
   <!-- ============ 1 · HERO ============ -->
   <section class="snap hero gridbg">
@@ -35,7 +30,7 @@ const phases = [
           AI strategy,<br /><span class="grad-text">shipped.</span><br />Results, not prototypes.
         </h1>
         <p class="lead reveal" style="--d:140ms">
-          Most AI stalls as a demo. We build the version that reaches production and gets used — and you
+          Most AI stalls as a demo. We build the version that reaches production and gets used, and you
           work with the engineers doing it, not account managers.
         </p>
         <div class="hero__cta reveal" style="--d:220ms">
@@ -59,7 +54,7 @@ const phases = [
       <div class="why__lead">
         <p class="kicker reveal">Why Truvantik</p>
         <h2 class="reveal" style="--d:60ms">Most AI stalls at the demo.<br />We build the part after.</h2>
-        <p class="lead reveal" style="--d:120ms">The gap is rarely the model — it is integration, ownership, evaluation and adoption. That is what we are built around.</p>
+        <p class="lead reveal" style="--d:120ms">The gap is rarely the model; it is integration, ownership, evaluation and adoption. That is what we are built around.</p>
         <a href="/why-truvantik" class="why__more reveal" style="--d:200ms">Why teams choose us <span class="arw">→</span></a>
       </div>
       <ol class="why__list">
@@ -173,7 +168,7 @@ const phases = [
     <div class="wrap proof__in">
       <div class="proof__copy reveal">
         <p class="kicker">Featured proof point</p>
-        <h2>Kron Health — a digital clinic platform.</h2>
+        <h2>Kron Health: a digital clinic platform.</h2>
         <div class="proof__tags">
           <span class="pill">Healthcare</span>
           <span class="pill">Built with 3BP Labs</span>
@@ -348,19 +343,19 @@ const phases = [
   .proof__copy .btn { margin-top: 1.7rem; }
   .proof__note { font-size: 0.82rem; margin-top: 1.5rem; max-width: 46ch; padding-left: 0.9rem; border-left: 2px solid var(--border-strong); }
 
-  /* Kron Health single card — animates through the 4 clinical steps */
+  /* Kron Health single card - animates through the 4 clinical steps */
   .draft { padding: 1.5rem 1.6rem; display: grid; gap: 1.1rem; }
   .draft__top { display: flex; align-items: center; gap: 0.7rem; }
   .draft__ai { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.3em 0.7em; border-radius: 999px;
     color: var(--ink-3); background: var(--surface-3); }
   [data-theme="bauhaus"] .draft__ai { border-radius: 0; }
   .draft__t { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); }
-  /* step 1 — patient intake indicator (top-right) */
+  /* step 1 - patient intake indicator (top-right) */
   .draft__intake { margin-left: auto; display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); opacity: 0.4; }
   .draft__idot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); }
   [data-theme="bauhaus"] .draft__idot { border-radius: 0; }
 
-  /* step 2 — AI note text writes itself in, line by line */
+  /* step 2 - AI note text writes itself in, line by line */
   .draft__lines { display: grid; gap: 0.5rem; }
   .dl { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); line-height: 1.5; white-space: nowrap; overflow: hidden; clip-path: inset(0 100% 0 0); }
   .dl b { color: var(--accent); font-weight: 500; }
@@ -371,7 +366,7 @@ const phases = [
   .draft.play .dl:nth-child(4) { animation-delay: 2.0s; }
   @keyframes typeLine { to { clip-path: inset(0 0 0 0); } }
 
-  /* step 3 — clinician review, check draws */
+  /* step 3 - clinician review, check draws */
   .draft__gate { display: flex; gap: 0.85rem; align-items: center; padding: 0.95rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); opacity: 0; transform: translateY(8px); }
   [data-theme="bauhaus"] .draft__gate { border-radius: 0; }
   .draft.play .draft__gate { animation: settleIn 0.55s var(--ease) 2.6s both; }
@@ -387,7 +382,7 @@ const phases = [
   @keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
   @keyframes draw { to { stroke-dashoffset: 0; } }
 
-  /* step 4 — into the record / auditable lights + pulses */
+  /* step 4 - into the record / auditable lights + pulses */
   .draft__audit { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-3); opacity: 0; }
   .draft.play .draft__audit { animation: settleIn 0.45s var(--ease) 3.6s both; }
   .draft__rec { width: 15px; height: 15px; color: var(--ink-3); }
@@ -398,7 +393,7 @@ const phases = [
   .draft.play .dot2 { animation: aud 2.4s var(--ease-in-out) 4s infinite; }
   @keyframes aud { 0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--highlight) 45%, transparent); } 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--highlight) 0%, transparent); } }
 
-  /* step 1 — intake lights first, then AI DRAFT activates */
+  /* step 1 - intake lights first, then AI DRAFT activates */
   .draft.play .draft__intake { animation: intakeOn 0.4s var(--ease) 0.25s both; }
   @keyframes intakeOn { to { opacity: 1; color: var(--accent); } }
   .draft.play .draft__idot { animation: idotOn 0.4s var(--ease) 0.25s both; }

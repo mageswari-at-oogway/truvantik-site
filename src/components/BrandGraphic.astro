@@ -1,7 +1,7 @@
 ---
 // Abstract brand graphic (replaces the mock dashboard).
 // The Truvantik diamond at the core; an accent node orbits through three
-// phase points — Assess -> Build -> Deploy. Concentric diamonds + drifting
+// phase points - Assess -> Build -> Deploy. Concentric diamonds + drifting
 // shapes give depth. Theme-aware, reduced-motion safe. Not a UI mockup.
 interface Props { compact?: boolean; id?: string }
 const { compact = false, id = "bg" } = Astro.props;
@@ -10,7 +10,7 @@ const clip = `${id}-clip`;
 <div class:list={["bg", { "bg--compact": compact }]} id={id}>
   <div class="bg__glow" aria-hidden="true"></div>
 
-  <svg class="bg__svg" viewBox="0 0 400 400" role="img" aria-label="Truvantik — assess, build, deploy">
+  <svg class="bg__svg" viewBox="0 0 400 400" role="img" aria-label="Truvantik: assess, build, deploy">
     <!-- rotating structure -->
     <g class="bg__spin">
       <rect x="80" y="80" width="240" height="240" rx="26" transform="rotate(45 200 200)"
