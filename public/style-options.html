@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Truvantik — 6 new overall styles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Playfair+Display:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+  *{box-sizing:border-box;margin:0}
+  body{font-family:Inter,system-ui,sans-serif;background:#111;color:#fff}
+  .lab{font-family:'Space Grotesk',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:11px 24px;background:#000;border-bottom:1px solid #2a2a2a;display:flex;justify-content:space-between}
+  .lab b{color:#8a8a8a;font-weight:400}
+  section{min-height:460px;position:relative;overflow:hidden}
+  nav{display:flex;align-items:center;gap:22px;padding:22px 46px}
+  nav .logo{font-weight:800;font-size:19px;margin-right:auto;display:flex;align-items:center;gap:9px}
+  nav .lk{font-size:14px;opacity:.75}nav .cta{padding:9px 16px;border-radius:8px;font-weight:600;font-size:13px}
+  .hero{padding:26px 46px 50px}
+  .ey{font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+  h1{font-size:52px;line-height:1.02;letter-spacing:-.03em;margin-bottom:18px;font-weight:800}
+  .p{font-size:17px;line-height:1.5;max-width:520px;opacity:.8;margin-bottom:24px}
+  .btns{display:flex;gap:12px}.b1{padding:13px 22px;font-weight:600;font-size:14px}.b2{padding:13px 22px;font-weight:600;font-size:14px}
+  .dia{width:22px;height:22px;transform:rotate(45deg);border-radius:5px;display:inline-block}
+
+  /* 1 SWISS GRID */
+  .s1{background:#fff;color:#111}
+  .s1 nav{border-bottom:2px solid #111}.s1 .logo .dia{background:#e2231a}
+  .s1 .cta{background:#e2231a;color:#fff;border-radius:0}
+  .s1 .hero{display:grid;grid-template-columns:80px 1fr;gap:30px;background-image:linear-gradient(90deg,#0000 0,#0000 calc(100% - 1px),#eee 100%);background-size:11% 100%}
+  .s1 .num{font-family:Archivo;font-weight:900;font-size:70px;color:#e2231a;line-height:.8}
+  .s1 h1{font-family:Archivo;font-weight:900;text-transform:uppercase;font-size:56px}
+  .s1 .ey{color:#e2231a;font-family:'Space Grotesk'}
+  .s1 .b1{background:#111;color:#fff;border-radius:0}.s1 .b2{border:2px solid #111;border-radius:0}
+
+  /* 2 NEO-BRUTALIST */
+  .s2{background:#f5f3e8;color:#141210}
+  .s2 nav{border-bottom:3px solid #141210}.s2 .logo .dia{background:#141210}
+  .s2 .cta{background:#c6f24e;color:#141210;border:2px solid #141210;box-shadow:3px 3px 0 #141210;border-radius:0}
+  .s2 h1{font-family:'Space Grotesk';font-weight:700}
+  .s2 .ey{background:#c6f24e;display:inline-block;padding:4px 10px;border:2px solid #141210;font-weight:700}
+  .s2 .hi{background:#c6f24e;padding:0 6px;box-shadow:3px 3px 0 #141210}
+  .s2 .b1{background:#141210;color:#fff;border:2px solid #141210;box-shadow:4px 4px 0 #141210;border-radius:0}
+  .s2 .b2{background:#fff;border:2px solid #141210;box-shadow:4px 4px 0 #141210;border-radius:0}
+
+  /* 3 NOIR LUXE */
+  .s3{background:#0d0d0c;color:#f2ece0}
+  .s3 nav .lk{color:#a89e88}.s3 .logo .dia{background:linear-gradient(135deg,#e8cd8f,#b8963f)}
+  .s3 .cta{background:linear-gradient(135deg,#e8cd8f,#c2a24f);color:#1a1710;border-radius:2px}
+  .s3 .ey{color:#c2a24f;letter-spacing:.22em}
+  .s3 h1{font-family:'Playfair Display';font-weight:600;font-size:60px;letter-spacing:-.01em}
+  .s3 h1 em{color:#d8b866;font-style:italic}
+  .s3 .p{color:#b3aa98}
+  .s3 .b1{background:linear-gradient(135deg,#e8cd8f,#c2a24f);color:#1a1710;border-radius:2px}.s3 .b2{border:1px solid #4a4436;color:#f2ece0;border-radius:2px}
+  .s3::after{content:"";position:absolute;top:-40%;right:-10%;width:50%;height:120%;background:radial-gradient(circle,rgba(194,162,79,.16),transparent 60%)}
+
+  /* 4 RETRO-FUTURIST */
+  .s4{background:#0a0620;color:#fff;overflow:hidden}
+  .s4 .logo .dia{background:linear-gradient(135deg,#ff2fd0,#22d3ee)}
+  .s4 nav .lk{color:#c4b5fd}.s4 .cta{background:linear-gradient(90deg,#ff2fd0,#8b5cf6);color:#fff;border-radius:999px}
+  .s4 .ey{color:#67e8f9;font-family:'Orbitron'}
+  .s4 h1{font-family:'Orbitron';font-weight:700;font-size:44px}
+  .s4 h1 .g{background:linear-gradient(90deg,#ff2fd0,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .s4 .p{color:#c4b5fd}
+  .s4 .b1{background:linear-gradient(90deg,#ff2fd0,#8b5cf6);color:#fff;border-radius:999px}.s4 .b2{border:1px solid #6d28d9;color:#e9d5ff;border-radius:999px}
+  .s4 .grid{position:absolute;left:0;right:0;bottom:0;height:45%;background-image:linear-gradient(#ff2fd033 1px,transparent 1px),linear-gradient(90deg,#22d3ee22 1px,transparent 1px);background-size:44px 30px;transform:perspective(300px) rotateX(58deg);transform-origin:bottom}
+
+  /* 5 CLEAN SAAS */
+  .s5{background:#ffffff;color:#0f172a}
+  .s5 nav .lk{color:#475569}.s5 .logo .dia{background:#2563eb;border-radius:7px;transform:rotate(0)}
+  .s5 .cta{background:#2563eb;color:#fff;border-radius:10px}
+  .s5{background:radial-gradient(120% 80% at 80% 0,#dbeafe,transparent 55%),#fff}
+  .s5 .ey{color:#2563eb;background:#eff6ff;display:inline-block;padding:6px 12px;border-radius:999px}
+  .s5 h1{font-family:Outfit;font-weight:800;color:#0f172a}
+  .s5 h1 .u{color:#2563eb}
+  .s5 .p{color:#475569}
+  .s5 .b1{background:#2563eb;color:#fff;border-radius:10px}.s5 .b2{background:#f1f5f9;color:#0f172a;border-radius:10px}
+
+  /* 6 MONO INK */
+  .s6{background:#e8e8e6;color:#161616}
+  .s6 nav{border-bottom:1px solid #161616}.s6 .logo .dia{background:#161616}
+  .s6 nav .lk{color:#555}.s6 .cta{background:#ff3b1d;color:#fff;border-radius:0}
+  .s6 .ey{color:#161616;font-family:'Space Grotesk'}
+  .s6 h1{font-family:'Space Grotesk';font-weight:700;font-size:58px}
+  .s6 h1 .u{color:#ff3b1d}
+  .s6 .p{color:#444}
+  .s6 .b1{background:#161616;color:#fff;border-radius:0}.s6 .b2{border:1px solid #161616;border-radius:0}
+</style></head><body>
+
+<div class="lab">1 · SWISS GRID <b>white · red · huge Archivo · numbered grid — structured, editorial-minimal</b></div>
+<section class="s1"><nav><span class="logo"><span class="dia"></span>Truvantik</span><span class="lk">Services</span><span class="lk">Industries</span><span class="lk">Work</span><span class="cta">Free assessment</span></nav>
+<div class="hero"><div class="num">01</div><div><p class="ey">Your true advantage</p><h1>AI strategy,<br>shipped.</h1><p class="p">Results, not prototypes. We turn strategy into systems that run in production — from first assessment to live deployment.</p><div class="btns"><span class="b1">Start a free assessment</span><span class="b2">Explore approach</span></div></div></div></section>
+
+<div class="lab">2 · NEO-BRUTALIST <b>thick outlines · lime accent · hard shadows — bold, confident, raw</b></div>
+<section class="s2"><nav><span class="logo"><span class="dia"></span>Truvantik</span><span class="lk">Services</span><span class="lk">Industries</span><span class="lk">Work</span><span class="cta">Free assessment</span></nav>
+<div class="hero"><p class="ey">Your true advantage</p><h1 style="margin-top:16px">AI strategy, <span class="hi">shipped.</span><br>Results, not prototypes.</h1><p class="p">We turn strategy into systems that run in production — nothing between you and the people building it.</p><div class="btns"><span class="b1">Start a free assessment</span><span class="b2">Explore approach</span></div></div></section>
+
+<div class="lab">3 · NOIR LUXE <b>near-black · gold · Playfair serif — premium, high-end consultancy</b></div>
+<section class="s3"><nav><span class="logo"><span class="dia"></span>Truvantik</span><span class="lk">Services</span><span class="lk">Industries</span><span class="lk">Work</span><span class="cta">Free assessment</span></nav>
+<div class="hero"><p class="ey">Your true advantage</p><h1>AI strategy, <em>shipped.</em><br>Results, not prototypes.</h1><p class="p">For teams working out where AI actually pays off — from first assessment to live deployment.</p><div class="btns"><span class="b1">Start a free assessment</span><span class="b2">Explore approach</span></div></div></section>
+
+<div class="lab">4 · RETRO-FUTURIST <b>indigo→magenta · neon grid · Orbitron — bold, techy, energetic</b></div>
+<section class="s4"><nav><span class="logo"><span class="dia"></span>Truvantik</span><span class="lk">Services</span><span class="lk">Industries</span><span class="lk">Work</span><span class="cta">Free assessment</span></nav>
+<div class="hero"><p class="ey">Your true advantage</p><h1>AI strategy, <span class="g">shipped.</span><br>Results, not prototypes.</h1><p class="p">We turn strategy into systems that run in production — from assessment to deployment.</p><div class="btns"><span class="b1">Start a free assessment</span><span class="b2">Explore approach</span></div></div><div class="grid"></div></section>
+
+<div class="lab">5 · CLEAN SAAS <b>white · soft blue · rounded Outfit — friendly, professional, product-y</b></div>
+<section class="s5"><nav><span class="logo"><span class="dia"></span>Truvantik</span><span class="lk">Services</span><span class="lk">Industries</span><span class="lk">Work</span><span class="cta">Free assessment</span></nav>
+<div class="hero"><p class="ey">Your true advantage</p><h1>AI strategy, <span class="u">shipped.</span><br>Results, not prototypes.</h1><p class="p">We turn AI strategy into systems that run in production — from first assessment to live deployment, across industries.</p><div class="btns"><span class="b1">Start a free assessment</span><span class="b2">Explore approach</span></div></div></section>
+
+<div class="lab">6 · MONO INK <b>greyscale · one hot accent · Space Grotesk — minimal, sharp, modern</b></div>
+<section class="s6"><nav><span class="logo"><span class="dia"></span>Truvantik</span><span class="lk">Services</span><span class="lk">Industries</span><span class="lk">Work</span><span class="cta">Free assessment</span></nav>
+<div class="hero"><p class="ey">Your true advantage</p><h1>AI strategy, <span class="u">shipped.</span><br>Results, not prototypes.</h1><p class="p">We turn strategy into systems that run in production — from first assessment to live deployment.</p><div class="btns"><span class="b1">Start a free assessment</span><span class="b2">Explore approach</span></div></div></section>
+
+</body></html>
