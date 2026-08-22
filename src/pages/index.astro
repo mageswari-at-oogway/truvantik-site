@@ -143,8 +143,11 @@ const phases = [
       <div class="proof__art reveal" style="--d:120ms" aria-hidden="true">
         <div class="draft card" id="proof-draft" data-draft>
           <div class="draft__top"><span class="draft__ai">AI draft</span><span class="draft__t">Clinical note · intake summary</span></div>
-          <div class="draft__lines">
-            <i style="--w:92%"></i><i style="--w:78%"></i><i style="--w:85%"></i><i style="--w:60%"></i>
+          <div class="draft__scanwrap">
+            <div class="draft__lines">
+              <i style="--w:92%"></i><i style="--w:78%"></i><i style="--w:85%"></i><i style="--w:60%"></i>
+            </div>
+            <span class="draft__scan" aria-hidden="true"></span>
           </div>
           <div class="draft__gate">
             <span class="draft__check">
@@ -279,46 +282,53 @@ const phases = [
   [data-theme="bauhaus"] .draft__ai { border-radius: 0; }
   .draft__t { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); }
 
-  /* typing lines */
-  .draft__lines { display: grid; gap: 0.55rem; }
-  .draft__lines i { position: relative; height: 9px; border-radius: 5px; background: var(--surface-3); width: 0; }
+  /* scan-and-verify note */
+  .draft__scanwrap { position: relative; padding: 0.1rem 0; overflow: hidden; }
+  .draft__lines { display: grid; gap: 0.6rem; }
+  .draft__lines i { height: 9px; border-radius: 5px; background: var(--surface-3); width: var(--w); opacity: 0; }
   [data-theme="bauhaus"] .draft__lines i { border-radius: 0; }
-  .draft__lines i::after { content: ""; position: absolute; right: -2px; top: -3px; width: 2px; height: 15px; background: var(--accent); opacity: 0; }
-  .draft.play .draft__lines i { width: var(--w); transition: width 0.45s var(--ease); }
-  .draft.play .draft__lines i:nth-child(1) { transition-delay: 0.15s; }
-  .draft.play .draft__lines i:nth-child(2) { transition-delay: 0.5s; }
-  .draft.play .draft__lines i:nth-child(3) { transition-delay: 0.85s; }
-  .draft.play .draft__lines i:nth-child(4) { transition-delay: 1.2s; }
-  .draft.play .draft__lines i:nth-child(4)::after { animation: caret 0.6s steps(1) 1.2s 3; }
-  @keyframes caret { 50% { opacity: 1; } }
+  .draft.play .draft__lines i { animation: lineIn 0.4s var(--ease) both, verify 0.35s var(--ease) both; }
+  .draft.play .draft__lines i:nth-child(1) { animation-delay: 0.1s, 0.9s; }
+  .draft.play .draft__lines i:nth-child(2) { animation-delay: 0.18s, 1.05s; }
+  .draft.play .draft__lines i:nth-child(3) { animation-delay: 0.26s, 1.2s; }
+  .draft.play .draft__lines i:nth-child(4) { animation-delay: 0.34s, 1.35s; }
+  @keyframes lineIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes verify { to { background: color-mix(in srgb, var(--accent) 32%, var(--surface-3)); } }
 
-  /* review gate */
-  .draft__gate { display: flex; gap: 0.85rem; align-items: center; padding: 0.95rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); opacity: 0; transform: translateY(12px); }
+  /* the sweeping scan line */
+  .draft__scan { position: absolute; left: -4px; right: -4px; top: 0; height: 2px; background: var(--accent);
+    box-shadow: 0 0 12px 2px color-mix(in srgb, var(--accent) 60%, transparent); opacity: 0; border-radius: 2px; }
+  .draft.play .draft__scan { animation: scan 1.15s var(--ease-in-out) 0.7s 1 both; }
+  @keyframes scan { 0% { top: 0; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+  /* review panel — stamps in */
+  .draft__gate { display: flex; gap: 0.85rem; align-items: center; padding: 0.95rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); opacity: 0; }
   [data-theme="bauhaus"] .draft__gate { border-radius: 0; }
-  .draft.play .draft__gate { opacity: 1; transform: none; transition: opacity 0.55s var(--ease) 1.85s, transform 0.55s var(--ease-spring) 1.85s; }
+  .draft.play .draft__gate { animation: stampIn 0.6s var(--ease-spring) 1.9s both; }
+  @keyframes stampIn { 0% { opacity: 0; transform: scale(1.35) rotate(-7deg); } 55% { opacity: 1; transform: scale(0.97) rotate(1.5deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
   .draft__gate b { font-family: var(--font-display); display: block; font-size: 0.95rem; }
   .draft__gate small { color: var(--ink-3); font-size: 0.78rem; }
-  .draft__check { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--accent); transform: scale(0.6); opacity: 0; }
+  .draft__check { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--accent-ink); transform: scale(0); }
   [data-theme="bauhaus"] .draft__check { border-radius: 0; }
-  .draft__check svg { width: 20px; height: 20px; }
-  .draft__check svg path { stroke-dasharray: 26; stroke-dashoffset: 26; }
-  .draft.play .draft__check { opacity: 1; transform: scale(1); transition: opacity 0.3s 2.25s, transform 0.4s var(--ease-spring) 2.25s; }
-  .draft.play .draft__check svg path { stroke-dashoffset: 0; transition: stroke-dashoffset 0.5s var(--ease) 2.5s; }
+  .draft__check svg { width: 19px; height: 19px; }
+  .draft.play .draft__check { animation: pop 0.45s var(--ease-spring) 2.35s both; }
+  @keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.18); } 100% { transform: scale(1); } }
 
   /* auditable */
   .draft__audit { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-3); opacity: 0.35; }
-  .draft.play .draft__audit { opacity: 1; transition: opacity 0.4s 3s; }
+  .draft.play .draft__audit { animation: auditIn 0.4s var(--ease) 2.8s both; }
+  @keyframes auditIn { to { opacity: 1; } }
   .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); }
   [data-theme="bauhaus"] .dot2 { border-radius: 0; }
-  .draft.play .dot2 { box-shadow: 0 0 0 0 color-mix(in srgb, var(--highlight) 45%, transparent); animation: aud 2s var(--ease-in-out) 3.2s infinite; }
+  .draft.play .dot2 { animation: aud 2s var(--ease-in-out) 3.1s infinite; }
   @keyframes aud { 0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--highlight) 45%, transparent); } 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--highlight) 0%, transparent); } }
 
   .draft.noanim, .draft.noanim * { transition: none !important; animation: none !important; }
   @media (prefers-reduced-motion: reduce) {
-    .draft__lines i { width: var(--w); }
-    .draft__gate { opacity: 1; transform: none; }
-    .draft__check { opacity: 1; transform: none; }
-    .draft__check svg path { stroke-dashoffset: 0; }
+    .draft__lines i { opacity: 1; background: color-mix(in srgb, var(--accent) 32%, var(--surface-3)); }
+    .draft__scan { display: none; }
+    .draft__gate { opacity: 1; }
+    .draft__check { transform: scale(1); }
     .draft__audit { opacity: 1; }
   }
 
