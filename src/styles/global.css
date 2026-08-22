@@ -143,8 +143,14 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ---------------- reveal-on-scroll ---------------- */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); transition-delay: var(--d, 0ms); }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); transition-delay: var(--d, 0ms); will-change: opacity, transform; }
 .reveal.in { opacity: 1; transform: none; }
+/* every section eases up as it enters the viewport */
+.snap { transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+@media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
+  .snap:not(.in-view) { opacity: 0.55; transform: translateY(14px); }
+  .snap.in-view { opacity: 1; transform: none; }
+}
 .reveal-clip { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s var(--ease); transition-delay: var(--d, 0ms); }
 .reveal-clip.in { clip-path: inset(0 0 0 0); }
 

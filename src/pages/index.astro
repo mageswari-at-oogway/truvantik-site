@@ -148,7 +148,10 @@ const phases = [
             <span class="draft__intake"><span class="draft__idot"></span>Intake</span>
           </div>
           <div class="draft__lines">
-            <i style="--w:92%"></i><i style="--w:78%"></i><i style="--w:85%"></i><i style="--w:60%"></i>
+            <span class="dl"><b>Chief complaint</b> · chest tightness, 3 days</span>
+            <span class="dl"><b>History</b> · no prior cardiac events, non-smoker</span>
+            <span class="dl"><b>Vitals</b> · BP 138/86 · HR 82 · SpO₂ 98%</span>
+            <span class="dl"><b>Plan</b> · ECG + troponin, clinician review</span>
           </div>
           <div class="draft__gate">
             <span class="draft__check">
@@ -281,21 +284,21 @@ const phases = [
   .draft__idot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); }
   [data-theme="bauhaus"] .draft__idot { border-radius: 0; }
 
-  /* step 2 — AI note lines write themselves in */
-  .draft__lines { display: grid; gap: 0.6rem; }
-  .draft__lines i { height: 9px; border-radius: 5px; background: var(--surface-3); width: 0; }
-  [data-theme="bauhaus"] .draft__lines i { border-radius: 0; }
-  .draft.play .draft__lines i { animation: writeIn 0.4s var(--ease) both; }
-  .draft.play .draft__lines i:nth-child(1) { animation-delay: 0.95s; }
-  .draft.play .draft__lines i:nth-child(2) { animation-delay: 1.15s; }
-  .draft.play .draft__lines i:nth-child(3) { animation-delay: 1.35s; }
-  .draft.play .draft__lines i:nth-child(4) { animation-delay: 1.55s; }
-  @keyframes writeIn { from { width: 0; } to { width: var(--w); } }
+  /* step 2 — AI note text writes itself in, line by line */
+  .draft__lines { display: grid; gap: 0.5rem; }
+  .dl { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-2); line-height: 1.5; white-space: nowrap; overflow: hidden; clip-path: inset(0 100% 0 0); }
+  .dl b { color: var(--accent); font-weight: 500; }
+  .draft.play .dl { animation: typeLine 0.5s steps(28) both; }
+  .draft.play .dl:nth-child(1) { animation-delay: 0.95s; }
+  .draft.play .dl:nth-child(2) { animation-delay: 1.3s; }
+  .draft.play .dl:nth-child(3) { animation-delay: 1.65s; }
+  .draft.play .dl:nth-child(4) { animation-delay: 2.0s; }
+  @keyframes typeLine { to { clip-path: inset(0 0 0 0); } }
 
   /* step 3 — clinician review, check draws */
   .draft__gate { display: flex; gap: 0.85rem; align-items: center; padding: 0.95rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); opacity: 0; transform: translateY(8px); }
   [data-theme="bauhaus"] .draft__gate { border-radius: 0; }
-  .draft.play .draft__gate { animation: settleIn 0.55s var(--ease) 1.9s both; }
+  .draft.play .draft__gate { animation: settleIn 0.55s var(--ease) 2.6s both; }
   @keyframes settleIn { to { opacity: 1; transform: none; } }
   .draft__gate b { font-family: var(--font-display); display: block; font-size: 0.95rem; }
   .draft__gate small { color: var(--ink-3); font-size: 0.78rem; }
@@ -303,20 +306,20 @@ const phases = [
   [data-theme="bauhaus"] .draft__check { border-radius: 0; }
   .draft__check svg { width: 19px; height: 19px; }
   .draft__check svg path { stroke-dasharray: 26; stroke-dashoffset: 26; }
-  .draft.play .draft__check { animation: pop 0.4s var(--ease-spring) 2.15s both; }
-  .draft.play .draft__check svg path { animation: draw 0.4s var(--ease) 2.45s both; }
+  .draft.play .draft__check { animation: pop 0.4s var(--ease-spring) 2.85s both; }
+  .draft.play .draft__check svg path { animation: draw 0.4s var(--ease) 3.15s both; }
   @keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
   @keyframes draw { to { stroke-dashoffset: 0; } }
 
   /* step 4 — into the record / auditable lights + pulses */
   .draft__audit { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-3); opacity: 0; }
-  .draft.play .draft__audit { animation: settleIn 0.45s var(--ease) 2.9s both; }
+  .draft.play .draft__audit { animation: settleIn 0.45s var(--ease) 3.6s both; }
   .draft__rec { width: 15px; height: 15px; color: var(--ink-3); }
-  .draft.play .draft__rec { animation: recOn 0.4s var(--ease) 3.1s both; }
+  .draft.play .draft__rec { animation: recOn 0.4s var(--ease) 3.8s both; }
   @keyframes recOn { to { color: var(--highlight); } }
   .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); }
   [data-theme="bauhaus"] .dot2 { border-radius: 0; }
-  .draft.play .dot2 { animation: aud 2.4s var(--ease-in-out) 3.3s infinite; }
+  .draft.play .dot2 { animation: aud 2.4s var(--ease-in-out) 4s infinite; }
   @keyframes aud { 0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--highlight) 45%, transparent); } 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--highlight) 0%, transparent); } }
 
   /* step 1 — intake lights first, then AI DRAFT activates */
@@ -328,7 +331,7 @@ const phases = [
   @keyframes aiOn { to { color: var(--accent-ink); background: var(--accent); } }
 
   @media (prefers-reduced-motion: reduce) {
-    .draft__lines i { width: var(--w); }
+    .dl { clip-path: inset(0 0 0 0); }
     .draft__gate, .draft__audit { opacity: 1; transform: none; }
     .draft__check { transform: scale(1); }
     .draft__check svg path { stroke-dashoffset: 0; }

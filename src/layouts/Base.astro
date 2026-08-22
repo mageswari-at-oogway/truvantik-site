@@ -69,6 +69,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
           { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
         );
         els.forEach((e) => io.observe(e));
+
+        // section-level transition: ease each .snap in as it enters
+        const secs = document.querySelectorAll(".snap");
+        const sio = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((en) => { if (en.isIntersecting) en.target.classList.add("in-view"); });
+          },
+          { threshold: 0.12 }
+        );
+        secs.forEach((s) => sio.observe(s));
       })();
     </script>
 
