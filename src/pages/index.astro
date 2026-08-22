@@ -141,42 +141,18 @@ const phases = [
         <p class="proof__note muted">Separate brand: Kron Health is its own product brand, built by our team with 3BP Labs. It is not a Truvantik service line.</p>
       </div>
       <div class="proof__art reveal" style="--d:120ms" aria-hidden="true">
-        <div class="kron card" id="proof-draft">
-          <div class="kron__head">
-            <span class="kron__k">Patient case · live workflow</span>
-            <span class="kron__badge"><span class="dot2"></span>Auditable</span>
+        <div class="draft card" id="proof-draft">
+          <div class="draft__top"><span class="draft__ai">AI draft</span><span class="draft__t">Clinical note · intake summary</span></div>
+          <div class="draft__lines">
+            <i style="--w:92%"></i><i style="--w:78%"></i><i style="--w:85%"></i><i style="--w:60%"></i>
           </div>
-          <ol class="kron__flow">
-            <span class="kspine" aria-hidden="true"><span class="kspine__fill"></span></span>
-
-            <li class="kstep kstep--1">
-              <span class="kstep__ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 19a6.5 6.5 0 0 1 13 0"/></svg>
-              </span>
-              <div class="kstep__b"><b>Patient intake</b><span>Symptoms &amp; history captured</span></div>
-            </li>
-
-            <li class="kstep kstep--2">
-              <span class="kstep__ico"><b class="kstep__ai">AI</b></span>
-              <div class="kstep__b"><b>AI-assisted note</b>
-                <span class="kstep__lines"><i style="--w:100%"></i><i style="--w:80%"></i><i style="--w:64%"></i></span>
-              </div>
-            </li>
-
-            <li class="kstep kstep--3">
-              <span class="kstep__ico">
-                <svg class="kstep__tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 L10 17.5 L19 7.5"/></svg>
-              </span>
-              <div class="kstep__b"><b>Clinician review</b><span>Approved at the right point</span></div>
-            </li>
-
-            <li class="kstep kstep--4">
-              <span class="kstep__ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/></svg>
-              </span>
-              <div class="kstep__b"><b>Into the record</b><span>Every step logged &amp; auditable</span></div>
-            </li>
-          </ol>
+          <div class="draft__gate">
+            <span class="draft__check">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5 L10 17.5 L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div><b>Clinician review</b><small>Approved before it enters the record</small></div>
+          </div>
+          <div class="draft__audit"><span class="dot2"></span>Auditable · every step logged</div>
         </div>
       </div>
     </div>
@@ -202,22 +178,11 @@ const phases = [
     (() => {
       const el = document.getElementById("proof-draft");
       if (!el) return;
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduce) { el.classList.add("play"); return; }
-      let timer;
-      const cycle = () => {
-        el.classList.add("noanim");
-        el.classList.remove("play");
-        void el.offsetWidth;
-        el.classList.remove("noanim");
-        el.classList.add("play");
-      };
       const io = new IntersectionObserver((es) => {
         es.forEach((e) => {
-          if (e.isIntersecting) { cycle(); timer = setInterval(cycle, 5600); }
-          else { clearInterval(timer); }
+          if (e.isIntersecting) { el.classList.add("play"); io.unobserve(el); }
         });
-      }, { threshold: 0.4 });
+      }, { threshold: 0.35 });
       io.observe(el);
     })();
   </script>
@@ -297,75 +262,44 @@ const phases = [
   .proof__copy .btn { margin-top: 1.7rem; }
   .proof__note { font-size: 0.82rem; margin-top: 1.5rem; max-width: 46ch; padding-left: 0.9rem; border-left: 2px solid var(--border-strong); }
 
-  /* Kron Health — clinical workflow that activates step by step */
-  .kron { padding: 1.5rem 1.6rem; display: grid; gap: 1.2rem; }
-  .kron__head { display: flex; align-items: center; justify-content: space-between; }
-  .kron__k { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); }
-  .kron__badge { display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); }
-  .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); }
+  /* Kron Health single card — calm settle-in */
+  .draft { padding: 1.5rem 1.6rem; display: grid; gap: 1.1rem; }
+  .draft__top { display: flex; align-items: center; gap: 0.7rem; }
+  .draft__ai { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-ink); background: var(--accent); padding: 0.3em 0.7em; border-radius: 999px; }
+  [data-theme="bauhaus"] .draft__ai { border-radius: 0; }
+  .draft__t { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); }
+
+  .draft__lines { display: grid; gap: 0.6rem; }
+  .draft__lines i { height: 9px; border-radius: 5px; background: var(--surface-3); width: var(--w); opacity: 0; transform: translateY(6px); }
+  [data-theme="bauhaus"] .draft__lines i { border-radius: 0; }
+  .draft.play .draft__lines i { animation: settleIn 0.5s var(--ease) both; }
+  .draft.play .draft__lines i:nth-child(1) { animation-delay: 0.1s; }
+  .draft.play .draft__lines i:nth-child(2) { animation-delay: 0.2s; }
+  .draft.play .draft__lines i:nth-child(3) { animation-delay: 0.3s; }
+  .draft.play .draft__lines i:nth-child(4) { animation-delay: 0.4s; }
+  @keyframes settleIn { to { opacity: 1; transform: none; } }
+
+  .draft__gate { display: flex; gap: 0.85rem; align-items: center; padding: 0.95rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); opacity: 0; transform: translateY(8px); }
+  [data-theme="bauhaus"] .draft__gate { border-radius: 0; }
+  .draft.play .draft__gate { animation: settleIn 0.55s var(--ease) 0.7s both; }
+  .draft__gate b { font-family: var(--font-display); display: block; font-size: 0.95rem; }
+  .draft__gate small { color: var(--ink-3); font-size: 0.78rem; }
+  .draft__check { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--accent-ink); transform: scale(0); }
+  [data-theme="bauhaus"] .draft__check { border-radius: 0; }
+  .draft__check svg { width: 19px; height: 19px; }
+  .draft.play .draft__check { animation: pop 0.45s var(--ease-spring) 1.05s both; }
+  @keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.15); } 100% { transform: scale(1); } }
+
+  .draft__audit { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-3); opacity: 0; }
+  .draft.play .draft__audit { animation: settleIn 0.45s var(--ease) 1.3s both; }
+  .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); animation: aud 2.4s var(--ease-in-out) 1.8s infinite; }
   [data-theme="bauhaus"] .dot2 { border-radius: 0; }
-
-  .kron__flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; position: relative; }
-  /* connecting spine */
-  .kspine { position: absolute; left: 19px; top: 24px; bottom: 24px; width: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .kspine__fill { position: absolute; inset: 0; background: var(--accent); transform: scaleY(0); transform-origin: top; }
-  .kron.play .kspine__fill { animation: spine 2.4s var(--ease) 0.4s both; }
-  @keyframes spine { to { transform: scaleY(1); } }
-
-  .kstep { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: center; padding: 0.5rem 0; position: relative; opacity: 0.4; }
-  .kron.play .kstep { animation: stepOn 0.5s var(--ease) both; }
-  .kron.play .kstep--1 { animation-delay: 0.3s; }
-  .kron.play .kstep--2 { animation-delay: 1.0s; }
-  .kron.play .kstep--3 { animation-delay: 1.7s; }
-  .kron.play .kstep--4 { animation-delay: 2.4s; }
-  @keyframes stepOn { from { opacity: 0.35; } to { opacity: 1; } }
-
-  .kstep__ico { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border-strong); color: var(--ink-3); z-index: 1; transition: none; }
-  [data-theme="bauhaus"] .kstep__ico { border-radius: 0; }
-  .kstep__ico svg { width: 20px; height: 20px; }
-  .kstep__ai { font-family: var(--font-mono); font-weight: 700; font-size: 0.72rem; }
-  .kron.play .kstep--1 .kstep__ico { animation: icoOn 0.4s var(--ease) 0.35s both; }
-  .kron.play .kstep--2 .kstep__ico { animation: icoOn 0.4s var(--ease) 1.05s both; }
-  .kron.play .kstep--3 .kstep__ico { animation: icoOn 0.45s var(--ease-spring) 1.75s both; }
-  .kron.play .kstep--4 .kstep__ico { animation: icoOn 0.4s var(--ease) 2.45s both; }
-  @keyframes icoOn {
-    0% { background: var(--surface-2); border-color: var(--border-strong); color: var(--ink-3); transform: scale(1); }
-    50% { transform: scale(1.12); }
-    100% { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); transform: scale(1); }
-  }
-
-  .kstep__b b { font-family: var(--font-display); display: block; font-size: 0.95rem; margin-bottom: 0.15rem; }
-  .kstep__b span { color: var(--ink-3); font-size: 0.82rem; line-height: 1.4; }
-
-  /* step 2 mini note lines fill as AI writes */
-  .kstep__lines { display: grid; gap: 0.32rem; margin-top: 0.1rem; }
-  .kstep__lines i { height: 5px; border-radius: 3px; background: var(--surface-3); width: 0; }
-  [data-theme="bauhaus"] .kstep__lines i { border-radius: 0; }
-  .kron.play .kstep__lines i { animation: writeLine 0.4s var(--ease) both; }
-  .kron.play .kstep__lines i:nth-child(1) { animation-delay: 1.15s; }
-  .kron.play .kstep__lines i:nth-child(2) { animation-delay: 1.32s; }
-  .kron.play .kstep__lines i:nth-child(3) { animation-delay: 1.49s; }
-  @keyframes writeLine { to { width: var(--w); } }
-
-  /* step 3 tick draws */
-  .kstep__tick { stroke-dasharray: 26; stroke-dashoffset: 26; }
-  .kron.play .kstep__tick { animation: draw 0.4s var(--ease) 2.0s both; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-
-  /* auditable badge lights + pulses once the record is written */
-  .kron.play .kron__badge { animation: auditIn 0.4s var(--ease) 2.7s both; }
-  @keyframes auditIn { to { color: var(--highlight); } }
-  .kron.play .dot2 { animation: aud 2s var(--ease-in-out) 2.9s infinite; }
   @keyframes aud { 0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--highlight) 45%, transparent); } 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--highlight) 0%, transparent); } }
 
-  .kron.noanim, .kron.noanim * { transition: none !important; animation: none !important; }
   @media (prefers-reduced-motion: reduce) {
-    .kstep { opacity: 1; }
-    .kstep__ico { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-    .kspine__fill { transform: scaleY(1); }
-    .kstep__lines i { width: var(--w); }
-    .kstep__tick { stroke-dashoffset: 0; }
-    .kron__badge { color: var(--highlight); }
+    .draft__lines i, .draft__gate, .draft__audit { opacity: 1; transform: none; }
+    .draft__check { transform: scale(1); }
+    .dot2 { animation: none; }
   }
 
   /* ---- cta ---- */
