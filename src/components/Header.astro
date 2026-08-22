@@ -1,0 +1,96 @@
+---
+import Logo from "./Logo.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const nav = [
+  { href: "/services", label: "Services" },
+  { href: "/industries", label: "Industries" },
+  { href: "/work", label: "Work" },
+  { href: "/about", label: "About" },
+];
+const isActive = (h: string) => path === h;
+---
+<header class="site-head" id="site-head">
+  <div class="wrap head-in">
+    <a href="/" class="head-logo" aria-label="Truvantik home"><Logo /></a>
+
+    <nav class="head-nav" aria-label="Primary">
+      {nav.map((n) => (
+        <a href={n.href} class:list={["nav-link", { active: isActive(n.href) }]}>{n.label}</a>
+      ))}
+    </nav>
+
+    <div class="head-actions">
+      <ThemeToggle />
+      <a href="/contact" class="btn head-cta">Free assessment <span class="arw">→</span></a>
+      <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <nav class="wrap" aria-label="Mobile">
+      {nav.map((n) => <a href={n.href} class="mnav-link">{n.label}</a>)}
+      <a href="/contact" class="btn mnav-cta">Start with a free assessment <span class="arw">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-head {
+    position: fixed; inset: 0 0 auto 0; z-index: 100;
+    background: color-mix(in srgb, var(--bg) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(1.2);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+  }
+  .site-head.scrolled { border-bottom-color: var(--border); }
+  .head-in { display: flex; align-items: center; gap: 1.5rem; height: 72px; }
+  .head-logo { color: var(--ink); }
+  .head-nav { display: flex; gap: 0.35rem; margin-inline-start: auto; }
+  .nav-link {
+    font-family: var(--font-display); font-weight: 500; font-size: 0.95rem;
+    color: var(--ink-2); padding: 0.5em 0.85em; border-radius: var(--radius-sm);
+    letter-spacing: -0.01em; position: relative;
+  }
+  .nav-link:hover { color: var(--ink); background: var(--surface-2); }
+  .nav-link.active { color: var(--ink); }
+  .nav-link.active::after {
+    content: ""; position: absolute; left: 0.85em; right: 0.85em; bottom: 0.15em;
+    height: 2px; background: var(--accent); border-radius: 2px;
+  }
+  .head-actions { display: flex; align-items: center; gap: 0.7rem; }
+  .head-cta { padding: 0.6em 1.05em; font-size: 0.9rem; }
+  .menu-btn { display: none; background: none; border: 0; color: var(--ink); padding: 0.3em; }
+
+  .mobile-nav { border-top: 1px solid var(--border); background: var(--bg); }
+  .mobile-nav nav { display: grid; gap: 0.25rem; padding-block: 1rem 1.5rem; }
+  .mnav-link { padding: 0.85em 0.4em; font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; border-bottom: 1px solid var(--border); }
+  .mnav-cta { margin-top: 1rem; justify-content: center; }
+
+  @media (max-width: 860px) {
+    .head-nav { display: none; }
+    .head-cta { display: none; }
+    .menu-btn { display: inline-flex; }
+    .head-nav { margin-inline-start: 0; }
+    .head-in { justify-content: space-between; }
+    .head-actions { margin-inline-start: auto; }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const head = document.getElementById("site-head");
+    const onScroll = () => head?.classList.toggle("scrolled", window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const btn = document.getElementById("menu-btn");
+    const nav = document.getElementById("mobile-nav");
+    btn?.addEventListener("click", () => {
+      const open = nav.hasAttribute("hidden");
+      if (open) { nav.removeAttribute("hidden"); } else { nav.setAttribute("hidden", ""); }
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  })();
+</script>

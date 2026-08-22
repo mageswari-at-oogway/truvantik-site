@@ -1,0 +1,304 @@
+---
+import Base from "../layouts/Base.astro";
+import RoadmapBoard from "../components/RoadmapBoard.astro";
+
+const diffs = [
+  { k: "01", t: "Engineering-led, not sales-led", d: "The people who scope your engagement are the people who build it. No account managers, no handoff decks." },
+  { k: "02", t: "From first assessment to production", d: "One partner across strategy, build, integration and the deployment that follows." },
+  { k: "03", t: "Cross-industry by design", d: "Patterns proven in one sector, adapted rather than reinvented in yours." },
+];
+
+const entries = [
+  { id: "unsure", tab: "Not sure where AI fits", body: "You have been asked for a plan, or you suspect there is value here but cannot yet name it. Begin with an assessment that ends in a ranked, costed roadmap.", flow: "Assessment → Ranked roadmap", time: "4–6 weeks", tag: "Start here" },
+  { id: "build", tab: "You know what to build", body: "The use case is clear and the business case is made. You need a team that can take it from data to a deployed product your users rely on.", flow: "Build → Shipped product", time: "3–5 months", tag: "Ready to build" },
+  { id: "stalled", tab: "Your pilot has stalled", body: "It works in a demo but not in the business. Usually the blocker is integration, ownership or adoption rather than the model itself.", flow: "Unstick → Production system", time: "6–8 weeks", tag: "Unstick it" },
+];
+
+const phases = [
+  { n: "01", k: "Assess", d: "Understand the work, the data and the constraints. Decide what is worth building and what is not.", note: "The point — reduce the problem to its essential elements." },
+  { n: "02", k: "Build", d: "Build the smallest system that proves the outcome, then harden it against real data and real users.", note: "The line — the shortest path through the build, reviewed with you directly." },
+  { n: "03", k: "Deploy", d: "Deploy into your stack, measure it against the outcome, and hand over the knowledge to keep it running.", note: "The plane — the system running whole: deployed, observed, documented, handed over." },
+];
+---
+<Base
+  title="Truvantik — AI strategy, shipped. Results, not prototypes."
+  description="Truvantik turns AI strategy into deployed, used-in-production systems — one partner from first assessment to live deployment, with nothing between you and the people who build it."
+>
+  <!-- ============ 1 · HERO ============ -->
+  <section class="snap hero gridbg">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap hero__in">
+      <div class="hero__copy">
+        <p class="kicker reveal">Your true advantage</p>
+        <h1 class="hero__h reveal" style="--d:60ms">
+          AI strategy,<br /><span class="grad-text">shipped.</span><br />Results, not prototypes.
+        </h1>
+        <p class="lead reveal" style="--d:140ms">
+          For organizations figuring out where AI actually creates value, Truvantik turns strategy into
+          deployed solutions — across industries, from first assessment to production. Nothing between
+          you and the people doing the work.
+        </p>
+        <div class="hero__cta reveal" style="--d:220ms">
+          <a href="/contact" class="btn btn--grad" data-magnetic>Start with a free assessment <span class="arw">→</span></a>
+          <a href="#approach" class="btn btn--ghost">Explore our approach</a>
+        </div>
+        <p class="hero__proof reveal" style="--d:300ms">
+          <span>One partner</span><b>·</b><span>Assess → Build → Deploy</span><b>·</b><span>Engineering-led</span>
+        </p>
+      </div>
+      <div class="hero__art reveal" style="--d:180ms">
+        <RoadmapBoard compact id="hero-board" />
+      </div>
+    </div>
+    <a href="#why" class="scroll-cue" aria-hidden="true"><span></span>Scroll</a>
+  </section>
+
+  <!-- ============ 2 · DIFFERENTIATORS ============ -->
+  <section class="snap why" id="why">
+    <div class="wrap why__in">
+      <div class="why__lead">
+        <p class="kicker reveal">Why Truvantik</p>
+        <h2 class="reveal" style="--d:60ms">Most AI work stops at the demo.<br />We build for the part after.</h2>
+        <p class="lead reveal" style="--d:120ms">The gap is rarely the model. It is integration, ownership, evaluation and adoption — so that is what we are built around.</p>
+      </div>
+      <ol class="why__list">
+        {diffs.map((d, i) => (
+          <li class="why__item reveal card" style={`--d:${140 + i * 90}ms`}>
+            <span class="why__k">{d.k}</span>
+            <div>
+              <h3>{d.t}</h3>
+              <p class="muted">{d.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 3 · ROADMAP (signature) ============ -->
+  <section class="snap board-sec gridbg" id="roadmap-sec">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="kicker">Opportunity roadmap</p>
+        <h2>From "we should do AI" to a ranked, sequenced portfolio.</h2>
+        <p class="lead">Every engagement runs on three phases. Opportunities are ranked by value → effort, then move Assess → Build → Deploy as they earn it.</p>
+      </div>
+      <div class="board-sec__art reveal" style="--d:120ms">
+        <RoadmapBoard id="main-board" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4 · ENTRY POINTS ============ -->
+  <section class="snap entry" id="approach">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="kicker">Pick your starting point</p>
+        <h2>Where are you today?</h2>
+        <p class="lead">Most conversations start in one of three places. Each leads to a different first engagement.</p>
+      </div>
+      <div class="entry__grid reveal" style="--d:100ms">
+        <div class="entry__tabs" role="tablist" aria-label="Starting points">
+          {entries.map((e, i) => (
+            <button class:list={["entry__tab", { active: i === 0 }]} role="tab"
+              id={`tab-${e.id}`} aria-selected={i === 0 ? "true" : "false"} aria-controls={`panel-${e.id}`} data-tab={e.id}>
+              <span class="entry__tag">{e.tag}</span>
+              <span class="entry__tt">{e.tab}</span>
+            </button>
+          ))}
+        </div>
+        <div class="entry__panels">
+          {entries.map((e, i) => (
+            <div class:list={["entry__panel card", { active: i === 0 }]} role="tabpanel"
+              id={`panel-${e.id}`} aria-labelledby={`tab-${e.id}`} data-panel={e.id} hidden={i !== 0}>
+              <p class="entry__body">{e.body}</p>
+              <div class="entry__meta">
+                <span class="pill entry__flow">{e.flow}</span>
+                <span class="pill">{e.time}</span>
+              </div>
+              <a href="/contact" class="btn btn--ghost entry__cta">Start here <span class="arw">→</span></a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5 · ASSESS · BUILD · DEPLOY ============ -->
+  <section class="snap flow gridbg" id="flow">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="kicker">How we work</p>
+        <h2>Assess · Build · Deploy</h2>
+        <p class="lead">Every engagement sits somewhere on the same three phases. Service steps are the detail inside them.</p>
+      </div>
+      <ol class="flow__track reveal" style="--d:120ms" data-flow>
+        <span class="flow__rail" aria-hidden="true"><span class="flow__rail-fill" data-rail></span></span>
+        {phases.map((p) => (
+          <li class="flow__step">
+            <span class="flow__node" aria-hidden="true">{p.n}</span>
+            <h3 class="flow__k">{p.k}</h3>
+            <p class="muted flow__d">{p.d}</p>
+            <p class="flow__note">{p.note}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 6 · PROOF POINT ============ -->
+  <section class="snap proof" id="proof">
+    <div class="wrap proof__in">
+      <div class="proof__copy reveal">
+        <p class="kicker">Featured proof point · built by our team</p>
+        <h2>Kron Health — a digital clinic platform.</h2>
+        <p class="lead">A clinic platform where AI-assisted workflows had to fit clinical reality: careful handling of patient information, clinician review at the right point, and behaviour that is auditable rather than opaque.</p>
+        <a href="/work" class="btn btn--ghost">Read our case studies <span class="arw">→</span></a>
+        <p class="proof__note muted">Separate brand: Kron Health is its own product brand, built by our team with 3BP Labs. It is not a Truvantik service line.</p>
+      </div>
+      <div class="proof__art reveal" style="--d:120ms" aria-hidden="true">
+        <div class="clin card">
+          <div class="clin__row"><span class="clin__ai">AI draft</span><span class="clin__t">Clinical note · intake summary</span></div>
+          <div class="clin__lines"><i style="width:92%"></i><i style="width:78%"></i><i style="width:85%"></i><i style="width:60%"></i></div>
+          <div class="clin__gate">
+            <span class="clin__check">✓</span>
+            <div><b>Clinician review</b><small>Approved before it enters the record</small></div>
+          </div>
+          <div class="clin__audit"><span class="dot2"></span>Auditable · every step logged</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7 · FINAL CTA ============ -->
+  <section class="snap cta gridbg">
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="wrap cta__in reveal">
+      <div class="cta__mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="72" height="72"><defs><clipPath id="ctaclip"><rect x="10" y="10" width="44" height="44" rx="9" transform="rotate(45 32 32)"/></clipPath></defs><g clip-path="url(#ctaclip)"><rect width="64" height="64" fill="var(--logo-face)"/><path d="M40 0 L64 24 L64 64 L40 64 Z" fill="var(--logo-corner)"/></g><path d="M32 15 L47 31 H38.5 V51 H25.5 V31 H17 Z" fill="var(--logo-mark)"/><rect x="10" y="10" width="44" height="44" rx="9" transform="rotate(45 32 32)" fill="none" stroke="var(--logo-stroke)" stroke-width="3"/></svg>
+      </div>
+      <h2>Let's find your true advantage.</h2>
+      <p class="lead">A 30-minute call is usually enough to tell whether there is a real opportunity here, and what the first step should be.</p>
+      <div class="cta__row">
+        <a href="/contact" class="btn btn--grad" data-magnetic>Start with a free assessment <span class="arw">→</span></a>
+        <a href="/services" class="btn btn--ghost">See how we work</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---- hero ---- */
+  .hero { padding-top: 72px; }
+  .hero__in { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  .hero__h { margin: 1.1rem 0 1.4rem; }
+  .hero__cta { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+  .hero__proof { display: flex; align-items: center; gap: 0.7rem; font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.03em; color: var(--ink-3); flex-wrap: wrap; }
+  .hero__proof b { color: var(--accent); }
+  .scroll-cue { position: absolute; bottom: 1.6rem; left: 50%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 0.5em; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+  .scroll-cue span { width: 1px; height: 26px; background: linear-gradient(var(--accent), transparent); animation: cue 1.8s var(--ease-in-out) infinite; }
+  @keyframes cue { 0%,100% { opacity: 0.3; transform: scaleY(0.7); } 50% { opacity: 1; transform: scaleY(1); } }
+
+  /* ---- why ---- */
+  .why__in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .why__lead h2 { margin: 1rem 0 1.2rem; }
+  .why__list { list-style: none; padding: 0; display: grid; gap: 0.9rem; }
+  .why__item { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; padding: 1.3rem 1.4rem; }
+  .why__item h3 { font-size: var(--step-1); margin-bottom: 0.35rem; }
+  .why__k { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); padding-top: 0.3rem; }
+  .why__item:hover { border-color: var(--border-strong); }
+
+  /* ---- board section ---- */
+  .board-sec__art { margin-top: 2.4rem; max-width: 1000px; margin-inline: auto; width: 100%; }
+
+  /* ---- entry ---- */
+  .entry__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 1.4rem; margin-top: 2.2rem; }
+  .entry__tabs { display: grid; gap: 0.6rem; align-content: start; }
+  .entry__tab { text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.05rem 1.2rem; display: grid; gap: 0.3rem; transition: border-color 0.25s, transform 0.25s var(--ease), background 0.25s; }
+  [data-theme="bauhaus"] .entry__tab { border: 1.5px solid var(--ink); }
+  .entry__tab:hover { transform: translateX(4px); border-color: var(--border-strong); }
+  .entry__tab.active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+  .entry__tag { font-family: var(--font-mono); font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); }
+  .entry__tt { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); letter-spacing: -0.02em; }
+  .entry__panel { padding: clamp(1.4rem, 3vw, 2.2rem); display: grid; gap: 1.3rem; align-content: center; }
+  .entry__panel[hidden] { display: none; }
+  .entry__body { font-size: var(--step-1); color: var(--ink-2); line-height: 1.5; }
+  .entry__meta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .entry__flow { color: var(--ink); border-color: var(--border-strong); }
+  .entry__cta { justify-self: start; }
+
+  /* ---- flow ---- */
+  .flow__track { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 3rem; position: relative; }
+  .flow__rail { position: absolute; top: 22px; left: 8%; right: 8%; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .flow__rail-fill { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, var(--accent), var(--highlight)); transition: width 1.4s var(--ease); }
+  .flow__track.in .flow__rail-fill { width: 100%; }
+  .flow__step { display: grid; gap: 0.5rem; position: relative; }
+  .flow__node { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--surface); border: 1px solid var(--border-strong); font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); position: relative; z-index: 1; }
+  [data-theme="bauhaus"] .flow__node { border-radius: 0; border-width: 1.5px; }
+  .flow__k { font-size: var(--step-2); margin-top: 0.3rem; }
+  .flow__note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); line-height: 1.5; }
+
+  /* ---- proof ---- */
+  .proof__in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  .proof__copy h2 { margin: 1rem 0 1.2rem; }
+  .proof__copy .btn { margin-top: 1.6rem; }
+  .proof__note { font-size: 0.82rem; margin-top: 1.4rem; max-width: 46ch; padding-left: 0.9rem; border-left: 2px solid var(--border-strong); }
+  .clin { padding: 1.4rem; display: grid; gap: 1rem; }
+  .clin__row { display: flex; align-items: center; gap: 0.7rem; }
+  .clin__ai { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-ink); background: var(--accent); padding: 0.25em 0.6em; border-radius: 999px; }
+  [data-theme="bauhaus"] .clin__ai { border-radius: 0; }
+  .clin__t { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); }
+  .clin__lines { display: grid; gap: 0.5rem; }
+  .clin__lines i { height: 8px; background: var(--surface-3); border-radius: 4px; display: block; animation: type 2.4s var(--ease) infinite; transform-origin: left; }
+  .clin__lines i:nth-child(2) { animation-delay: 0.2s; } .clin__lines i:nth-child(3) { animation-delay: 0.4s; } .clin__lines i:nth-child(4) { animation-delay: 0.6s; }
+  @keyframes type { 0% { transform: scaleX(0); opacity: 0.4; } 40%,100% { transform: scaleX(1); opacity: 1; } }
+  .clin__gate { display: flex; gap: 0.8rem; align-items: center; padding: 0.9rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+  .clin__gate b { font-family: var(--font-display); display: block; font-size: 0.92rem; } .clin__gate small { color: var(--ink-3); font-size: 0.76rem; }
+  .clin__check { width: 30px; height: 30px; flex-shrink: 0; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); font-weight: 700; }
+  [data-theme="bauhaus"] .clin__check { border-radius: 0; }
+  .clin__audit { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-3); }
+  .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); box-shadow: 0 0 0 3px color-mix(in srgb, var(--highlight) 25%, transparent); }
+
+  /* ---- cta ---- */
+  .cta__in { text-align: center; display: grid; justify-items: center; gap: 1.3rem; max-width: 44ch; margin-inline: auto; }
+  .cta__mark { animation: float 6s var(--ease-in-out) infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-8px) rotate(3deg); } }
+  .cta__row { display: flex; gap: 0.85rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+
+  /* ---- responsive ---- */
+  @media (max-width: 860px) {
+    .hero__in, .why__in, .proof__in, .entry__grid { grid-template-columns: 1fr; }
+    .hero { padding-top: 96px; }
+    .hero__art { order: 2; }
+    .scroll-cue { display: none; }
+    .flow__track { grid-template-columns: 1fr; gap: 1.8rem; }
+    .flow__rail { left: 22px; right: auto; top: 10%; bottom: 10%; width: 2px; height: auto; }
+    .flow__rail-fill { background: linear-gradient(180deg, var(--accent), var(--highlight)); }
+    .flow__track.in .flow__rail-fill { width: 100%; height: 100%; }
+    .flow__step { padding-left: 62px; }
+    .flow__node { position: absolute; left: 0; top: 0; }
+  }
+  @media (max-width: 620px) {
+    .why__item { grid-template-columns: 1fr; gap: 0.4rem; }
+  }
+</style>
+
+<script is:inline>
+  // entry-point tabs
+  (() => {
+    const tabs = document.querySelectorAll(".entry__tab");
+    const panels = document.querySelectorAll(".entry__panel");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const id = tab.getAttribute("data-tab");
+        tabs.forEach((t) => { t.classList.toggle("active", t === tab); t.setAttribute("aria-selected", String(t === tab)); });
+        panels.forEach((p) => {
+          const on = p.getAttribute("data-panel") === id;
+          p.classList.toggle("active", on);
+          if (on) p.removeAttribute("hidden"); else p.setAttribute("hidden", "");
+        });
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,175 @@
+---
+// Signature product moment: a live opportunity roadmap.
+// A card advances Assess -> Build -> Deploy on a timer (JS state machine).
+// Respects reduced-motion (renders the settled end-state).
+interface Props { compact?: boolean; id?: string }
+const { compact = false, id = "roadmap" } = Astro.props;
+
+const assess = [
+  "Customer support triage",
+  "Contract & document review",
+  "Returns exception handling",
+  "Onboarding data entry",
+  "Internal knowledge retrieval",
+];
+---
+<div class:list={["board", { "board--compact": compact }]} id={id} data-roadmap>
+  <div class="board__bar" aria-hidden="true">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="board__tag">Illustrative · one client</span>
+  </div>
+
+  <div class="board__cols">
+    <section class="col" data-col="assess">
+      <header class="col__h"><span class="col__k">Assess</span><span class="col__n" data-count>5</span></header>
+      <ul class="col__list">
+        {assess.map((t, i) => (
+          <li class="tk" data-tk={i === 0 ? "mover" : "static"} style={`--i:${i}`}>
+            <span class="tk__id">{String(i + 1).padStart(2, "0")}</span>
+            <span class="tk__t">{t}</span>
+            <span class="tk__ve" aria-hidden="true"><b>V</b><i>E</i></span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="col" data-col="build">
+      <header class="col__h"><span class="col__k">Build</span><span class="col__st">S4/8</span></header>
+      <ul class="col__list">
+        <li class="tk tk--build" data-slot="build">
+          <span class="tk__id">06</span>
+          <span class="tk__t">Support triage copilot</span>
+          <span class="tk__note">↳ from Customer support triage</span>
+          <span class="prog" aria-hidden="true"><span class="prog__bar"></span></span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="col" data-col="deploy">
+      <header class="col__h"><span class="col__k">Deploy</span><span class="col__st col__st--live">● Live</span></header>
+      <ul class="col__list">
+        <li class="tk tk--deploy">
+          <span class="tk__id">07</span>
+          <span class="tk__t">Document review agent</span>
+          <span class="tk__note">In production</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <p class="board__foot" aria-hidden="true">Ranked by value → effort, in that order.</p>
+</div>
+
+<style>
+  .board {
+    background: var(--surface-solid);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lift);
+    padding: 1rem 1rem 0.75rem;
+    overflow: hidden;
+    position: relative;
+  }
+  .board::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: var(--grad-soft); opacity: 0.6; mix-blend-mode: soft-light;
+  }
+  .board > * { position: relative; }
+  [data-theme="bauhaus"] .board { border: 2px solid var(--ink); }
+  .board__bar { display: flex; align-items: center; gap: 0.4rem; padding: 0.15rem 0.25rem 0.9rem; }
+  .board__bar .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
+  [data-theme="bauhaus"] .dot { border-radius: 0; }
+  .board__tag { margin-left: auto; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+
+  .board__cols { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 0.6rem; }
+  .col { background: color-mix(in srgb, var(--bg) 60%, transparent); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.6rem; min-height: 100%; }
+  [data-theme="bauhaus"] .col { border: 1.5px solid var(--ink); }
+  .col__h { display: flex; align-items: baseline; justify-content: space-between; gap: 0.4rem; margin-bottom: 0.6rem; }
+  .col__k { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); white-space: nowrap; }
+  .col__n, .col__st { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-3); white-space: nowrap; }
+  .col__st--live { color: var(--highlight); }
+  .col__list { list-style: none; padding: 0; display: grid; gap: 0.4rem; }
+
+  .tk {
+    position: relative; display: grid; gap: 0.15rem;
+    background: var(--surface-solid); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 0.5rem 0.6rem;
+    transition: transform 0.5s var(--ease), opacity 0.5s var(--ease), border-color 0.3s;
+  }
+  [data-theme="bauhaus"] .tk { border: 1.5px solid var(--ink); }
+  .tk__id { font-family: var(--font-mono); font-size: 0.6rem; color: var(--ink-3); }
+  .tk__t { font-size: 0.82rem; font-weight: 600; font-family: var(--font-display); letter-spacing: -0.01em; line-height: 1.2; }
+  .tk__note { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink-3); }
+  .tk__ve { position: absolute; top: 0.5rem; right: 0.55rem; display: inline-flex; gap: 2px; font-family: var(--font-mono); font-size: 0.56rem; }
+  .tk__ve b { color: var(--accent); } .tk__ve i { color: var(--ink-3); font-style: normal; }
+  .tk--build { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+  .tk--deploy { border-color: color-mix(in srgb, var(--highlight) 40%, var(--border)); }
+
+  .prog { display: block; height: 3px; border-radius: 3px; background: var(--surface-3); margin-top: 0.4rem; overflow: hidden; }
+  .prog__bar { display: block; height: 100%; width: 50%; background: var(--accent); border-radius: 3px; }
+
+  /* the migrating card */
+  .tk[data-tk="mover"].is-lifting { transform: translateY(-6px) scale(1.015); border-color: var(--accent); box-shadow: var(--shadow-card); }
+  .tk[data-tk="mover"].is-gone { opacity: 0; transform: translateX(14px) scale(0.96); }
+  .tk--flash { animation: flashIn 0.6s var(--ease); }
+  @keyframes flashIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .board__foot { font-family: var(--font-mono); font-size: 0.64rem; color: var(--ink-3); text-align: center; padding: 0.75rem 0 0.35rem; letter-spacing: 0.03em; }
+
+  .board--compact .board__cols { grid-template-columns: 1.2fr 0.9fr 0.9fr; }
+  .board--compact .tk__t { font-size: 0.76rem; }
+  .board--compact .board__foot { display: none; }
+
+  @media (max-width: 620px) {
+    .board__cols { grid-template-columns: 1fr; }
+    .col { }
+  }
+</style>
+
+<script is:inline define:vars={{ id }}>
+  (() => {
+    const board = document.getElementById(id);
+    if (!board) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const mover = board.querySelector('[data-tk="mover"]');
+    const buildSlot = board.querySelector('[data-slot="build"]');
+    const prog = board.querySelector(".prog__bar");
+    const count = board.querySelector("[data-count]");
+    if (!mover) return;
+
+    let timer;
+    const run = () => {
+      // 1. lift the top Assess card
+      mover.classList.add("is-lifting");
+      setTimeout(() => {
+        // 2. send it away
+        mover.classList.remove("is-lifting");
+        mover.classList.add("is-gone");
+        if (count) count.textContent = "4";
+      }, 900);
+      setTimeout(() => {
+        // 3. flash a refreshed Build progress + reset
+        if (prog) { prog.style.width = "72%"; }
+        buildSlot?.classList.add("tk--flash");
+      }, 1500);
+      setTimeout(() => {
+        buildSlot?.classList.remove("tk--flash");
+        if (prog) prog.style.width = "50%";
+      }, 2300);
+      setTimeout(() => {
+        // 4. reset the mover back into Assess
+        mover.classList.remove("is-gone");
+        if (count) count.textContent = "5";
+      }, 4200);
+    };
+
+    // only animate while visible
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => {
+        if (e.isIntersecting) { run(); timer = setInterval(run, 6000); }
+        else { clearInterval(timer); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(board);
+  })();
+</script>

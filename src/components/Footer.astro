@@ -1,0 +1,70 @@
+---
+import Logo from "./Logo.astro";
+const year = new Date().getFullYear();
+const cols = [
+  { title: "Services", links: [
+    { href: "/services#assessment", label: "AI strategy & assessment" },
+    { href: "/services#build", label: "Custom AI product development" },
+    { href: "/services#integration", label: "AI integration & deployment" },
+    { href: "/services#advisory", label: "Ongoing AI advisory" },
+  ]},
+  { title: "Industries", links: [
+    { href: "/industries#healthcare", label: "Healthcare" },
+    { href: "/industries#retail", label: "Retail & e-commerce" },
+    { href: "/industries#manufacturing", label: "Manufacturing & industrial" },
+    { href: "/industries#consumer-tech", label: "Consumer technology" },
+  ]},
+  { title: "Company", links: [
+    { href: "/about", label: "About" },
+    { href: "/work", label: "Case studies" },
+    { href: "/contact", label: "Contact" },
+    { href: "mailto:hello@truvantik.com", label: "hello@truvantik.com" },
+  ]},
+];
+---
+<footer class="site-foot snap snap--auto">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="/" aria-label="Truvantik home" class="foot-logo"><Logo /></a>
+        <p class="foot-tag">Your true advantage.</p>
+        <p class="foot-mean"><span>Tru</span> · <span>vant</span> · <span>ik</span> — true, vantage, intelligence &amp; knowledge.</p>
+        <p class="muted foot-desc">AI consulting from strategy to production, across industries.</p>
+      </div>
+      {cols.map((c) => (
+        <nav class="foot-col" aria-label={c.title}>
+          <h3 class="foot-h">{c.title}</h3>
+          {c.links.map((l) => <a href={l.href} class="foot-link">{l.label}</a>)}
+        </nav>
+      ))}
+    </div>
+    <div class="foot-bottom">
+      <p class="muted">© {year} Truvantik — the AI consulting brand of Prabhaavi Solutions.</p>
+      <div class="foot-legal">
+        <a href="/privacy" class="foot-link">Privacy</a>
+        <a href="/terms" class="foot-link">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-foot { background: var(--bg-2); border-top: 1px solid var(--border); padding-block: clamp(3.5rem, 8vh, 6rem) 2.5rem; }
+  .foot-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+  .foot-logo { color: var(--ink); }
+  .foot-tag { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin-top: 1rem; }
+  .foot-mean { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-3); margin-top: 0.5rem; letter-spacing: 0.02em; }
+  .foot-mean span { color: var(--accent); }
+  .foot-desc { margin-top: 0.9rem; max-width: 30ch; font-size: 0.92rem; }
+  .foot-h { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink-3); margin-bottom: 1rem; font-weight: 500; }
+  .foot-col { display: grid; gap: 0.6rem; align-content: start; }
+  .foot-link { color: var(--ink-2); font-size: 0.92rem; }
+  .foot-link:hover { color: var(--accent); }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1.8rem; flex-wrap: wrap; }
+  .foot-legal { display: flex; gap: 1.3rem; }
+  @media (max-width: 860px) {
+    .foot-top { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
+    .foot-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 520px) { .foot-top { grid-template-columns: 1fr; } }
+</style>

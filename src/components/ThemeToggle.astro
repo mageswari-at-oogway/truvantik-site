@@ -1,0 +1,45 @@
+---
+// Cycles dark -> light -> bauhaus, persists to localStorage.
+---
+<button class="tt" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch theme">
+  <span class="tt__dot" aria-hidden="true"></span>
+  <span class="tt__label" id="tt-label">Dark</span>
+</button>
+
+<style>
+  .tt {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    background: var(--surface); color: var(--ink-2);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 0.4em 0.8em 0.4em 0.6em;
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .tt:hover { color: var(--ink); border-color: var(--border-strong); }
+  [data-theme="bauhaus"] .tt { border-radius: 0; border-width: 1.5px; border-color: var(--ink); }
+  .tt__dot {
+    width: 0.8em; height: 0.8em; border-radius: 999px;
+    background: conic-gradient(var(--accent), var(--highlight), var(--accent));
+    box-shadow: 0 0 0 1px var(--border);
+  }
+  [data-theme="bauhaus"] .tt__dot { border-radius: 0; }
+</style>
+
+<script is:inline>
+  (() => {
+    const order = ["dark", "light", "bauhaus"];
+    const names = { dark: "Dark", light: "Light", bauhaus: "Bauhaus" };
+    const btn = document.getElementById("theme-toggle");
+    const label = document.getElementById("tt-label");
+    const cur = document.documentElement.getAttribute("data-theme") || "dark";
+    if (label) label.textContent = names[cur] || "Dark";
+    btn?.addEventListener("click", () => {
+      const now = document.documentElement.getAttribute("data-theme") || "dark";
+      const next = order[(order.indexOf(now) + 1) % order.length];
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("tv-theme", next); } catch (e) {}
+      if (label) label.textContent = names[next];
+    });
+  })();
+</script>

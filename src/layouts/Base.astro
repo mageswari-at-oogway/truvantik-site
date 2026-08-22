@@ -1,0 +1,115 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  hideFooter?: boolean;
+}
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0a1420" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- no-flash theme -->
+    <script is:inline>
+      (() => {
+        try {
+          const t = localStorage.getItem("tv-theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- reveal-on-scroll (shared) -->
+    <script is:inline>
+      (() => {
+        const els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window) ||
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          els.forEach((e) => e.classList.add("in"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((en) => {
+              if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+            });
+          },
+          { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
+        );
+        els.forEach((e) => io.observe(e));
+      })();
+    </script>
+
+    <!-- magnetic buttons + count-up (shared) -->
+    <script is:inline>
+      (() => {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const fine = window.matchMedia("(pointer: fine)").matches;
+        if (!reduce && fine) {
+          document.querySelectorAll("[data-magnetic]").forEach((el) => {
+            const s = 0.28;
+            el.addEventListener("pointermove", (e) => {
+              const r = el.getBoundingClientRect();
+              const x = e.clientX - (r.left + r.width / 2);
+              const y = e.clientY - (r.top + r.height / 2);
+              el.style.transform = `translate(${x * s}px, ${y * s - 3}px)`;
+            });
+            el.addEventListener("pointerleave", () => { el.style.transform = ""; });
+          });
+        }
+        const counters = document.querySelectorAll("[data-count-to]");
+        if (counters.length) {
+          const animate = (el) => {
+            if (reduce) { el.textContent = (el.dataset.prefix||"") + el.dataset.countTo + (el.dataset.suffix || ""); return; }
+            const to = parseFloat(el.dataset.countTo);
+            const suffix = el.dataset.suffix || ""; const prefix = el.dataset.prefix || "";
+            const dur = 1400; const t0 = performance.now();
+            const tick = (t) => {
+              const p = Math.min(1, (t - t0) / dur);
+              const e = 1 - Math.pow(1 - p, 3);
+              el.textContent = prefix + Math.round(to * e) + suffix;
+              if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          };
+          const cio = new IntersectionObserver((es) => {
+            es.forEach((en) => { if (en.isIntersecting) { animate(en.target); cio.unobserve(en.target); } });
+          }, { threshold: 0.5 });
+          counters.forEach((c) => cio.observe(c));
+        }
+      })();
+    </script>
+  </body>
+</html>

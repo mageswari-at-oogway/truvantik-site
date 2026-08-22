@@ -1,0 +1,150 @@
+/* ============================================================
+   Truvantik — design tokens  (v2 — fresh art direction)
+   NOT the reference navy clone. Warm near-black canvas, a single
+   signature orange->teal gradient as the through-line, deep glow,
+   glass panels. Three themes via [data-theme] on <html>.
+   Adding a theme = add one [data-theme="x"] block below.
+   ============================================================ */
+
+:root {
+  /* ---- type ---- */
+  --font-display: "Geist", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-body: "Manrope", -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---- fluid type scale (bigger, more editorial) ---- */
+  --step--1: clamp(0.8rem, 0.76rem + 0.2vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.22vw, 1.13rem);
+  --step-1: clamp(1.2rem, 1.09rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.55rem, 1.32rem + 1.1vw, 2.25rem);
+  --step-3: clamp(2.05rem, 1.65rem + 2vw, 3.3rem);
+  --step-4: clamp(2.7rem, 2rem + 3.4vw, 4.9rem);
+  --step-5: clamp(3.3rem, 2.2rem + 5.4vw, 7rem);
+
+  /* ---- geometry ---- */
+  --radius-sm: 10px;
+  --radius: 18px;
+  --radius-lg: 26px;
+  --radius-xl: 36px;
+  --maxw: 1220px;
+  --gutter: clamp(1.15rem, 0.5rem + 3vw, 3rem);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ---- brand hues (stable across themes) ---- */
+  --teal: #37e0c8;
+  --teal-2: #26b6c9;
+  --orange: #ff6a2b;
+  --orange-2: #ff9445;
+  --violet: #8b7bff;
+  /* signature gradient — the single recurring visual motif */
+  --grad: linear-gradient(100deg, var(--orange) 0%, var(--orange-2) 26%, var(--teal-2) 74%, var(--teal) 100%);
+  --grad-soft: linear-gradient(135deg, rgb(255 106 43 / 0.16), rgb(55 224 200 / 0.14));
+}
+
+/* ============ DARK — default / hero ============ */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #08080b;
+  --bg-2: #0c0c11;
+  --surface: rgb(255 255 255 / 0.03);
+  --surface-solid: #101017;
+  --surface-2: rgb(255 255 255 / 0.06);
+  --surface-3: rgb(255 255 255 / 0.1);
+  --ink: #f4f3f6;
+  --ink-2: #b7b5c2;
+  --ink-3: #7c7a89;
+  --border: rgb(255 255 255 / 0.09);
+  --border-strong: rgb(255 255 255 / 0.2);
+  --accent: var(--teal);
+  --accent-ink: #04231f;
+  --highlight: var(--orange);
+  --highlight-ink: #fff;
+  --grid-line: rgb(255 255 255 / 0.035);
+  --glow-a: rgb(255 106 43 / 0.5);
+  --glow-b: rgb(55 224 200 / 0.42);
+  --glow-c: rgb(139 123 255 / 0.3);
+  --glass: blur(20px) saturate(1.4);
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 20px 50px -30px rgb(0 0 0 / 0.9);
+  --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.08) inset, 0 30px 80px -30px rgb(0 0 0 / 0.9),
+    0 0 60px -24px var(--glow-b);
+  --logo-face: #f4f3f6;
+  --logo-corner: var(--teal);
+  --logo-mark: var(--orange);
+  --logo-stroke: var(--bg);
+}
+
+/* ============ LIGHT — warm, editorial ============ */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f7f5f2;
+  --bg-2: #efece7;
+  --surface: rgb(255 255 255 / 0.7);
+  --surface-solid: #ffffff;
+  --surface-2: rgb(20 16 12 / 0.04);
+  --surface-3: rgb(20 16 12 / 0.08);
+  --ink: #16130f;
+  --ink-2: #4a453d;
+  --ink-3: #7d766b;
+  --border: rgb(20 16 12 / 0.12);
+  --border-strong: rgb(20 16 12 / 0.24);
+  --teal: #10a595;
+  --teal-2: #0e8fa0;
+  --orange: #f05a1e;
+  --orange-2: #ff8a3d;
+  --accent: var(--teal);
+  --accent-ink: #ffffff;
+  --highlight: var(--orange);
+  --highlight-ink: #ffffff;
+  --grid-line: rgb(20 16 12 / 0.05);
+  --glow-a: rgb(240 90 30 / 0.22);
+  --glow-b: rgb(16 165 149 / 0.2);
+  --glow-c: rgb(139 123 255 / 0.16);
+  --glass: blur(18px) saturate(1.3);
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 18px 44px -28px rgb(20 16 12 / 0.4);
+  --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.9) inset, 0 30px 70px -30px rgb(20 16 12 / 0.42),
+    0 0 50px -26px var(--glow-b);
+  --logo-face: #16130f;
+  --logo-corner: var(--teal);
+  --logo-mark: var(--orange);
+  --logo-stroke: #f7f5f2;
+}
+
+/* ============ BAUHAUS — bold, playful, flat ============ */
+[data-theme="bauhaus"] {
+  color-scheme: light;
+  --bg: #f3efe4;
+  --bg-2: #ece7d9;
+  --surface: #fbf9f3;
+  --surface-solid: #fbf9f3;
+  --surface-2: #efe9db;
+  --surface-3: #e5dfcd;
+  --ink: #14110b;
+  --ink-2: #423d31;
+  --ink-3: #6d6653;
+  --border: rgb(20 17 11 / 0.16);
+  --border-strong: rgb(20 17 11 / 1);
+  --teal: #1f9c8f;
+  --orange: #e2401f;
+  --accent: #d42a1e;
+  --accent-ink: #ffffff;
+  --highlight: #2b4cc7;
+  --highlight-ink: #ffffff;
+  --bau-yellow: #f4c020;
+  --bau-blue: #2b4cc7;
+  --bau-red: #d42a1e;
+  --grad: linear-gradient(100deg, #d42a1e 0%, #f4c020 50%, #2b4cc7 100%);
+  --grad-soft: linear-gradient(135deg, rgb(212 42 30 / 0.12), rgb(43 76 199 / 0.12));
+  --grid-line: rgb(20 17 11 / 0.07);
+  --glow-a: transparent; --glow-b: transparent; --glow-c: transparent;
+  --glass: none;
+  --shadow-card: 4px 4px 0 var(--ink);
+  --shadow-lift: 7px 7px 0 var(--ink);
+  --radius-sm: 0px; --radius: 0px; --radius-lg: 0px; --radius-xl: 0px;
+  --logo-face: #14110b;
+  --logo-corner: #2b4cc7;
+  --logo-mark: #d42a1e;
+  --logo-stroke: #f3efe4;
+}
