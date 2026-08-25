@@ -73,36 +73,210 @@
   --logo-stroke: #f2efe7;
 }
 
-/* ============ INK - editorial dark ============ */
-[data-theme="ink"] {
+/* ============ CHARTREUSE - off-brand, high-vis acid green ============ */
+[data-theme="chartreuse"] {
   color-scheme: dark;
-  --bg: #121110;
-  --bg-2: #171614;
-  --surface: #1a1917;
-  --surface-solid: #1a1917;
-  --surface-2: #201e1b;
-  --surface-3: #2a2723;
-  --ink: #f3f1ea;
-  --ink-2: #b7b2a6;
-  --ink-3: #837e72;
-  --border: rgb(243 241 234 / 0.12);
-  --border-strong: rgb(243 241 234 / 0.28);
-  --rule: rgb(243 241 234 / 0.16);
-  --teal: #3ac9b9;
-  --orange: #f2652f;
-  --orange-2: #ff8a4c;
-  --accent: var(--orange);
-  --accent-ink: #1a0d06;
-  --highlight: var(--orange);
-  --highlight-ink: #1a0d06;
-  --grid-line: rgb(243 241 234 / 0.045);
+  --bg: #0a0a05;
+  --bg-2: #0e0e07;
+  --surface: #14140a;
+  --surface-solid: #14140a;
+  --surface-2: #1a1a0e;
+  --surface-3: #2e2e14;
+  --ink: #f6f8e8;
+  --ink-2: #a3a685;
+  --ink-3: #686b52;
+  --border: #2e2e14;
+  --border-strong: #45451f;
+  --rule: #23230f;
+  --teal: #3aa89a;
+  --orange: #d4ff3d;
+  --orange-2: #e6ff7a;
+  --accent: #d4ff3d;
+  --accent-ink: #0e1002;
+  --highlight: #d4ff3d;
+  --highlight-ink: #0e1002;
+  --grad: linear-gradient(96deg, #d4ff3d, #e6ff7a);
+  --grad-soft: linear-gradient(135deg, rgb(212 255 61 / 0.12), rgb(212 255 61 / 0.04));
+  --grid-line: rgb(246 248 232 / 0.045);
   --glass: none;
   --shadow-card: none;
-  --shadow-lift: 0 24px 50px -30px rgb(0 0 0 / 0.8);
-  --logo-face: #f3f1ea;
+  --shadow-lift: 0 0 46px -22px rgb(212 255 61 / 0.35);
+  --radius-sm: 2px; --radius: 2px; --radius-lg: 4px; --radius-xl: 6px;
+  --logo-face: #f6f8e8;
+  --logo-corner: var(--teal);
+  --logo-mark: #d4ff3d;
+  --logo-stroke: #0a0a05;
+}
+
+/* ============ STATIC - off-brand, pure black/white + one blue jolt ============ */
+[data-theme="static"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --bg-2: #050505;
+  --surface: #0a0a0a;
+  --surface-solid: #0a0a0a;
+  --surface-2: #121212;
+  --surface-3: #1e1e1e;
+  --ink: #ffffff;
+  --ink-2: #9c9c9c;
+  --ink-3: #5c5c5c;
+  --border: #333333;
+  --border-strong: #4d4d4d;
+  --rule: #262626;
+  --teal: #0044ff;
+  --orange: #0044ff;
+  --orange-2: #3d6dff;
+  --accent: #0044ff;
+  --accent-ink: #ffffff;
+  --highlight: #0044ff;
+  --highlight-ink: #ffffff;
+  --grad: linear-gradient(96deg, #0044ff, #3d6dff);
+  --grad-soft: linear-gradient(135deg, rgb(0 68 255 / 0.14), transparent);
+  --grid-line: rgb(255 255 255 / 0.05);
+  --glass: none;
+  --shadow-card: none;
+  --shadow-lift: 0 0 0 1px #333333;
+  --radius-sm: 0px; --radius: 0px; --radius-lg: 0px; --radius-xl: 0px;
+  --logo-face: #ffffff;
+  --logo-corner: #0044ff;
+  --logo-mark: #ffffff;
+  --logo-stroke: #000000;
+}
+
+/* ============ VOID - true-black OLED, teal-led ============ */
+[data-theme="void"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --bg-2: #060606;
+  --surface: #0a0a0a;
+  --surface-solid: #0a0a0a;
+  --surface-2: #101010;
+  --surface-3: #1a1a1a;
+  --ink: #f5f5f5;
+  --ink-2: #8b9793;
+  --ink-3: #565f5d;
+  --border: #1f1f1f;
+  --border-strong: #333333;
+  --rule: #1a1a1a;
+  --teal: #2be0c4;
+  --orange: #e0481d;
+  --orange-2: #f26a2c;
+  --accent: var(--teal);
+  --accent-ink: #00110d;
+  --highlight: var(--teal);
+  --highlight-ink: #00110d;
+  --grad: linear-gradient(96deg, #2be0c4, #63f0da);
+  --grad-soft: linear-gradient(135deg, rgb(43 224 196 / 0.1), rgb(224 72 29 / 0.06));
+  --grid-line: rgb(245 245 245 / 0.04);
+  --glass: none;
+  --shadow-card: none;
+  --shadow-lift: 0 0 44px -20px rgb(43 224 196 / 0.4);
+  --logo-face: #f5f5f5;
   --logo-corner: var(--teal);
   --logo-mark: var(--orange);
-  --logo-stroke: #121110;
+  --logo-stroke: #000000;
+}
+
+/* ============ VOLCANIC - charcoal-black, molten orange-red glow ============ */
+[data-theme="volcanic"] {
+  color-scheme: dark;
+  --bg: #0c0a09;
+  --bg-2: #100d0b;
+  --surface: #16110e;
+  --surface-solid: #16110e;
+  --surface-2: #1d1613;
+  --surface-3: #33231a;
+  --ink: #f5ede6;
+  --ink-2: #b09a89;
+  --ink-3: #756255;
+  --border: #33231a;
+  --border-strong: #4a3325;
+  --rule: #291c15;
+  --teal: #3a9c86;
+  --orange: #ff5a1f;
+  --orange-2: #ffb020;
+  --accent: var(--orange);
+  --accent-ink: #1a0900;
+  --highlight: var(--orange);
+  --highlight-ink: #1a0900;
+  --grad: linear-gradient(96deg, #ff5a1f, #ffb020);
+  --grad-soft: linear-gradient(135deg, rgb(255 90 31 / 0.16), rgb(255 176 32 / 0.08));
+  --grid-line: rgb(245 237 230 / 0.045);
+  --glass: none;
+  --shadow-card: none;
+  --shadow-lift: 0 24px 55px -26px rgb(255 90 31 / 0.35);
+  --logo-face: #f5ede6;
+  --logo-corner: var(--teal);
+  --logo-mark: var(--orange);
+  --logo-stroke: #0c0a09;
+}
+
+/* ============ MOSS - forest-black, sage accent ============ */
+[data-theme="moss"] {
+  color-scheme: dark;
+  --bg: #0e1410;
+  --bg-2: #121a15;
+  --surface: #151f18;
+  --surface-solid: #151f18;
+  --surface-2: #1b2820;
+  --surface-3: #26362c;
+  --ink: #e9f0e8;
+  --ink-2: #94a89a;
+  --ink-3: #5f7267;
+  --border: #26362c;
+  --border-strong: #3a4f42;
+  --rule: #213027;
+  --teal: #7fb069;
+  --orange: #e0481d;
+  --orange-2: #f26a2c;
+  --accent: #7fb069;
+  --accent-ink: #0c1a0f;
+  --highlight: #7fb069;
+  --highlight-ink: #0c1a0f;
+  --grad: linear-gradient(96deg, #7fb069, #a3cc8c);
+  --grad-soft: linear-gradient(135deg, rgb(127 176 105 / 0.12), rgb(224 72 29 / 0.06));
+  --grid-line: rgb(233 240 232 / 0.045);
+  --glass: none;
+  --shadow-card: none;
+  --shadow-lift: 0 24px 50px -30px rgb(0 0 0 / 0.75);
+  --logo-face: #e9f0e8;
+  --logo-corner: #7fb069;
+  --logo-mark: var(--orange);
+  --logo-stroke: #0e1410;
+}
+
+/* ============ CRIMSON - bordeaux-black, magenta-red accent ============ */
+[data-theme="crimson"] {
+  color-scheme: dark;
+  --bg: #120a0d;
+  --bg-2: #170d11;
+  --surface: #1c1015;
+  --surface-solid: #1c1015;
+  --surface-2: #24141a;
+  --surface-3: #3a1f27;
+  --ink: #f6ecee;
+  --ink-2: #b18e96;
+  --ink-3: #7a5b62;
+  --border: #3a1f27;
+  --border-strong: #532a36;
+  --rule: #301a21;
+  --teal: #2fa8a0;
+  --orange: #e0335f;
+  --orange-2: #ff5c85;
+  --accent: #e0335f;
+  --accent-ink: #ffffff;
+  --highlight: #e0335f;
+  --highlight-ink: #ffffff;
+  --grad: linear-gradient(96deg, #e0335f, #ff5c85);
+  --grad-soft: linear-gradient(135deg, rgb(224 51 95 / 0.14), rgb(47 168 160 / 0.08));
+  --grid-line: rgb(246 236 238 / 0.045);
+  --glass: none;
+  --shadow-card: none;
+  --shadow-lift: 0 0 46px -24px rgb(224 51 95 / 0.4);
+  --logo-face: #f6ecee;
+  --logo-corner: #2fa8a0;
+  --logo-mark: #e0335f;
+  --logo-stroke: #120a0d;
 }
 
 /* ============ TERMINAL - brutalist mono, black + acid green ============ */

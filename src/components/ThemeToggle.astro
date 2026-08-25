@@ -6,10 +6,15 @@
     <span class="tt__current" aria-hidden="true"></span>
   </button>
   <div class="tt__menu" id="theme-menu" role="menu" hidden>
+    <button type="button" role="menuitemradio" data-theme-choice="void" aria-checked="false"><span class="tt__swatch tt__swatch--void"></span><span>Void</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="volcanic" aria-checked="false"><span class="tt__swatch tt__swatch--volcanic"></span><span>Volcanic</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="moss" aria-checked="false"><span class="tt__swatch tt__swatch--moss"></span><span>Moss</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="crimson" aria-checked="false"><span class="tt__swatch tt__swatch--crimson"></span><span>Crimson</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="chartreuse" aria-checked="false"><span class="tt__swatch tt__swatch--chartreuse"></span><span>Chartreuse</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="static" aria-checked="false"><span class="tt__swatch tt__swatch--static"></span><span>Static</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="terminal" aria-checked="true"><span class="tt__swatch tt__swatch--terminal"></span><span>Terminal</span><span class="tt__check" aria-hidden="true">✓</span></button>
     <button type="button" role="menuitemradio" data-theme-choice="paper" aria-checked="false"><span class="tt__swatch tt__swatch--paper"></span><span>Paper</span><span class="tt__check" aria-hidden="true">✓</span></button>
-    <button type="button" role="menuitemradio" data-theme-choice="ink" aria-checked="false"><span class="tt__swatch tt__swatch--ink"></span><span>Ink</span><span class="tt__check" aria-hidden="true">✓</span></button>
-    <button type="button" role="menuitemradio" data-theme-choice="bauhaus" aria-checked="true"><span class="tt__swatch tt__swatch--bauhaus"></span><span>Bauhaus</span><span class="tt__check" aria-hidden="true">✓</span></button>
-    <button type="button" role="menuitemradio" data-theme-choice="terminal" aria-checked="false"><span class="tt__swatch tt__swatch--terminal"></span><span>Terminal</span><span class="tt__check" aria-hidden="true">✓</span></button>
+    <button type="button" role="menuitemradio" data-theme-choice="bauhaus" aria-checked="false"><span class="tt__swatch tt__swatch--bauhaus"></span><span>Bauhaus</span><span class="tt__check" aria-hidden="true">✓</span></button>
     <button type="button" role="menuitemradio" data-theme-choice="nimbus" aria-checked="false"><span class="tt__swatch tt__swatch--nimbus"></span><span>Nimbus</span><span class="tt__check" aria-hidden="true">✓</span></button>
   </div>
 </div>
@@ -28,10 +33,15 @@
   .tt__check { color: var(--accent); font-size: 1.35rem; font-weight: 700; opacity: 0; transform: translateX(-.2rem); transition: opacity .18s var(--ease), transform .18s var(--ease); }
   .tt__menu button[aria-checked="true"] .tt__check { opacity: 1; transform: translateX(0); }
   .tt__swatch--paper { background: linear-gradient(135deg, #f2efe7 0 54%, #e0481d 54%); }
-  .tt__swatch--ink { background: linear-gradient(135deg, #1a1917 0 54%, #f2652f 54%); }
   .tt__swatch--bauhaus { background: linear-gradient(135deg, #f3efe4 0 48%, #d42a1e 48% 74%, #2b4cc7 74%); }
   .tt__swatch--terminal { background: linear-gradient(135deg, #0d0d0d 0 54%, #00ff9c 54%); }
   .tt__swatch--nimbus { background: linear-gradient(135deg, #fdf5f0 0 46%, #f2733f 46% 70%, #7c6bd6 70%); }
+  .tt__swatch--void { background: linear-gradient(135deg, #000000 0 54%, #2be0c4 54%); }
+  .tt__swatch--volcanic { background: linear-gradient(135deg, #16110e 0 54%, #ff5a1f 54%); }
+  .tt__swatch--chartreuse { background: linear-gradient(135deg, #14140a 0 54%, #d4ff3d 54%); }
+  .tt__swatch--static { background: linear-gradient(135deg, #000000 0 54%, #0044ff 54%); }
+  .tt__swatch--moss { background: linear-gradient(135deg, #151f18 0 54%, #7fb069 54%); }
+  .tt__swatch--crimson { background: linear-gradient(135deg, #1c1015 0 54%, #e0335f 54%); }
   [data-theme="bauhaus"] .tt__trigger { border-radius: 0; border-width: 1.5px; border-color: var(--ink); }
   [data-theme="bauhaus"] .tt__menu { border-radius: 0; border-width: 1.5px; border-color: var(--ink); }
 </style>
@@ -46,14 +56,14 @@
       try { localStorage.setItem("tv-theme", next); } catch (e) {}
       choices.forEach((choice) => choice.setAttribute("aria-checked", String(choice.dataset.themeChoice === next)));
     };
-    setTheme(document.documentElement.getAttribute("data-theme") || "bauhaus");
+    setTheme(document.documentElement.getAttribute("data-theme") || "terminal");
     const close = () => { menu?.setAttribute("hidden", ""); trigger?.setAttribute("aria-expanded", "false"); };
     trigger?.addEventListener("click", () => {
       const isClosed = menu?.hasAttribute("hidden");
       if (isClosed) { menu?.removeAttribute("hidden"); trigger.setAttribute("aria-expanded", "true"); }
       else close();
     });
-    choices.forEach((choice) => choice.addEventListener("click", () => { setTheme(choice.dataset.themeChoice || "bauhaus"); close(); trigger?.focus(); }));
+    choices.forEach((choice) => choice.addEventListener("click", () => { setTheme(choice.dataset.themeChoice || "terminal"); close(); trigger?.focus(); }));
     document.addEventListener("click", (event) => { if (!document.getElementById("theme-switcher")?.contains(event.target)) close(); });
     document.addEventListener("keydown", (event) => { if (event.key === "Escape") { close(); trigger?.focus(); } });
   })();
