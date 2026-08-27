@@ -86,6 +86,7 @@ const cases = [
   .wcase__in::before { content: ""; position: absolute; left: calc(clamp(4.5rem, 9vw, 8rem) / 2); top: 1rem; bottom: 1rem; width: 1px; background: var(--border); }
   .wcase__head { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; row-gap: 0.8rem; align-items: start; padding-bottom: clamp(2.5rem, 5vw, 4.5rem); }
   .wcase__n { grid-column: 1; grid-row: span 2; justify-self: center; position: relative; z-index: 1; width: 2.35rem; aspect-ratio: 1; display: grid; place-items: center; background: var(--bg); font-family: var(--font-display); font-weight: 650; font-size: 0.9rem; color: var(--accent); }
+  :global([data-theme="ember"]) .wcase__n { color: var(--orange); }
   .wcase__labels { grid-column: 2; display: flex; gap: 0.75rem; flex-wrap: wrap; }
   .wcase__tag { font-family: var(--font-display); font-size: 0.72rem; font-weight: 650; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3); }
   .wcase__tag + .wcase__tag::before { content: "•"; color: var(--accent); margin-right: 0.75rem; }

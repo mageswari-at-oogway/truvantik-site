@@ -67,6 +67,7 @@ const wont = [
   .why__principles { --active: 0; grid-column: 2; position: relative; }
   .why__thread { position: absolute; top: 0; bottom: 0; left: 1.25rem; width: 1px; background: var(--border); }
   .why__thread span { position: absolute; left: 50%; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent); }
+  :global([data-theme="ember"]) .why__thread span { background: var(--orange); box-shadow: 0 0 0 5px color-mix(in srgb, var(--orange) 14%, transparent); }
   .why__principle { display: grid; grid-template-columns: 5rem minmax(12rem, .8fr) minmax(20rem, 1.2fr); gap: clamp(1.1rem, 3vw, 3rem); padding: clamp(1.6rem, 3vw, 2.7rem) 0; border-top: 1px solid var(--rule); position: relative; transition: color .35s var(--ease), background .35s var(--ease); }
   .why__principle:last-child { border-bottom: 1px solid var(--rule); }
   .why__principle::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 58%); opacity: 0; transition: opacity .35s var(--ease); pointer-events: none; }

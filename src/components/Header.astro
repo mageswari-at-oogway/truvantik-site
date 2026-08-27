@@ -62,7 +62,11 @@ const isActive = (h: string) => path === h;
     height: 2px; background: var(--accent); border-radius: 2px;
   }
   .head-actions { display: flex; align-items: center; gap: 0.7rem; }
-  .head-cta { padding: 0.6em 1.05em; font-size: 0.9rem; }
+  .head-cta { padding: 0.6em 1.05em; font-size: 0.9rem; margin-left: 0.5rem; }
+  :global([data-theme="ember"]) .head-cta,
+  :global([data-theme="ember"]) .mnav-cta {
+    background: var(--orange); color: #ffffff; border-color: var(--orange);
+  }
   .menu-btn { display: none; background: none; border: 0; color: var(--ink); padding: 0.3em; }
 
   .mobile-nav { border-top: 1px solid var(--border); background: var(--bg); }

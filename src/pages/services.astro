@@ -4,7 +4,7 @@ import CtaBand from "../components/CtaBand.astro";
 
 const services = [
   {
-    id: "assessment", n: "01", phase: "Assess", cta: "assessment",
+    id: "assessment", n: "01", phase: "Assess",
     title: "AI strategy & assessment",
     promise: "",
     body: "Assess your operations, data and constraints to produce a ranked, costed roadmap, not a slide deck of possibilities.",
@@ -13,7 +13,7 @@ const services = [
     visual: "rank",
   },
   {
-    id: "build", n: "02", phase: "Build", cta: "product development",
+    id: "build", n: "02", phase: "Build",
     title: "Custom AI product development",
     promise: "",
     body: "Engineering-led delivery of AI products and features, from data pipeline and model selection through interface, evaluation and launch.",
@@ -22,7 +22,7 @@ const services = [
     visual: "sprint",
   },
   {
-    id: "integration", n: "03", phase: "Deploy", cta: "deployment",
+    id: "integration", n: "03", phase: "Deploy",
     title: "AI integration & deployment",
     promise: "",
     body: "The unglamorous work that decides whether AI gets used: integration with core systems, access control, evaluation in production, and change management with the teams involved.",
@@ -31,7 +31,7 @@ const services = [
     visual: "nodes",
   },
   {
-    id: "advisory", n: "04", phase: "Ongoing", cta: "advisory",
+    id: "advisory", n: "04", phase: "Ongoing",
     title: "Ongoing AI advisory",
     promise: "",
     body: "Continuing advisory for teams that now own AI systems: architecture review, vendor and model decisions, evaluation discipline, and hiring the right people.",
@@ -86,7 +86,7 @@ const services = [
                 <ul class="svc__list svc__list--check">{s.get.map((g) => <li>{g}</li>)}</ul>
               </div>
             </div>
-            <a href="/contact" class="btn btn--grad svc__cta" data-magnetic>Get a proposal for {s.cta} <span class="arw">→</span></a>
+            <a href="/contact" class="btn btn--grad svc__cta" data-magnetic>Begin the conversation <span class="arw">→</span></a>
             </div>
           </div>
 
@@ -177,6 +177,7 @@ const services = [
   .svc__meta { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.5rem; }
   .svc__n { font-family: var(--font-mono); font-size: 1.1rem; color: var(--accent); font-weight: 500; }
   .svc__phase { font-family: var(--font-display); font-size: 0.75rem; font-weight: 650; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+  :global([data-theme="ember"]) .svc__n, :global([data-theme="ember"]) .svc__phase { color: var(--orange); }
   .svc__copy h2 {
     font-family: var(--font-display);
     font-size: clamp(2rem, 1.55rem + 1.45vw, 3.1rem);
@@ -206,7 +207,6 @@ const services = [
   .svc__list li { position: relative; padding-left: 1.5rem; font-size: clamp(0.9rem, 0.87rem + 0.1vw, 0.98rem); color: var(--ink-2); line-height: 1.48; }
   .svc__list--who li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--ink-3); }
   .svc__list--check li::before { content: "✓"; position: absolute; left: 0; top: 0; font-size: 0.8rem; color: var(--accent); font-weight: 700; }
-  .svc__cta { text-transform: capitalize; }
 
   /* ---- diagrams sit openly in the page canvas ---- */
   .svc__art { grid-column: 3; position: sticky; top: 10rem; min-height: 17rem; display: grid; place-items: center; margin: 0; }
@@ -279,6 +279,8 @@ const services = [
   .viz-cadence__lines span::before { content: ""; position: absolute; left: 0; top: 0.45em; width: 7px; height: 7px; background: var(--accent); transform: rotate(45deg); }
   .viz-cadence__lines span::after { content: ""; position: absolute; left: 0; top: calc(0.45em + 10px); width: 1px; height: 1.15rem; background: var(--border-strong); }
   .viz-cadence__lines span:last-child::after { display: none; }
+
+  :global([data-theme="ember"]) .svc__cta { background: var(--orange); color: #ffffff; border-color: var(--orange); }
 
   @media (prefers-reduced-motion: reduce) {
     .rb, .viz-track b { transform: none !important; }

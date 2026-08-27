@@ -86,7 +86,6 @@ const steps = [
   .contact__steps { list-style: none; padding: 0; display: grid; gap: 0.9rem; margin: 2rem 0; }
   .contact__steps li { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: center; color: var(--ink-2); }
   .contact__stepn { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--border-strong); font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); }
-  [data-theme="bauhaus"] .contact__stepn { border-radius: 0; }
   .contact__alt { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; padding-top: 1.4rem; border-top: 1px solid var(--border); }
   .contact__mail { font-family: var(--font-mono); color: var(--accent); }
   .contact__mail:hover { text-decoration: underline; }
@@ -101,7 +100,6 @@ const steps = [
     background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm);
     padding: 0.75em 0.9em; width: 100%; transition: border-color 0.2s, box-shadow 0.2s;
   }
-  [data-theme="bauhaus"] .field input, [data-theme="bauhaus"] .field select, [data-theme="bauhaus"] .field textarea { border-radius: 0; border-width: 1.5px; }
   .field textarea { resize: vertical; }
   .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
   .field.invalid input, .field.invalid textarea { border-color: var(--highlight); }
@@ -113,7 +111,6 @@ const steps = [
 
   .contact__success { padding: clamp(2rem, 4vw, 3rem); display: grid; gap: 1rem; justify-items: start; text-align: left; }
   .contact__tick { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--grad); color: #fff; font-weight: 700; font-size: 1.3rem; }
-  [data-theme="bauhaus"] .contact__tick { border-radius: 0; }
 
   @media (max-width: 860px) { .contact__in { grid-template-columns: 1fr; padding-top: 3.5rem; } }
 </style>
