@@ -98,6 +98,7 @@ const industries = [
   .ind__list { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
   .ind__list li { position: relative; padding-left: 1.4rem; color: var(--ink-2); }
   .ind__list li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; border-radius: 2px; background: var(--grad); }
+  :global([data-theme="ember"]) .ind__list li::before { background: var(--orange); }
 
   .ind-more__in { max-width: 60ch; display: grid; gap: 1.2rem; justify-items: start; }
   .ind-more__in h2 { margin-top: 0.2rem; }

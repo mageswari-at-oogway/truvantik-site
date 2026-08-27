@@ -18,7 +18,6 @@ const clip = `${id}-clip`;
       <path d="M295 250 C338 250 355 250 387 250" />
       <path d="M291 265 C329 282 354 293 387 297" />
     </g>
-    <g class="workflow-orbit__float workflow-orbit__float--orange"><circle class="workflow-orbit__dot workflow-orbit__dot--orange" cx="109" cy="132" r="10" /></g>
     <g class="workflow-orbit__float workflow-orbit__float--violet"><rect class="workflow-orbit__dot workflow-orbit__dot--violet" x="410" y="127" width="17" height="17" rx="4" transform="rotate(42 418.5 135.5)" /></g>
     <g class="workflow-orbit__float workflow-orbit__float--teal"><path class="workflow-orbit__dot workflow-orbit__dot--teal" d="M128 354 l13 -22 l13 22 Z" /></g>
   </svg>
@@ -88,11 +87,9 @@ const clip = `${id}-clip`;
   .workflow-orbit__system-links path { stroke: color-mix(in srgb, var(--highlight) 56%, transparent); stroke-dasharray: 3 6; animation: system-links-stage 12s var(--ease-in-out) infinite; }
   .workflow-orbit__system-links path:nth-child(2) { stroke: color-mix(in srgb, var(--accent) 55%, transparent); }
   .workflow-orbit__system-links path:nth-child(3) { stroke: color-mix(in srgb, var(--teal) 62%, transparent); }
-  .workflow-orbit__dot--orange { fill: var(--accent); }
   .workflow-orbit__dot--violet { fill: var(--highlight); }
   .workflow-orbit__dot--teal { fill: var(--teal); }
   .workflow-orbit__float { transform-box: view-box; transform-origin: center; }
-  .workflow-orbit__float--orange { animation: marker-float 6s var(--ease-in-out) infinite; }
   .workflow-orbit__float--violet { animation: marker-float 7.2s var(--ease-in-out) -2.4s infinite reverse; }
   .workflow-orbit__float--teal { animation: marker-float 6.6s var(--ease-in-out) -4.1s infinite; }
 
@@ -238,4 +235,27 @@ const clip = `${id}-clip`;
     .workflow-orbit__inputs, .workflow-orbit__systems, .workflow-orbit__system-map, .workflow-orbit__solution { opacity: 1; transform: none; }
     .workflow-orbit__systems { transform: translateX(-50%); }
   }
+
+  /* ---- EMBER: whole graphic in orange, Void stays teal-led ---- */
+  :global([data-theme="ember"]) .workflow-orbit::before { background: radial-gradient(circle, color-mix(in srgb, var(--orange) 12%, transparent), transparent 68%); }
+  :global([data-theme="ember"]) .workflow-orbit__arc--orange { stroke: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__arc--teal { stroke: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__input-links path { stroke: color-mix(in srgb, var(--orange) 60%, transparent); }
+  :global([data-theme="ember"]) .workflow-orbit__input-links path:nth-child(2) { stroke: color-mix(in srgb, var(--orange) 65%, transparent); }
+  :global([data-theme="ember"]) .workflow-orbit__system-links path { stroke: color-mix(in srgb, var(--orange) 56%, transparent); }
+  :global([data-theme="ember"]) .workflow-orbit__system-links path:nth-child(2) { stroke: color-mix(in srgb, var(--orange) 55%, transparent); }
+  :global([data-theme="ember"]) .workflow-orbit__system-links path:nth-child(3) { stroke: color-mix(in srgb, var(--orange) 62%, transparent); }
+  :global([data-theme="ember"]) .workflow-orbit__dot--violet { fill: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__dot--teal { fill: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__core { border-color: color-mix(in srgb, var(--orange) 18%, transparent); }
+  :global([data-theme="ember"]) .workflow-orbit__signal i, :global([data-theme="ember"]) .workflow-orbit__systems i { background: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__signal > span::before { background: radial-gradient(circle at 12% 50%, color-mix(in srgb, var(--orange) 14%, transparent), transparent 74%); }
+  :global([data-theme="ember"]) .workflow-orbit__signal--documents i { background: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__signal--documents > span::before { background: radial-gradient(circle at 12% 50%, color-mix(in srgb, var(--orange) 14%, transparent), transparent 74%); }
+  :global([data-theme="ember"]) .workflow-orbit__systems { background: radial-gradient(circle at 24% 50%, color-mix(in srgb, var(--orange) 15%, transparent), transparent 72%); }
+  :global([data-theme="ember"]) .workflow-orbit__system-map { background: radial-gradient(circle at 17% 50%, color-mix(in srgb, var(--orange) 11%, transparent), transparent 74%); }
+  :global([data-theme="ember"]) .workflow-orbit__system-map i { background: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__system-map span:nth-child(2) i { background: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__system-map span:nth-child(3) i { background: var(--orange); }
+  :global([data-theme="ember"]) .workflow-orbit__solution::before { background: radial-gradient(circle at 10% 52%, color-mix(in srgb, var(--orange) 15%, transparent), transparent 72%); }
 </style>

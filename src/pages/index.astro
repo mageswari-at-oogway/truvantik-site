@@ -118,7 +118,7 @@ const entries = [
           <div class="plp__body">
             <span class="plp__n">01</span>
             <h3>Assess</h3>
-            <p class="muted">Understand the work, the data and the constraints. Decide what is worth building and what is not.</p>
+            <p class="muted">Understand the work, the data and the constraints, then decide what is worth building.</p>
             <p class="plp__note">Reduce the problem to its essential elements.</p>
           </div>
         </li>
@@ -136,7 +136,7 @@ const entries = [
             <span class="plp__n">02</span>
             <h3>Build</h3>
             <p class="muted">Build the smallest system that proves the outcome, then harden it against real data and real users.</p>
-            <p class="plp__note">The shortest path through the build, reviewed with you directly.</p>
+            <p class="plp__note">The shortest path, reviewed with you directly.</p>
           </div>
         </li>
 
@@ -154,8 +154,8 @@ const entries = [
           <div class="plp__body">
             <span class="plp__n">03</span>
             <h3>Deploy</h3>
-            <p class="muted">Deploy into your stack, measure it against the outcome, and hand over the knowledge to keep it running.</p>
-            <p class="plp__note">The system running whole: deployed, observed, documented, handed over.</p>
+            <p class="muted">Deploy into your stack, measure it against the outcome, and hand over the knowledge to run it.</p>
+            <p class="plp__note">Deployed, observed, documented, handed over.</p>
           </div>
         </li>
       </ol>
@@ -318,12 +318,12 @@ const entries = [
   .plp__grid { stroke-dasharray: 72; stroke-dashoffset: 72; }
   .plp.in .plp__grid { animation: draw 0.6s var(--ease) 0.9s both; }
 
-  [data-theme="bauhaus"] .plp__pt, [data-theme="bauhaus"] .plp__end { border-radius: 0; }
 
   .plp__n { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent); }
   .plp__col h3 { font-size: var(--step-2); margin: 0.1rem 0 0.2rem; }
-  .plp__col p.muted { font-size: 0.92rem; line-height: 1.55; }
+  .plp__col p.muted { font-size: 0.92rem; line-height: 1.55; min-height: 2.9rem; }
   .plp__note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); line-height: 1.5; padding-left: 0.9rem; border-left: 2px solid var(--accent); }
+  :global([data-theme="ember"]) .plp__note { border-left-color: var(--orange); }
 
   @media (prefers-reduced-motion: reduce) {
     .plp__pt, .plp__end, .plp__plane { opacity: 1; transform: none; }
@@ -344,12 +344,10 @@ const entries = [
   .draft__top { display: flex; align-items: center; gap: 0.7rem; }
   .draft__ai { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.3em 0.7em; border-radius: 999px;
     color: var(--ink-3); background: var(--surface-3); }
-  [data-theme="bauhaus"] .draft__ai { border-radius: 0; }
   .draft__t { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-3); }
   /* step 1 - patient intake indicator (top-right) */
   .draft__intake { margin-left: auto; display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); opacity: 0.4; }
   .draft__idot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); }
-  [data-theme="bauhaus"] .draft__idot { border-radius: 0; }
 
   /* step 2 - AI note text writes itself in, line by line */
   .draft__lines { display: grid; gap: 0.5rem; }
@@ -364,13 +362,11 @@ const entries = [
 
   /* step 3 - clinician review, check draws */
   .draft__gate { display: flex; gap: 0.85rem; align-items: center; padding: 0.95rem; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-sm); opacity: 0; transform: translateY(8px); }
-  [data-theme="bauhaus"] .draft__gate { border-radius: 0; }
   .draft.play .draft__gate { animation: settleIn 0.55s var(--ease) 2.6s both; }
   @keyframes settleIn { to { opacity: 1; transform: none; } }
   .draft__gate b { font-family: var(--font-display); display: block; font-size: 0.95rem; }
   .draft__gate small { color: var(--ink-3); font-size: 0.78rem; }
   .draft__check { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--accent-ink); transform: scale(0); }
-  [data-theme="bauhaus"] .draft__check { border-radius: 0; }
   .draft__check svg { width: 19px; height: 19px; }
   .draft__check svg path { stroke-dasharray: 26; stroke-dashoffset: 26; }
   .draft.play .draft__check { animation: pop 0.4s var(--ease-spring) 2.85s both; }
@@ -385,15 +381,18 @@ const entries = [
   .draft.play .draft__rec { animation: recOn 0.4s var(--ease) 3.8s both; }
   @keyframes recOn { to { color: var(--highlight); } }
   .dot2 { width: 7px; height: 7px; border-radius: 50%; background: var(--highlight); }
-  [data-theme="bauhaus"] .dot2 { border-radius: 0; }
   .draft.play .dot2 { animation: aud 2.4s var(--ease-in-out) 4s infinite; }
   @keyframes aud { 0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--highlight) 45%, transparent); } 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--highlight) 0%, transparent); } }
 
   /* step 1 - intake lights first, then AI DRAFT activates */
   .draft.play .draft__intake { animation: intakeOn 0.4s var(--ease) 0.25s both; }
   @keyframes intakeOn { to { opacity: 1; color: var(--accent); } }
+  @keyframes intakeOnEmber { to { opacity: 1; color: var(--orange); } }
+  :global([data-theme="ember"]) .draft.play .draft__intake { animation-name: intakeOnEmber; }
   .draft.play .draft__idot { animation: idotOn 0.4s var(--ease) 0.25s both; }
   @keyframes idotOn { to { background: var(--accent); } }
+  @keyframes idotOnEmber { to { background: var(--orange); } }
+  :global([data-theme="ember"]) .draft.play .draft__idot { animation-name: idotOnEmber; }
   .draft.play .draft__ai { animation: aiOn 0.4s var(--ease) 0.8s both; }
   @keyframes aiOn { to { color: var(--accent-ink); background: var(--accent); } }
 
@@ -408,6 +407,8 @@ const entries = [
     .draft__idot { background: var(--accent); }
     .draft__rec { color: var(--highlight); }
     .dot2 { animation: none; }
+    :global([data-theme="ember"]) .draft__intake { color: var(--orange); }
+    :global([data-theme="ember"]) .draft__idot { background: var(--orange); }
   }
 
   /* ---- cta ---- */
