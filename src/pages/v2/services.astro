@@ -1,0 +1,19 @@
+---
+import Layout from '../../v2/Layout.astro';
+import PageIntro from '../../v2/components/PageIntro.astro';
+import Close from '../../v2/components/Close.astro';
+import Arrow from '../../v2/components/Arrow.astro';
+import { services } from '../../v2/content';
+import { contact } from '../../v2/routes';
+---
+<Layout page="services" title="Services: from the right question to daily use" description="AI strategy, custom product development, integration and ongoing advisory. Choose the support your team needs.">
+  <PageIntro title="The right support. At the right stage." description="Start with a question, a defined use case, or a pilot that needs to move forward. We connect strategy to the engineering needed to make it useful." />
+  <nav class="container jump-nav" aria-label="On this page">{services.map(s => <a href={`#${s.id}`}>{s.phase}<Arrow /></a>)}</nav>
+  {services.map((s, i) => <section class="section section--ruled service-section" id={s.id}><div class="container service-grid">
+    <div class="service-index"><span>{String(i+1).padStart(2, '0')}</span><strong>{s.phase}</strong></div>
+    <div><h2>{s.title}</h2><p class="service-promise">{s.promise}</p><p class="muted">{s.description}</p><div class="fit"><h3>A good fit when</h3><p>{s.fit}</p></div></div>
+    <div class="deliverables"><h3>What you leave with</h3><ul>{s.outputs.map(output => <li>{output}</li>)}</ul><a class="text-link" href={contact(s.start)}>{s.question}<Arrow /></a></div>
+  </div></section>)}
+  <section class="container section split"><h2>Before we start, we agree what useful means.</h2><div class="prose"><p>A shared definition of the problem, the people involved and the measure of success keeps the work grounded.</p><p>We look at data access, integration constraints and who will own the result. Scope and timing follow that understanding—not the other way around.</p></div></section>
+  <Close title="Not sure where your project fits?" text="Tell us where you are today. You don’t need to choose a service before talking to us." />
+</Layout>

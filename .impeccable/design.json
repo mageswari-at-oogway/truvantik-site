@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "title": "Truvantik / dark editorial",
+  "extensions": {
+    "motion": [
+      {
+        "name": "workflow-cycle",
+        "value": "7.2s",
+        "purpose": "Input, core response, output and rest; visibility-gated, with reduced-motion support."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-navigation",
+        "value": "860px"
+      },
+      {
+        "name": "service-stack",
+        "value": "1100px"
+      }
+    ]
+  }
+}

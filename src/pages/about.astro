@@ -12,7 +12,7 @@ const structure = [
   { name: "Truvantik", role: "Client work: strategy, build and integration." },
   { name: "Prabhaavi Solutions", role: "The legal entity behind Truvantik." },
   { name: "3BP Labs", role: "Our engineering partner." },
-  { name: "Kron Health", role: "A digital clinic product built by our team with 3BP Labs." },
+  { name: "Tapioca Health", role: "A digital clinic product built by our team with 3BP Labs." },
 ];
 
 ---
@@ -67,7 +67,7 @@ const structure = [
         {structure.map((item, index) => (
           <li class:list={{ "is-primary": index === 0 }}>
             <span class="about-structure__index">{String(index + 1).padStart(2, "0")}</span>
-            <h3>{item.name}</h3>
+            <h3>{item.name === "Tapioca Health" ? <a href="https://tapiocahealth.com">{item.name}</a> : item.name}</h3>
             <p>{item.role}</p>
           </li>
         ))}
@@ -109,7 +109,6 @@ const structure = [
   .about-structure__list h3 { font-size: clamp(1.1rem, 1.2vw, 1.35rem); line-height: 1.15; }
   .about-structure__list p { color: var(--ink-2); font-size: .97rem; line-height: 1.45; }
   .about-structure__list .is-primary h3 { color: var(--accent); }
-  :global([data-theme="ember"]) .about-structure__list .is-primary h3 { color: var(--orange); }
 
   @media (max-width: 860px) {
     .about-story__in, .about-method__in, .about-structure__in { grid-template-columns: 1fr; }

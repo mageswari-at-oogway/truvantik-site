@@ -1,0 +1,80 @@
+---
+import './styles.css';
+import Mark from './components/Mark.astro';
+import Arrow from './components/Arrow.astro';
+import { path, navigation, type Page } from './routes';
+interface Props { title: string; description: string; page?: Page }
+const { title, description, page = '' } = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-version="v2">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | Truvantik</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0b0c0e" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- THESIS: A workflow-first editorial site makes AI delivery tangible, not a gallery of promises.
+    OWN-WORLD: Approved charcoal, Outfit, saffron actions, soft-white text, green outputs; fixed multicolor diamond.
+    STORY: Understand the offer, recognise your starting point, examine the work, prepare a conversation.
+    FIRST VIEWPORT: Left offer and action; right large orbital workflow; Assess-Build-Deploy strip anchors the fold.
+    FORM: Workflow-led editorial, candidate 4; seed 499f0107. User delegated selection; comp a.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="home-link" href={path()} aria-label="Truvantik v2 home"><Mark /></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>Menu <span aria-hidden="true">+</span></button>
+        <nav id="primary-nav" class="primary-nav" aria-label="Main navigation">
+          {navigation.map(item => <a href={path(item.page)} aria-current={page === item.page ? 'page' : undefined}>{item.label}</a>)}
+          <a class="button button--small" href={path('contact')} aria-current={page === 'contact' ? 'page' : undefined}>Let’s talk <Arrow /></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="container footer-main">
+        <div><a href={path()} aria-label="Truvantik v2 home"><Mark /></a><p>AI strategy, engineering<br />and integration.</p><a href="mailto:hello@truvantik.com" class="text-link">hello@truvantik.com</a></div>
+        <nav aria-label="Explore"><strong>Explore</strong>{navigation.map(item => <a href={path(item.page)}>{item.label}</a>)}<a href={path('why-truvantik')}>Why Truvantik</a><a href={path('contact')}>Contact</a></nav>
+        <div class="footer-note"><strong>Built for everyday work.</strong><p>Truvantik is the AI consulting brand of Prabhaavi Solutions.</p><p class="small">You’re viewing the v2 design preview.<br /><a href="/" class="text-link">View the original site</a></p></div>
+      </div>
+      <div class="container footer-bottom"><span>© {new Date().getFullYear()} Truvantik</span><div><a href={path('privacy')}>Privacy</a><a href={path('terms')}>Terms</a><a href="/v2/design.md">Design system</a></div></div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#primary-nav');
+      const smallScreen = matchMedia('(max-width: 760px)');
+      if (toggle && nav) {
+        toggle.hidden = false;
+        const close = () => { toggle.setAttribute('aria-expanded', 'false'); nav.dataset.open = 'false'; };
+        nav.dataset.enhanced = 'true';
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') !== 'true';
+          toggle.setAttribute('aria-expanded', String(open)); nav.dataset.open = String(open);
+        });
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { close(); toggle.focus(); }
+        });
+        document.addEventListener('click', e => { if (smallScreen.matches && e.target instanceof Node && !nav.contains(e.target) && !toggle.contains(e.target)) close(); });
+        smallScreen.addEventListener('change', close);
+      }
+      const graphics = [...document.querySelectorAll<HTMLElement>('[data-motion]')];
+      const visible = new Set<Element>();
+      const updateMotion = () => graphics.forEach(el => el.style.setProperty('--v2-motion', visible.has(el) && !document.hidden ? 'running' : 'paused'));
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target)); updateMotion();
+        });
+        graphics.forEach(el => observer.observe(el));
+        document.addEventListener('visibilitychange', updateMotion);
+      }
+    </script>
+  </body>
+</html>

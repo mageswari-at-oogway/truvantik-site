@@ -1,10 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs><clipPath id="c"><rect x="10" y="10" width="44" height="44" rx="9" transform="rotate(45 32 32)"/></clipPath></defs>
-  <rect width="64" height="64" rx="12" fill="#0a1420"/>
-  <g clip-path="url(#c)">
-    <rect width="64" height="64" fill="#f3f7f9"/>
-    <path d="M40 0 L64 24 L64 64 L40 64 Z" fill="#35b8c9"/>
-  </g>
-  <path d="M32 15 L47 31 H38.5 V51 H25.5 V31 H17 Z" fill="#f2652f"/>
-  <rect x="10" y="10" width="44" height="44" rx="9" transform="rotate(45 32 32)" fill="none" stroke="#0a1420" stroke-width="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#0b0c0e"/>
+  <rect x="10" y="10" width="44" height="44" rx="8" transform="rotate(45 32 32)" fill="#17191c" stroke="#687078" stroke-width="2.5"/>
+  <path d="M19 21.5 C19 20.4 19.8 19.5 20.8 19.5 H43.2 C44.2 19.5 45 20.4 45 21.5 V26 H19 Z" fill="#f3f2ee"/>
+  <path d="M32 23.5 L45.5 37.5 H37.5 L32 31 L26.5 37.5 H18.5 L32 23.5 Z" fill="#f2a64b"/>
+  <polygon points="32,38 39,47 25,47" fill="#79b991"/>
 </svg>

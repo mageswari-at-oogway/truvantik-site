@@ -1,0 +1,14 @@
+---
+// Approved logo snapshot: deliberately independent of v1's build graph.
+interface Props { size?: number; wordmark?: boolean }
+const { size = 34, wordmark = true } = Astro.props;
+---
+<span class="brand">
+  <svg width={size} height={size} viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <rect x="10" y="10" width="44" height="44" rx="8" transform="rotate(45 32 32)" fill="#17191c" stroke="#687078" stroke-width="2.5" />
+    <path d="M19 21.5 C19 20.4 19.8 19.5 20.8 19.5 H43.2 C44.2 19.5 45 20.4 45 21.5 V26 H19 Z" fill="#f3f2ee" />
+    <path d="M32 23.5 L45.5 37.5 H37.5 L32 31 L26.5 37.5 H18.5 L32 23.5 Z" fill="#f2a64b" />
+    <polygon points="32,38 39,47 25,47" fill="#79b991" />
+  </svg>
+  {wordmark && <span>Truvantik</span>}
+</span>

@@ -67,13 +67,12 @@ const wont = [
   .why__principles { --active: 0; grid-column: 2; position: relative; }
   .why__thread { position: absolute; top: 0; bottom: 0; left: 1.25rem; width: 1px; background: var(--border); }
   .why__thread span { position: absolute; left: 50%; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent); }
-  :global([data-theme="ember"]) .why__thread span { background: var(--orange); box-shadow: 0 0 0 5px color-mix(in srgb, var(--orange) 14%, transparent); }
-  .why__principle { display: grid; grid-template-columns: 5rem minmax(12rem, .8fr) minmax(20rem, 1.2fr); gap: clamp(1.1rem, 3vw, 3rem); padding: clamp(1.6rem, 3vw, 2.7rem) 0; border-top: 1px solid var(--rule); position: relative; transition: color .35s var(--ease), background .35s var(--ease); }
+  .why__principle { display: grid; grid-template-columns: 3rem minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1.1rem, 3vw, 3rem); padding: clamp(1.6rem, 3vw, 2.7rem) 0; border-top: 1px solid var(--rule); position: relative; transition: color .35s var(--ease), background .35s var(--ease); }
   .why__principle:last-child { border-bottom: 1px solid var(--rule); }
   .why__principle::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 58%); opacity: 0; transition: opacity .35s var(--ease); pointer-events: none; }
   .why__principle.is-active::before, .why__principle:hover::before, .why__principle:focus-visible::before { opacity: 1; }
   .why__principle > * { position: relative; }
-  .why__marker { color: var(--ink-3); padding-left: 3rem; transition: color .3s var(--ease); }
+  .why__marker { color: var(--ink-3); padding-left: 1.8rem; transition: color .3s var(--ease); }
   .why__principle.is-active .why__marker, .why__principle:hover .why__marker, .why__principle:focus-visible .why__marker { color: var(--accent); }
   .why__summary h2 { font-size: clamp(1.2rem, 1.5vw, 1.55rem); margin-bottom: .45rem; }
   .why__summary p { font-size: clamp(.95rem, .91rem + .12vw, 1.04rem); line-height: 1.4; color: var(--ink-2); max-width: 23ch; }

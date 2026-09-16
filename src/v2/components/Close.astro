@@ -1,0 +1,7 @@
+---
+import Arrow from './Arrow.astro';
+import { contact } from '../routes';
+interface Props { title?: string; text?: string; start?: string }
+const { title = 'Bring us the problem. We’ll find the next useful step.', text = 'Tell us what your team is trying to do, what is getting in the way, and what a better day would look like.', start = '' } = Astro.props;
+---
+<section class="closing"><div class="container closing__inner"><div><h2>{title}</h2><p>{text}</p></div><a class="button" href={contact(start)}>Start a conversation <Arrow /></a></div></section>

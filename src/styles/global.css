@@ -1,12 +1,8 @@
 /* ============================================================
-   DESIGN THESIS (v3 - "Dossier")
-   1. A document, not a billboard. Warm paper, near-black ink, one
-      orange accent. Precise hairline rules and oversized index
-      numerals give structure instead of glow.
-   2. Type is smaller and tighter - confident, editorial, scannable.
-      Monospace labels flag every section like a technical dossier.
-   3. Motion is quiet and physical: reveals, a live roadmap, count-ups.
-      Nothing flashes. The restraint is the statement.
+   Truvantik shared primitives: layout, buttons, focus, grids and
+   motion governance for the dark editorial identity. Colours come
+   from the single Saffron & green palette in tokens.css. Keep this
+   file plain CSS; see design.md for the rules it implements.
    ============================================================ */
 
 @import "./tokens.css";
@@ -14,7 +10,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
 
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 88px; }
+[hidden] { display: none !important; }
+input::placeholder, textarea::placeholder { color: var(--ink-3); opacity: 1; }
 
 @media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
   html { scroll-snap-type: y proximity; }
@@ -30,14 +28,6 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: clip;
   position: relative;
-}
-
-/* faint paper grain */
-body::after {
-  content: "";
-  position: fixed; inset: 0; z-index: 1; pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 h1, h2, h3, h4 {
@@ -60,7 +50,7 @@ button { font: inherit; cursor: pointer; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 
 /* ---------------- accent word (was gradient) ---------------- */
-.grad-text { color: var(--teal); }
+.grad-text { color: var(--accent); }
 
 /* ---------------- layout primitives ---------------- */
 .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); position: relative; z-index: 2; }
@@ -84,8 +74,6 @@ button { font: inherit; cursor: pointer; }
 .kicker::before {
   content: ""; width: 22px; height: 2px; background: var(--accent);
 }
-[data-theme="ember"] .kicker::before { background: var(--orange); }
-
 .lead { font-size: var(--step-1); color: var(--ink-2); line-height: 1.55; max-width: 52ch; }
 .muted { color: var(--ink-3); }
 .accent { color: var(--accent); }
@@ -109,12 +97,10 @@ button { font: inherit; cursor: pointer; }
 
 /* primary = solid accent */
 .btn--grad { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.btn--grad:hover { background: var(--orange-2); border-color: var(--orange-2); }
+.btn--grad:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 
 .btn--ghost { background: transparent; color: var(--ink); border-color: var(--border-strong); }
 .btn--ghost:hover { background: var(--ink); color: var(--bg); }
-[data-theme="ember"] .btn--ghost { background: var(--orange); color: #ffffff; border-color: var(--orange); }
-[data-theme="ember"] .btn--ghost:hover { background: var(--orange-2); color: #ffffff; border-color: var(--orange-2); }
 
 /* ---------------- card - flat, hairline ---------------- */
 .card {
@@ -139,15 +125,9 @@ button { font: inherit; cursor: pointer; }
   mask-image: radial-gradient(ellipse 85% 78% at 50% 42%, #000 45%, transparent 100%);
 }
 
-/* ---------------- reveal-on-scroll ---------------- */
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); transition-delay: var(--d, 0ms); will-change: opacity, transform; }
-.reveal.in { opacity: 1; transform: none; }
-/* every section eases up as it enters the viewport */
-.snap { transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
-@media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
-  .snap:not(.in-view) { opacity: 0.55; transform: translateY(14px); }
-  .snap.in-view { opacity: 1; transform: none; }
-}
+/* ---------------- reveal-on-scroll ----------------
+   .reveal / .in are observer hooks only: content rests visible so it
+   survives a JavaScript failure. .reveal-clip still wipes in. */
 .reveal-clip { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s var(--ease); transition-delay: var(--d, 0ms); }
 .reveal-clip.in { clip-path: inset(0 0 0 0); }
 
@@ -178,40 +158,8 @@ button { font: inherit; cursor: pointer; }
 .skip-link { position: absolute; left: 0.5rem; top: -4rem; z-index: 200; background: var(--accent); color: var(--accent-ink); padding: 0.6em 1em; border-radius: var(--radius-sm); transition: top 0.2s var(--ease); }
 .skip-link:focus { top: 0.5rem; }
 
-/* ---------------- About page fallback layout ---------------- */
-.about-hero { overflow: clip; }
-.about-hero__in { display: grid; align-content: center; min-height: 100svh; padding-block: clamp(6rem, 12vh, 9rem); }
-.about-hero .kicker { margin-bottom: clamp(1.7rem, 3vw, 2.5rem); }
-.about-hero h1 { max-width: 14ch; margin-bottom: 1.35rem; font-size: var(--page-title); line-height: .94; letter-spacing: -.04em; }
-.about-hero__summary { max-width: 55ch; color: var(--ink-2); font-size: var(--step-1); line-height: 1.5; }
-.about-story { min-height: auto; scroll-snap-align: none; border-top: 1px solid var(--rule); padding-block: clamp(5rem, 10vw, 9rem); }
-.about-story__in { display: grid; grid-template-columns: minmax(16rem, .75fr) minmax(0, 1.25fr); gap: clamp(3rem, 10vw, 11rem); align-items: start; }
-.about-story h2 { position: sticky; top: 8rem; max-width: 8ch; font-size: clamp(2rem, 3.5vw, 3.8rem); line-height: .95; letter-spacing: -.04em; }
-.about-story__copy { display: grid; gap: 1.45rem; max-width: 48ch; color: var(--ink-2); font-size: var(--step-1); line-height: 1.58; }
-.about-story__copy p:first-child { color: var(--ink); font-size: clamp(1.2rem, 1.08rem + .42vw, 1.5rem); line-height: 1.4; }
-.about-method, .about-structure { min-height: auto; scroll-snap-align: none; border-top: 1px solid var(--rule); padding-block: clamp(5rem, 10vw, 9rem); }
-.about-method__in, .about-structure__in { display: grid; grid-template-columns: minmax(16rem, .75fr) minmax(0, 1.25fr); gap: clamp(3rem, 10vw, 11rem); align-items: start; }
-.about-method__intro, .about-structure__intro { position: sticky; top: 8rem; }
-.about-method__intro h2, .about-structure__intro h2 { max-width: 9ch; font-size: clamp(2rem, 3.5vw, 3.8rem); line-height: .95; letter-spacing: -.04em; margin-bottom: 1.35rem; }
-.about-method__intro p, .about-structure__intro p { max-width: 30ch; color: var(--ink-2); font-size: var(--step-1); line-height: 1.5; }
-.about-method__steps, .about-structure__list { list-style: none; padding: 0; border-top: 1px solid var(--rule); }
-.about-method__steps li { display: grid; grid-template-columns: 4.25rem minmax(0, 1fr); gap: 1rem; padding: clamp(1.7rem, 3.5vw, 3rem) 0; border-bottom: 1px solid var(--rule); }
-.about-method__steps li > span, .about-structure__index { color: var(--accent); font-family: var(--font-display); font-size: .74rem; font-weight: 650; letter-spacing: .08em; }
-.about-method__steps h3 { font-size: clamp(1.45rem, 2vw, 2.15rem); line-height: 1; margin-bottom: .65rem; }
-.about-method__steps p { max-width: 32ch; color: var(--ink-2); font-size: var(--step-1); line-height: 1.45; }
-.about-structure { padding-top: clamp(4rem, 8vw, 7.5rem); }
-.about-structure__list li { display: grid; grid-template-columns: 4.25rem minmax(12rem, .85fr) minmax(13rem, 1.15fr); gap: 1rem; align-items: baseline; padding: 1.3rem 0; border-bottom: 1px solid var(--rule); }
-.about-structure__list li.is-primary { padding-top: 1.7rem; }
-.about-structure__list h3 { font-size: clamp(1.1rem, 1.2vw, 1.35rem); line-height: 1.15; }
-.about-structure__list p { color: var(--ink-2); font-size: .97rem; line-height: 1.45; }
-.about-structure__list .is-primary h3 { color: var(--accent); }
-@media (max-width: 860px) {
-  .about-story__in, .about-method__in, .about-structure__in { grid-template-columns: 1fr; }
-  .about-hero h1 { max-width: 12ch; }
-  .about-story h2, .about-method__intro, .about-structure__intro { position: static; }
-}
-@media (max-width: 580px) {
-  .about-method__steps li { grid-template-columns: 3rem minmax(0, 1fr); }
-  .about-structure__list li { grid-template-columns: 3rem 1fr; gap: .65rem; }
-  .about-structure__list p { grid-column: 2; }
+/* Shared motion governance: visibility and reduced-motion fallback. */
+.snap * { animation-play-state: var(--motion-state, paused) !important; }
+@media (prefers-reduced-motion: reduce) {
+  .snap, .snap:not(.in-view) { opacity: 1; transform: none; }
 }

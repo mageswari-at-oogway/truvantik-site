@@ -12,7 +12,7 @@ const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 <!doctype html>
-<html lang="en" data-theme="void">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,7 +22,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0b0c0e" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <!-- fonts -->
@@ -32,16 +32,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- no-flash theme -->
-    <script is:inline>
-      (() => {
-        try {
-          const t = localStorage.getItem("tv-theme");
-          if (t) document.documentElement.setAttribute("data-theme", t);
-        } catch (e) {}
-      })();
-    </script>
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
@@ -79,6 +69,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
           { threshold: 0.12 }
         );
         secs.forEach((s) => sio.observe(s));
+        const syncMotion = () => secs.forEach((s) => s.style.setProperty("--motion-state", s.classList.contains("in-view") && !document.hidden ? "running" : "paused"));
+        const motionObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => entry.target.classList.toggle("in-view", entry.isIntersecting));
+          syncMotion();
+        }, { threshold: .05 });
+        secs.forEach((s) => motionObserver.observe(s));
+        document.addEventListener("visibilitychange", syncMotion);
       })();
     </script>
 
