@@ -10,6 +10,7 @@ import Base from "../layouts/Base.astro";
       <div class="legal__body">
         <h2>What we collect</h2>
         <p>When you contact us we collect the name, work email, company and message you choose to send. We use this only to respond to your enquiry and to scope a possible engagement.</p>
+        <p>Our contact form uses Formspree to process your submission, including your selected starting point if provided.</p>
         <h2>How we use it</h2>
         <p>We do not sell your information. We do not add you to marketing lists without your consent. We retain enquiry details only as long as needed to follow up.</p>
         <h2>Contact</h2>
@@ -22,7 +23,7 @@ import Base from "../layouts/Base.astro";
 <style>
   .legal__in { max-width: 68ch; padding-top: 5rem; }
   .legal__in h1 { font-size: var(--page-title); margin: 1rem 0 1rem; }
-  .legal__flag { font-family: var(--font-mono); font-size: 0.82rem; color: var(--highlight); border-left: 2px solid var(--highlight); padding-left: 0.9rem; margin-bottom: 2rem; }
+  .legal__flag { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); border-left: 2px solid var(--accent); padding-left: 0.9rem; margin-bottom: 2rem; }
   .legal__body { display: grid; gap: 0.7rem; }
   .legal__body h2 { font-size: var(--step-1); margin-top: 1.4rem; }
   .legal__body p { color: var(--ink-2); }

@@ -1,0 +1,15 @@
+---
+import Layout from '../../v2/Layout.astro';
+import PageIntro from '../../v2/components/PageIntro.astro';
+import Close from '../../v2/components/Close.astro';
+import Arrow from '../../v2/components/Arrow.astro';
+import { commitments } from '../../v2/content';
+import { path } from '../../v2/routes';
+---
+<Layout page="why-truvantik" title="Why Truvantik: engineering beyond the demo" description="One engineering-led partner for assessment, build and deployment. Integration, evaluation and ownership from the start.">
+  <PageIntro title="A good demo isn’t the finish line." description="Useful AI has to survive real data, existing systems and everyday decisions. That is the work we organise around." />
+  <section class="container section section--ruled commitment-grid">{commitments.map(c => <article><h2>{c.title}</h2><p>{c.body}</p></article>)}</section>
+  <section class="standards"><div class="container section split"><h2>What we won’t ask you to settle for.</h2><div class="principle-list"><div><h3>A new build where a simpler fix works.</h3><p>The recommendation should serve the problem.</p></div><div><h3>A pilot with no path into operations.</h3><p>Integration and adoption need owners, not assumptions.</p></div><div><h3>Numbers that can’t be substantiated.</h3><p>We distinguish examples from evidence.</p></div></div></div></section>
+  <section class="container section split"><h2>One partner across the decisions and the delivery.</h2><div class="prose"><p>Assessment informs the build. Engineering informs the strategy. Deployment makes both accountable to real use.</p><a class="text-link" href={path('services')}>See how the work fits together <Arrow /></a></div></section>
+  <Close />
+</Layout>

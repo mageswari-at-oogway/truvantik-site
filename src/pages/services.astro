@@ -170,14 +170,13 @@ const services = [
 
   /* ---- continuous service chapters ---- */
   .svc { min-height: auto; scroll-snap-align: none; padding-block: clamp(5rem, 11vw, 10rem); border-top: 1px solid var(--rule); }
-  .svc__chapter { display: grid; grid-template-columns: minmax(12rem, 0.65fr) minmax(22rem, 1.2fr) minmax(14rem, 0.7fr); gap: clamp(2rem, 4vw, 5rem); align-items: start; }
+  .svc__chapter { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.2fr) minmax(0, .7fr); gap: clamp(2rem, 4vw, 5rem); align-items: start; }
   .svc__copy { display: contents; }
   .svc__header { grid-column: 1; position: sticky; top: 8rem; }
   .svc__story { grid-column: 2; }
   .svc__meta { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.5rem; }
   .svc__n { font-family: var(--font-mono); font-size: 1.1rem; color: var(--accent); font-weight: 500; }
   .svc__phase { font-family: var(--font-display); font-size: 0.75rem; font-weight: 650; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
-  :global([data-theme="ember"]) .svc__n, :global([data-theme="ember"]) .svc__phase { color: var(--orange); }
   .svc__copy h2 {
     font-family: var(--font-display);
     font-size: clamp(2rem, 1.55rem + 1.45vw, 3.1rem);
@@ -206,7 +205,7 @@ const services = [
   .svc__list { list-style: none; padding: 0; display: grid; gap: 0.62rem; }
   .svc__list li { position: relative; padding-left: 1.5rem; font-size: clamp(0.9rem, 0.87rem + 0.1vw, 0.98rem); color: var(--ink-2); line-height: 1.48; }
   .svc__list--who li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--ink-3); }
-  .svc__list--check li::before { content: "✓"; position: absolute; left: 0; top: 0; font-size: 0.8rem; color: var(--accent); font-weight: 700; }
+  .svc__list--check li::before { content: "✓"; position: absolute; left: 0; top: 0; font-size: 0.8rem; color: var(--highlight); font-weight: 700; }
 
   /* ---- diagrams sit openly in the page canvas ---- */
   .svc__art { grid-column: 3; position: sticky; top: 10rem; min-height: 17rem; display: grid; place-items: center; margin: 0; }
@@ -225,7 +224,7 @@ const services = [
   .rb em { position: relative; z-index: 1; font-family: var(--font-display); font-style: normal; font-size: 0.88rem; font-weight: 500; white-space: nowrap; color: var(--ink-2); }
   .rb--on::after { height: 3px; background: var(--accent); }
   .rb--on em { color: var(--ink); }
-  .rb--cut { opacity: 0.55; }
+  .rb--cut { opacity: 0.72; }
   .svc__chapter.in .rb { opacity: 1; transform: none; transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
   .svc__chapter.in .rb:nth-child(1) { transition-delay: 0.05s; }
   .svc__chapter.in .rb:nth-child(2) { transition-delay: 0.18s; }
@@ -255,6 +254,7 @@ const services = [
   .nmap { display: block; width: 100%; height: auto; max-width: 320px; max-height: 210px; margin: 0 auto; overflow: visible; }
   .ngroup { fill: var(--ink-3); font-family: var(--font-display); font-size: 8px; font-weight: 650; letter-spacing: 1.2px; }
   .nl { fill: none; stroke: var(--border-strong); stroke-width: 1.25; stroke-dasharray: 130; stroke-dashoffset: 0; }
+  .nl:nth-of-type(3), .nl:nth-of-type(4) { stroke: color-mix(in srgb, var(--highlight) 62%, transparent); }
   .svc__chapter.in .nl { animation: draw 0.6s var(--ease) both; }
   .svc__chapter.in .nl:nth-of-type(1) { animation-delay: 0.35s; }
   .svc__chapter.in .nl:nth-of-type(2) { animation-delay: 0.5s; }
@@ -262,6 +262,7 @@ const services = [
   .svc__chapter.in .nl:nth-of-type(4) { animation-delay: 0.8s; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
   .nn path { fill: var(--ink-3); }
+  .nn--3 path, .nn--4 path { fill: var(--highlight); }
   .nn text { fill: var(--ink-2); font-family: var(--font-display); font-size: 12px; font-weight: 500; }
   .nn { opacity: 1; transform: none; transform-box: fill-box; transform-origin: center; }
   .svc__chapter.in .nn { animation: pop 0.4s var(--ease) both; }
@@ -280,8 +281,6 @@ const services = [
   .viz-cadence__lines span::after { content: ""; position: absolute; left: 0; top: calc(0.45em + 10px); width: 1px; height: 1.15rem; background: var(--border-strong); }
   .viz-cadence__lines span:last-child::after { display: none; }
 
-  :global([data-theme="ember"]) .svc__cta { background: var(--orange); color: #ffffff; border-color: var(--orange); }
-
   @media (prefers-reduced-motion: reduce) {
     .rb, .viz-track b { transform: none !important; }
     .sc { opacity: 1 !important; transform: none !important; }
@@ -289,7 +288,7 @@ const services = [
     .nn, .nhub { opacity: 1 !important; transform: none !important; }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     .svc-intro__layout, .svc__chapter { grid-template-columns: 1fr; }
     .svc-intro__layout { gap: 3rem; }
     .svc-nav { max-width: 34rem; }

@@ -1,0 +1,19 @@
+---
+import Layout from '../../v2/Layout.astro';
+import PageIntro from '../../v2/components/PageIntro.astro';
+import Close from '../../v2/components/Close.astro';
+import Clinical from '../../v2/components/Clinical.astro';
+import Arrow from '../../v2/components/Arrow.astro';
+import { scenarios } from '../../v2/content';
+---
+<Layout page="work" title="Work: what useful AI looks like in practice" description="Explore Tapioca Health and clearly labelled representative scenarios across document review, catalogue operations and quality inspection.">
+  <PageIntro title="The work behind the promise." description="A product engagement, followed by representative scenarios that make our approach concrete. No invented performance figures." />
+  <section class="section section--ruled" id="tapioca"><div class="container split">
+    <div><h2>Tapioca Health</h2><p class="work-label">Healthcare · Built with 3BP Labs</p><p class="lead">A digital clinic platform where AI-assisted workflows need to fit clinical reality.</p><p class="muted space-top">The work spans product and platform engineering, documentation and intake with clinician review, and evaluation and monitoring designed into the system.</p><div class="actions"><a class="text-link" href="https://tapiocahealth.com">Visit tapiocahealth.com <Arrow /></a></div></div>
+    <Clinical />
+  </div></section>
+  <section class="container section section--ruled"><div class="section-heading"><h2>Different problems.<br />The same engineering discipline.</h2><p class="muted">The following are representative scenarios, not named client engagements or verified client results.</p></div>
+    <div class="scenario-list">{scenarios.map(s => <article class="scenario" id={s.id}><header><h3>{s.title}</h3><p class="work-label">{s.sector} · Representative scenario</p></header><dl><div><dt>The problem</dt><dd>{s.problem}</dd></div><div><dt>The approach</dt><dd>{s.approach}</dd></div><div><dt>What to evaluate</dt><dd>{s.measure}</dd></div></dl></article>)}</div>
+  </section>
+  <Close title="What would useful look like for your team?" />
+</Layout>

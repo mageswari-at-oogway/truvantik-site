@@ -4,7 +4,7 @@
 
 > **How this brief was built.** Content and structure are synthesized from a complete crawl of the two existing Truvantik references — [truvantik-site.vercel.app](https://truvantik-site.vercel.app) (a **single-page** boutique dev-shop direction) and [truvantik.lovable.app](https://truvantik.lovable.app) (a **full multi-page** consulting-firm site: home, services + 4 service detail pages, industries, case studies, why-us, about, contact, privacy, terms) — with visual inspiration from [deployment.inc](https://deployment.inc). Per direction agreed with the team: **blend both positionings** (consulting structure and depth + the boutique "talk to the builders" differentiators), **offer multiple visual themes** for selection (Section 3), and lead with **the free assessment / working session** as the primary conversion.
 
-> **Key company facts (confirmed from the Lovable /about page and footer).** Truvantik is the **AI consulting brand of Prabhaavi Solutions** (the legal entity). Delivery is **alongside the 3BP Labs engineering team**, which gives engagements senior engineering capacity without a hiring cycle. **Kron Health** (digital clinic platform) was built by the team with 3BP Labs and is its own product brand, not a Truvantik service line. Brand name meaning: **Tru · vant · ik — true, vantage, intelligence & knowledge**, i.e. *"Your true advantage."* Contact: **hello@truvantik.com**.
+> **Key company facts (confirmed from the Lovable /about page and footer).** Truvantik is the **AI consulting brand of Prabhaavi Solutions** (the legal entity). Delivery is **alongside the 3BP Labs engineering team**, which gives engagements senior engineering capacity without a hiring cycle. **Tapioca Health** (digital clinic platform) was built by the team with 3BP Labs and is its own product brand, not a Truvantik service line. Brand name meaning: **Tru · vant · ik — true, vantage, intelligence & knowledge**, i.e. *"Your true advantage."* Contact: **hello@truvantik.com**.
 
 ---
 
@@ -30,7 +30,7 @@ The core tension the site must resolve for the visitor: *most AI work stalls as 
 ### Secondary actions
 
 - **Explore our approach** — anchors to the Assess · Build · Deploy section (ungated).
-- **Read our case studies / See a proof point** — anchors to the featured proof point (Kron Health).
+- **Read our case studies / See a proof point** — anchors to the featured proof point (Tapioca Health).
 
 Both secondary CTAs are visually subordinate to the primary.
 
@@ -39,7 +39,7 @@ Both secondary CTAs are visually subordinate to the primary.
 - The **Assess · Build · Deploy** spine is the backbone of the page. Every fold should be locatable on it.
 - Lead with **outcomes and the partnership model**, not tooling or model names. Models are a means, chosen "by measurement, not fashion."
 - Keep the **"you talk to the builders"** differentiator visible and repeated — it is the boutique edge inside the consulting frame. The person in your standup is the person whose code ships that afternoon.
-- Use **real artifacts** where possible: the opportunity-roadmap board, phase diagrams, the Kron Health proof point. Label any representative UI **"Illustrative."**
+- Use **real artifacts** where possible: the opportunity-roadmap board, phase diagrams, the Tapioca Health proof point. Label any representative UI **"Illustrative."**
 - Keep the page to **eight folds**. Every fold must advance the story or the conversion.
 - Choose **one** visual theme from Section 3 and apply it consistently. Restrained, purposeful motion only.
 - The primary CTA label is always **"Start with a free assessment."** Do not introduce alternative CTA labels per fold.
@@ -95,9 +95,9 @@ The consulting positioning and enterprise audience are better served by dedicate
 | Services | `/services` | Overview of the four service lines. |
 | Service detail ×4 | `/services/{slug}` | Deep page per service (template in Section 4b). |
 | Industries | `/industries` | Sector patterns + per-industry outcome ranges, with hash anchors per sector. |
-| Case Studies | `/work` | Kron Health + representative scenarios (Section 4c). |
+| Case Studies | `/work` | Tapioca Health + representative scenarios (Section 4c). |
 | Why Us | `/why-truvantik` | Four commitments + "What we will not do". |
-| About | `/about` | Founder-led story, corporate structure (Prabhaavi / 3BP Labs / Kron Health). |
+| About | `/about` | Founder-led story, corporate structure (Prabhaavi / 3BP Labs / Tapioca Health). |
 | Contact | `/contact` | Qualification form + "what happens next" + book-a-call. |
 | Privacy / Terms | `/privacy`, `/terms` | Legal. |
 
@@ -293,17 +293,17 @@ Supporting rationale: *Document-heavy review looks much the same in underwriting
 ### Copy — featured proof point
 
 - Eyebrow: **Featured proof point · Built by our team**
-- Title: **Kron Health — a digital clinic platform** *(Healthcare)*
+- Title: **Tapioca Health — a digital clinic platform** *(Healthcare)*
 - Body: Delivering a clinic platform where AI-assisted workflows had to fit clinical reality: careful handling of patient information, review by a clinician at the right point, and behaviour that is auditable rather than opaque.
 - CTA: **Read our case studies**
 
 ### Required disclaimer (verbatim intent)
 
-> **Separate brand.** Kron Health is its own product brand, built by our team with 3BP Labs. It is not a Truvantik service line, and its healthcare-specific claims belong to that product.
+> **Separate brand.** Tapioca Health is its own product brand, built by our team with 3BP Labs. It is not a Truvantik service line, and its healthcare-specific claims belong to that product.
 
 ### Representation
 
-Industries as a compact tag row or grid. Proof point as a feature card with the separate-brand disclaimer clearly attached. Do not present Kron Health as a Truvantik service.
+Industries as a compact tag row or grid. Proof point as a feature card with the separate-brand disclaimer clearly attached. Do not present Tapioca Health as a Truvantik service.
 
 ## Fold 8 — Why us (commitments) + FAQ + final CTA
 
@@ -375,12 +375,12 @@ Each of the four services gets its own page following this pattern (from the Lov
 
 Framing line: *Where clients have published figures, we cite them. Where they have not, we describe the shape of the work rather than invent numbers.* (This honesty is a differentiator — keep it.)
 
-1. **Kron Health — a digital clinic platform** *(Healthcare · completed engagement)* — with the separate-brand disclaimer. Problem: a clinic platform where AI-assisted workflows had to fit clinical reality (careful PII handling, clinician review at the right point, auditable not opaque). Did: product & platform engineering across clinical and patient-facing workflows; AI-assisted documentation & intake with clinician-in-the-loop; evaluation & monitoring built in from the start. Outcome: a shipped, working product — the clearest illustration of the depth of build work the team takes on.
+1. **Tapioca Health — a digital clinic platform** *(Healthcare · completed engagement)* — with the separate-brand disclaimer. Problem: a clinic platform where AI-assisted workflows had to fit clinical reality (careful PII handling, clinician review at the right point, auditable not opaque). Did: product & platform engineering across clinical and patient-facing workflows; AI-assisted documentation & intake with clinician-in-the-loop; evaluation & monitoring built in from the start. Outcome: a shipped, working product — the clearest illustration of the depth of build work the team takes on.
 2. **Cutting manual review on document-heavy onboarding** *(Financial services · representative scenario, no figures attributed)* — extraction with confidence thresholds routing uncertain cases to a person; integrated into the existing case system; reviewers moved from transcription to judgement on exceptions, with an audit trail on every automated decision.
 3. **Scaling catalogue operations without scaling the team** *(Retail & e-commerce · representative scenario)* — normalisation & enrichment pipeline over supplier feeds; generated copy/attributes held to a house style guide with merchandiser approval before publish; quality reported per supplier.
 4. **Restarting a stalled quality-inspection pilot** *(Manufacturing · representative scenario)* — diagnosed the stall as integration/ownership not model quality; deployed inside the plant environment with monitoring & continuous evaluation; surfaced results in the operators' existing tool and named an owner; capability moved from parked notebook to routine shift use after handover.
 
-Label the three composites clearly as **representative scenarios** (not specific client engagements). Only Kron Health is a named, real engagement.
+Label the three composites clearly as **representative scenarios** (not specific client engagements). Only Tapioca Health is a named, real engagement.
 
 ---
 
@@ -388,7 +388,7 @@ Label the three composites clearly as **representative scenarios** (not specific
 
 - Heading: **Founder-led, engineering-led, deliberately cross-industry.**
 - Core story: too many AI projects stop at the demo, and the gap is rarely the model — it's integration, ownership, evaluation and adoption. Truvantik is built around the whole path instead of one slice.
-- **How we're set up** (structure block): **Truvantik** (the AI consulting brand) · **Prabhaavi Solutions** (legal entity) · **3BP Labs** (engineering partnership — senior capacity without a hiring cycle) · **Kron Health** (product brand built with 3BP Labs, not a service line).
+- **How we're set up** (structure block): **Truvantik** (the AI consulting brand) · **Prabhaavi Solutions** (legal entity) · **3BP Labs** (engineering partnership — senior capacity without a hiring cycle) · **Tapioca Health** (product brand built with 3BP Labs, not a service line).
 - Closing: *The people who scope an engagement are the people who build it.* Small enough that context doesn't get lost in handovers; success measure agreed before any code is written.
 
 ---
@@ -482,7 +482,7 @@ Form submissions, form completion rate, scheduling completion rate, entry-point 
 - **Scheduling URL** (Calendly or equivalent) for the "book a call" path. *(Email hello@truvantik.com is confirmed.)*
 - **CRM / form endpoint** and field mapping.
 - **Sign-off on the industry outcome ranges** (15–25% clinical time, 5–15% conversion, 20–35% downtime, sub-100ms latency) — defensible as published, or soften.
-- **Case-study confirmation** — Kron Health separate-brand + 3BP Labs wording sign-off; approval to keep the 3 composites labelled as representative scenarios (or replace with real, publishable ones).
+- **Case-study confirmation** — Tapioca Health separate-brand + 3BP Labs wording sign-off; approval to keep the 3 composites labelled as representative scenarios (or replace with real, publishable ones).
 - **Data handling / security wording** for the FAQ and procurement (residency, certifications, model-training policy) — a gap in both references; needed for the enterprise audience.
 - **Team / founder names & bios** if a "meet the team" element is wanted (the About page CTA implies one).
 - **Privacy Policy and Terms** final copy.
@@ -490,7 +490,7 @@ Form submissions, form completion rate, scheduling completion rate, entry-point 
 ### Launch guardrails
 
 - Use only the claims and attributions specified or approved here.
-- Do not present Kron Health as a Truvantik service line.
+- Do not present Tapioca Health as a Truvantik service line.
 - Keep the primary CTA label consistent ("Start with a free assessment").
 - Keep the Assess · Build · Deploy spine consistent across every fold.
 - Keep the "you talk to the builders" differentiator present but honest to actual delivery model.

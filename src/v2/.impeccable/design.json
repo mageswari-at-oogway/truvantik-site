@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-06T17:22:36.069Z",
+  "title": "Design System: Truvantik v2",
+  "extensions": {
+    "colorMeta": {
+      "action": {
+        "role": "primary",
+        "displayName": "Saffron action"
+      },
+      "outcome": {
+        "role": "secondary",
+        "displayName": "Outcome green"
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Charcoal"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Soft white"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Quiet rule"
+      },
+      "error": {
+        "role": "feedback",
+        "displayName": "Error rose"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Main page headings, with narrower measures in the home hero."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text, generally limited to 68ch."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Visible qualifications next to illustrative figures."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.22, 1, .36, 1)",
+        "purpose": "The --v2-ease curve used by button background transitions."
+      },
+      {
+        "name": "button-background",
+        "value": ".18s",
+        "purpose": "Background transition; no hover translation or scale."
+      },
+      {
+        "name": "workflow-cycle",
+        "value": "7.2s linear infinite",
+        "purpose": "Incoming saffron signals precede outgoing green signals."
+      },
+      {
+        "name": "visibility-gate",
+        "value": "var(--v2-motion, paused)",
+        "purpose": "Run only for intersecting figures while the document is visible. No JavaScript or IntersectionObserver leaves motion paused."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "(prefers-reduced-motion: reduce)",
+        "purpose": "Disable animation and transitions; retain static diagram information. Implemented in source, not an accessibility certification."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "content-grids",
+        "value": "1000px",
+        "purpose": "Maximum width: service and industry grids reduce to two columns; hero tightens."
+      },
+      {
+        "name": "menu-and-stacked-layout",
+        "value": "760px",
+        "purpose": "Maximum width: menu disclosure, 72px header, stacked main grids and fields; two-column footer."
+      },
+      {
+        "name": "vertical-workflow",
+        "value": "560px",
+        "purpose": "Maximum width: replace horizontal canvas with vertical inputs-to-core-to-outputs diagram."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Saffron action with hover, keyboard focus, disabled and reduced-motion treatments.",
+      "html": "<button class=\"ds-button ds-primary\" type=\"button\">Prepare email <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:1.25rem;min-height:50px;padding:.75rem 1.25rem;border:1px solid transparent;border-radius:6px;font:500 1.0625rem/1.35 Outfit,system-ui,sans-serif;text-decoration:none;cursor:pointer;transition:background .18s var(--v2-ease,cubic-bezier(.22,1,.36,1))}.ds-button:focus-visible{outline:2px solid var(--v2-action,#f2a64b);outline-offset:5px}.ds-button:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-primary{background:var(--v2-action,#f2a64b);color:var(--v2-action-ink,#211507)}.ds-primary:hover{background:var(--v2-action-hover,#ffc47e)}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Transparent bordered action used for copying the prepared draft.",
+      "html": "<button class=\"ds-button ds-secondary\" type=\"button\">Copy draft</button>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:1.25rem;min-height:50px;padding:.75rem 1.25rem;border:1px solid transparent;border-radius:6px;font:500 1.0625rem/1.35 Outfit,system-ui,sans-serif;text-decoration:none;cursor:pointer;transition:background .18s var(--v2-ease,cubic-bezier(.22,1,.36,1))}.ds-button:focus-visible{outline:2px solid var(--v2-action,#f2a64b);outline-offset:5px}.ds-button:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-secondary{background:transparent;color:var(--v2-ink,#f3f2ee);border-color:var(--v2-line-strong,#687078)}.ds-secondary:hover{background:var(--v2-surface-hover,#202327)}"
+    },
+    {
+      "name": "Closing action",
+      "kind": "button",
+      "refersTo": "button-closing",
+      "description": "Dark action on the green closing field, with a dark focus outline.",
+      "html": "<div class=\"ds-closing\"><a class=\"ds-button ds-closing-action\" href=\"/v2/contact/\">Start a conversation <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a></div>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:1.25rem;min-height:50px;padding:.75rem 1.25rem;border:1px solid transparent;border-radius:6px;font:500 1.0625rem/1.35 Outfit,system-ui,sans-serif;text-decoration:none;cursor:pointer;transition:background .18s var(--v2-ease,cubic-bezier(.22,1,.36,1))}.ds-button:focus-visible{outline:2px solid var(--v2-action,#f2a64b);outline-offset:5px}.ds-button:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}.ds-closing{background:var(--v2-outcome,#79b991);padding:3rem}.ds-closing-action{background:var(--v2-outcome-ink,#101d15);color:var(--v2-ink,#f3f2ee)}.ds-closing-action:hover{background:#263c2d}.ds-closing-action:focus-visible{outline-color:var(--v2-outcome-ink,#101d15)}"
+    },
+    {
+      "name": "Email field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labelled email input. Validation sets aria-invalid=true and linked error text; the first invalid field receives focus. There is no separate hover fill.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-email\">Email <span>(required)</span></label><input id=\"ds-email\" type=\"email\" autocomplete=\"email\" required maxlength=\"254\" aria-describedby=\"ds-email-error\"/><p class=\"ds-field-error\" id=\"ds-email-error\"></p></div>",
+      "css": ".ds-field{font:400 1.0625rem/1.6 Outfit,system-ui,sans-serif;color:var(--v2-ink,#f3f2ee)}.ds-field label{display:block;margin-bottom:.5rem;font-size:.97rem}.ds-field label span{font-size:.84rem;color:var(--v2-subtle,#989da3)}.ds-field input{box-sizing:border-box;width:100%;min-height:48px;border:1px solid var(--v2-line-strong,#687078);border-radius:6px;background:var(--v2-bg,#0b0c0e);color:var(--v2-ink,#f3f2ee);padding:.75rem .9rem;font:inherit}.ds-field input:focus-visible{outline:2px solid var(--v2-action,#f2a64b);outline-offset:5px}.ds-field input[aria-invalid=true]{border-color:var(--v2-error,#ffb1ad)}.ds-field-error{margin:.35rem 0 0;color:var(--v2-error,#ffb1ad);font-size:.88rem}.ds-field-error:empty{display:none}"
+    },
+    {
+      "name": "Primary navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Current-page and hover states. Preview shows links; runtime Layout.astro adds mobile disclosure, Escape focus return and outside-click handling. Without JavaScript links remain visible.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation example\"><a href=\"/v2/services/\" aria-current=\"page\">Services</a><a href=\"/v2/industries/\">Industries</a><a href=\"/v2/work/\">Work</a><a href=\"/v2/about/\">About</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:clamp(1.25rem,3vw,3rem);background:var(--v2-bg,#0b0c0e);font:400 .96rem/1.6 Outfit,system-ui,sans-serif}.ds-nav>a{display:inline-flex;align-items:center;min-height:44px;color:var(--v2-ink,#f3f2ee);text-decoration:none}.ds-nav>a:hover,.ds-nav>a[aria-current=page]{color:var(--v2-action,#f2a64b)}.ds-nav>a[aria-current=page]{text-decoration:underline;text-underline-offset:8px}.ds-nav>a:focus-visible{outline:2px solid var(--v2-action,#f2a64b);outline-offset:5px}@media(max-width:760px){.ds-nav{flex-direction:column;align-items:stretch;gap:0;padding-block:.5rem 1.25rem}.ds-nav>a{padding:.65rem 0;min-height:48px}}"
+    },
+    {
+      "name": "Clinical sequence panel",
+      "kind": "card",
+      "refersTo": "clinical-panel",
+      "description": "Static bordered sequence with green review step and illustrative caption. No interactive hover or focus behavior applies.",
+      "html": "<figure class=\"ds-clinical\" aria-label=\"Illustrative clinical workflow: patient context, an AI-assisted draft, clinician review, and a care note.\"><div class=\"ds-clinical-heading\"><span aria-hidden=\"true\"></span>Clinical review stays in the workflow.</div><ol><li><span>Patient context</span><p>Intake &amp; documentation</p></li><li><span>AI-assisted draft</span><p>Information organised for review</p></li><li class=\"ds-review\"><span>Clinician review</span><p>Judgement remains with the clinician</p></li><li><span>Care note</span><p>Reviewed before the next step</p></li></ol><figcaption>Illustrative workflow, not a product screenshot.</figcaption></figure>",
+      "css": ".ds-clinical{margin:0;border:1px solid var(--v2-line,#30353a);border-radius:14px;padding:clamp(1.25rem,3vw,2.5rem);color:var(--v2-ink,#f3f2ee);font:400 1.0625rem/1.6 Outfit,system-ui,sans-serif}.ds-clinical-heading{display:flex;gap:.7rem;align-items:center;font-size:1rem}.ds-clinical-heading>span{width:7px;height:7px;border-radius:50%;background:var(--v2-outcome,#79b991);flex:0 0 auto}.ds-clinical ol{list-style:none;padding:0;margin:1.5rem 0}.ds-clinical li{position:relative;padding:1rem 0 1rem 1.8rem}.ds-clinical li:before{content:'';position:absolute;left:3px;top:25px;width:6px;height:6px;border:1px solid var(--v2-line-strong,#687078);background:var(--v2-bg,#0b0c0e);border-radius:50%;z-index:1}.ds-clinical li:not(:last-child):after{content:'';position:absolute;left:6px;top:30px;height:100%;width:1px;background:var(--v2-line,#30353a)}.ds-clinical li>span{font-size:1.2rem}.ds-clinical li p{margin:0;font-size:.88rem;color:var(--v2-muted,#c0c2c4)}.ds-clinical .ds-review>span{color:var(--v2-outcome,#79b991)}.ds-clinical .ds-review:before{border-color:var(--v2-outcome,#79b991);background:var(--v2-outcome,#79b991)}.ds-clinical figcaption{font-size:.8rem;color:var(--v2-subtle,#989da3)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Work made visible",
+    "overview": "A dark, composed editorial system makes engineering work understandable through clear typography, ruled sections and labelled workflow diagrams. Saffron identifies action; green identifies outcomes and review. Outfit and the settled multicolor diamond carry the brand across every page.\n\nThis guide records the implemented system inside `/v2`. The original site's root `design.md` remains its authority. The selected home composition and its rationale belong in `brief.md`; they are not a template that every page must repeat.",
+    "keyCharacteristics": [
+      "Soft-white editorial headings on charcoal, with generous reading space.",
+      "Ruled content groups and restrained rounding instead of pervasive cards.",
+      "Saffron actions, green outcomes and a stationary, exact brand mark.",
+      "Responsive diagrams with useful static content and visibility-gated motion."
+    ],
+    "rules": [
+      {
+        "name": "The Color Meaning Rule",
+        "body": "Keep saffron associated with action and green associated with outcomes; the logo retains all three approved colors together.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do use the scoped `Layout.astro` and `styles.css` for every v2 page; keep route construction in `routes.ts` and shared factual content in `content.ts`.",
+      "Do keep this lowercase `design.md` canonical; `/v2/design.md` serves this source, and `.impeccable/design.json` extends it with motion, states and component previews.",
+      "Do update the guide and sidecar together when intentionally changing a durable v2 rule, and keep page composition decisions in `brief.md`.",
+      "Do retain explicit illustrative labels, product relationships and the distinction between preparing and sending an email.",
+      "Do run the build and scoped verification in `README.md`, then check representative desktop/mobile layouts and affected keyboard, contact and motion states."
+    ],
+    "donts": [
+      "Don't import v1 layout, components, scripts or CSS into v2, or change the incumbent hash baseline to conceal an isolation failure.",
+      "Don't redesign the approved mark, introduce a light palette, add a picker or persist a theme or motion preference.",
+      "Don't let animation carry essential information, shrink desktop diagrams into illegible mobile labels or add a visible pause button to this delegated direction.",
+      "Don't add storage, telemetry, backend submission, invented results or a fake sent state as part of a visual change.",
+      "Don't promote or redirect v2 to the original routes without a separate user decision."
+    ]
+  }
+}

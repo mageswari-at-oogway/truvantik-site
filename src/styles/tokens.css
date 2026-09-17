@@ -1,12 +1,10 @@
-/* ============================================================
-   Truvantik - design tokens  (v3 - "Dossier" editorial system)
-   Two themes via [data-theme] on <html>: void (default) and ember.
-   Ember is Void plus a restored orange highlight in the hero/
-   diagram graphics (see WorkflowOrbit.astro's [data-theme="ember"]
-   overrides) - everything else is identical to Void.
-   ============================================================ */
+/* Truvantik: the single dark editorial palette - Saffron & green on neutral
+   charcoal. Saffron owns actions, soft white owns text, muted green identifies
+   workflow outputs. One palette only; there is no theme switching. See design.md. */
 
 :root {
+  color-scheme: dark;
+
   /* ---- type ---- */
   --font-display: "Outfit", -apple-system, "Segoe UI", system-ui, sans-serif;
   --font-body: "Outfit", -apple-system, "Segoe UI", system-ui, sans-serif;
@@ -32,48 +30,44 @@
   --gutter: clamp(1.15rem, 0.5rem + 3vw, 3rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-spring: var(--ease);
 
-  /* ---- brand hues (stable across themes) ---- */
-  --teal: #1f9c8f;
-  --orange: #e0481d;
-  --orange-2: #f26a2c;
-  --grad: linear-gradient(96deg, var(--orange), var(--orange-2));
-  --grad-soft: linear-gradient(135deg, rgb(224 72 29 / 0.1), rgb(31 156 143 / 0.08));
-}
+  /* ---- canvas and surfaces ---- */
+  --bg: #0b0c0e;
+  --bg-2: #111315;
+  --surface: #17191c;
+  --surface-2: #202327;
+  --surface-3: #2b3035;
 
-/* ============ VOID - default, true-black OLED, teal-led ============ */
-:root,
-[data-theme="void"],
-[data-theme="ember"] {
-  color-scheme: dark;
-  --bg: #000000;
-  --bg-2: #060606;
-  --surface: #0a0a0a;
-  --surface-solid: #0a0a0a;
-  --surface-2: #101010;
-  --surface-3: #1a1a1a;
-  --ink: #f5f5f5;
-  --ink-2: #8b9793;
-  --ink-3: #565f5d;
-  --border: #1f1f1f;
-  --border-strong: #333333;
-  --rule: #1a1a1a;
-  --teal: #2be0c4;
-  --orange: #e0481d;
-  --orange-2: #f26a2c;
-  --accent: var(--teal);
-  --accent-ink: #00110d;
-  --highlight: var(--teal);
-  --highlight-ink: #00110d;
-  --grad: linear-gradient(96deg, #2be0c4, #63f0da);
-  --grad-soft: linear-gradient(135deg, rgb(43 224 196 / 0.1), rgb(224 72 29 / 0.06));
-  --grid-line: rgb(245 245 245 / 0.04);
-  --glass: none;
+  /* ---- text ---- */
+  --ink: #f3f2ee;
+  --ink-2: #c0c2c4;
+  --ink-3: #989da3;
+
+  /* ---- lines ---- */
+  --border: #30353a;
+  --border-strong: #687078;
+  --rule: #24282d;
+
+  /* ---- accents: saffron acts, green reports outcomes ---- */
+  --accent: #f2a64b;
+  --accent-hover: #ffc47e;
+  --accent-ink: #211507;
+  --highlight: #79b991;
+  --highlight-ink: #101d15;
+  --danger: #ffb1ad;
+
+  /* ---- washes and depth ---- */
+  --grad: linear-gradient(96deg, var(--accent), var(--accent-hover));
+  --grad-soft: rgb(242 166 75 / 0.055);
+  --grid-line: rgb(243 242 238 / 0.025);
   --shadow-card: none;
-  --shadow-lift: 0 0 44px -20px rgb(43 224 196 / 0.4);
-  --logo-face: #f5f5f5;
-  --logo-corner: var(--teal);
-  --logo-mark: var(--orange);
-  --logo-stroke: #000000;
+  --shadow-lift: 0 12px 36px -20px rgb(0 0 0 / 0.5);
+
+  /* ---- fixed multicolor logo identity; geometry stays in Logo.astro ---- */
+  --logo-face: #17191c;
+  --logo-corner: #f3f2ee;
+  --logo-mark: #f2a64b;
+  --logo-anchor: #79b991;
+  --logo-stroke: #687078;
 }

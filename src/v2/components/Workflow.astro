@@ -1,0 +1,62 @@
+---
+import Mark from './Mark.astro';
+---
+<figure class="workflow" data-motion aria-label="Illustrative workflow: customer requests and documents connect through Truvantik to CRM, operations and knowledge systems.">
+  <div class="workflow__canvas" aria-hidden="true">
+    <svg class="workflow__lines" viewBox="0 0 650 440" fill="none">
+      <g class="orbits" stroke="var(--v2-line)">
+        <ellipse cx="355" cy="218" rx="160" ry="192" />
+        <ellipse cx="355" cy="218" rx="119" ry="145" stroke-dasharray="3 6" />
+        <ellipse cx="355" cy="218" rx="77" ry="94" />
+        <path d="M355 26v384" stroke-dasharray="2 8" />
+        <circle cx="355" cy="26" r="4" fill="var(--v2-bg)" />
+        <circle cx="355" cy="410" r="4" fill="var(--v2-bg)" />
+      </g>
+      <g class="connections" stroke="var(--v2-line-strong)" stroke-width="1.2">
+        <path d="M137 111C232 111 226 198 316 198" />
+        <path d="M137 163C219 163 245 214 316 214" />
+        <path d="M137 297C248 297 247 230 316 230" />
+        <path d="M137 349C260 349 251 246 316 246" />
+        <path d="M391 208C446 208 450 118 528 118" />
+        <path d="M391 224H528" />
+        <path d="M391 240C446 240 450 330 528 330" />
+      </g>
+      <g class="signals signals--in" stroke="var(--v2-action)" stroke-width="2.4" pathLength="1">
+        <path d="M137 111C232 111 226 198 316 198" pathLength="1" />
+        <path d="M137 163C219 163 245 214 316 214" pathLength="1" />
+        <path d="M137 297C248 297 247 230 316 230" pathLength="1" />
+        <path d="M137 349C260 349 251 246 316 246" pathLength="1" />
+      </g>
+      <g class="signals signals--out" stroke="var(--v2-outcome)" stroke-width="2.4">
+        <path d="M391 208C446 208 450 118 528 118" pathLength="1" />
+        <path d="M391 224H528" pathLength="1" />
+        <path d="M391 240C446 240 450 330 528 330" pathLength="1" />
+      </g>
+      <g fill="var(--v2-bg)" stroke="var(--v2-line-strong)">
+        {[111,163,297,349].map(y => <circle cx="137" cy={y} r="3.5" />)}
+      </g>
+      <g fill="var(--v2-outcome)">{[118,224,330].map(y => <circle cx="528" cy={y} r="3.5" />)}</g>
+    </svg>
+    <div class="workflow__label workflow__label--requests"><strong>Customer requests</strong><span>Questions</span><span>Messages</span></div>
+    <div class="workflow__label workflow__label--documents"><strong>Documents & data</strong><span>Files</span><span>Team knowledge</span></div>
+    <div class="workflow__core"><Mark size={88} wordmark={false} /></div>
+    <div class="workflow__output workflow__output--crm"><strong>CRM</strong><span>Customer context</span></div>
+    <div class="workflow__output workflow__output--ops"><strong>Operations</strong><span>Actions & review</span></div>
+    <div class="workflow__output workflow__output--kb"><strong>Knowledge</strong><span>Useful answers</span></div>
+  </div>
+  <div class="workflow-mobile" aria-hidden="true">
+    <div class="workflow-mobile__inputs"><span>Customer requests</span><span>Documents & data</span></div>
+    <div class="workflow-mobile__canvas">
+      <svg viewBox="0 0 350 235" fill="none">
+        <g stroke="var(--v2-line)"><ellipse cx="175" cy="106" rx="110" ry="88" /><ellipse cx="175" cy="106" rx="74" ry="59" stroke-dasharray="3 6" /></g>
+        <g stroke="var(--v2-line-strong)"><path d="M80 0C80 60 165 35 165 79M270 0C270 60 185 35 185 79M155 135C155 186 52 168 52 235M175 135V235M195 135C195 186 298 168 298 235" /></g>
+        <g class="signals signals--in" stroke="var(--v2-action)" stroke-width="2"><path d="M80 0C80 60 165 35 165 79" pathLength="1" /><path d="M270 0C270 60 185 35 185 79" pathLength="1" /></g>
+        <g class="signals signals--out" stroke="var(--v2-outcome)" stroke-width="2"><path d="M155 135C155 186 52 168 52 235" pathLength="1" /><path d="M175 135V235" pathLength="1" /><path d="M195 135C195 186 298 168 298 235" pathLength="1" /></g>
+        <g fill="var(--v2-outcome)"><circle cx="52" cy="231" r="3" /><circle cx="175" cy="231" r="3" /><circle cx="298" cy="231" r="3" /></g>
+      </svg>
+      <div class="workflow-mobile__core"><Mark size={66} wordmark={false} /></div>
+    </div>
+    <div class="workflow-mobile__outputs"><span>CRM</span><span>Operations</span><span>Knowledge</span></div>
+  </div>
+  <figcaption>Illustrative workflow. Connected to the tools your team uses.</figcaption>
+</figure>

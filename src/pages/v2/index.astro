@@ -1,0 +1,33 @@
+---
+import Layout from '../../v2/Layout.astro';
+import Workflow from '../../v2/components/Workflow.astro';
+import Arrow from '../../v2/components/Arrow.astro';
+import Close from '../../v2/components/Close.astro';
+import Clinical from '../../v2/components/Clinical.astro';
+import { path } from '../../v2/routes';
+import { services, startingPoints } from '../../v2/content';
+---
+<Layout title="AI that makes it into everyday work" description="AI strategy, engineering and integration. One partner from the first useful question to a workflow your team can use.">
+  <section class="container hero">
+    <div class="hero__copy">
+      <h1>AI that makes it into everyday work.</h1>
+      <p class="lead">Strategy, engineering and integration. One partner from the first useful question to a workflow your team can use.</p>
+      <div class="actions"><a class="button" href={path('contact')}>Talk about your project <Arrow /></a><a class="text-link" href="#starting">Find your starting point</a></div>
+    </div>
+    <Workflow />
+  </section>
+  <div class="process-strip"><div class="container process-strip__inner">{services.slice(0, 3).map((s, i) => <a class="process-step" href={`${path('services')}#${s.id}`}><span>0{i+1}</span><div><strong>{s.phase}</strong><p>{['Find the right problem to solve.', 'Engineer the product around it.', 'Make it part of daily work.'][i]}</p></div></a>)}</div></div>
+  <section class="container section split" id="starting">
+    <div><h2>Where are you starting?</h2><p class="lead">You don’t need a finished brief. Just a problem worth understanding.</p><div class="actions"><a class="text-link" href={path('services')}>Explore our services <Arrow /></a></div></div>
+    <div>{startingPoints.map(p => <a class="choice" href={`${path('services')}#${p.service}`}><div><h3>{p.title}</h3><p>{p.text}</p></div><Arrow /></a>)}</div>
+  </section>
+  <section class="proof section section--ruled"><div class="container split proof__inner">
+    <div><h2>Engineering depth.<br />Clinical care.</h2><p class="lead">Tapioca Health is a digital clinic platform built with 3BP Labs. A setting where information handling, clinician review and auditability belong in the product from the start.</p><div class="actions"><a class="text-link" href={`${path('work')}#tapioca`}>Explore the work <Arrow /></a><a class="text-link" href="https://tapiocahealth.com">Visit Tapioca Health <Arrow /></a></div></div>
+    <Clinical />
+  </div></section>
+  <section class="container section split">
+    <div><h2>The last mile is part of the work.</h2><p class="lead">A model is one component. The system around it determines whether it gets used.</p><div class="actions"><a class="text-link" href={path('why-truvantik')}>Why work with Truvantik <Arrow /></a></div></div>
+    <div class="principle-list"><div><h3>Integrated, not isolated.</h3><p>Workflows belong in the tools your team already uses.</p></div><div><h3>Evaluated, not assumed.</h3><p>Make quality, uncertainty and failure behaviour visible.</p></div><div><h3>Owned, not abandoned.</h3><p>Monitoring, adoption and handover belong in the plan.</p></div></div>
+  </section>
+  <Close />
+</Layout>

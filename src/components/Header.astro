@@ -1,6 +1,5 @@
 ---
 import Logo from "./Logo.astro";
-import ThemeToggle from "./ThemeToggle.astro";
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const nav = [
   { href: "/services", label: "Services" },
@@ -17,12 +16,11 @@ const isActive = (h: string) => path === h;
 
     <nav class="head-nav" aria-label="Primary">
       {nav.map((n) => (
-        <a href={n.href} class:list={["nav-link", { active: isActive(n.href) }]}>{n.label}</a>
+        <a href={n.href} aria-current={isActive(n.href) ? "page" : undefined} class:list={["nav-link", { active: isActive(n.href) }]}>{n.label}</a>
       ))}
     </nav>
 
     <div class="head-actions">
-      <ThemeToggle />
       <a href="/contact" class="btn head-cta">Let’s talk <span class="arw">→</span></a>
       <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
@@ -32,7 +30,7 @@ const isActive = (h: string) => path === h;
 
   <div class="mobile-nav" id="mobile-nav" hidden>
     <nav class="wrap" aria-label="Mobile">
-      {nav.map((n) => <a href={n.href} class="mnav-link">{n.label}</a>)}
+      {nav.map((n) => <a href={n.href} aria-current={isActive(n.href) ? "page" : undefined} class="mnav-link">{n.label}</a>)}
       <a href="/contact" class="btn mnav-cta">Let’s talk <span class="arw">→</span></a>
     </nav>
   </div>
@@ -61,13 +59,9 @@ const isActive = (h: string) => path === h;
     content: ""; position: absolute; left: 0.85em; right: 0.85em; bottom: 0.15em;
     height: 2px; background: var(--accent); border-radius: 2px;
   }
-  .head-actions { display: flex; align-items: center; gap: 0.7rem; }
-  .head-cta { padding: 0.6em 1.05em; font-size: 0.9rem; margin-left: 0.5rem; }
-  :global([data-theme="ember"]) .head-cta,
-  :global([data-theme="ember"]) .mnav-cta {
-    background: var(--orange); color: #ffffff; border-color: var(--orange);
-  }
-  .menu-btn { display: none; background: none; border: 0; color: var(--ink); padding: 0.3em; }
+  .head-actions { display: flex; align-items: center; gap: 0.7rem; margin-inline-start: 1.1rem; }
+  .head-cta { padding: 0.6em 1.05em; font-size: 0.9rem; }
+  .menu-btn { display: none; background: none; border: 0; color: var(--ink); padding: 0.6em; min-width: 44px; min-height: 44px; }
 
   .mobile-nav { border-top: 1px solid var(--border); background: var(--bg); }
   .mobile-nav nav { display: grid; gap: 0.25rem; padding-block: 1rem 1.5rem; }
@@ -96,6 +90,10 @@ const isActive = (h: string) => path === h;
       const open = nav.hasAttribute("hidden");
       if (open) { nav.removeAttribute("hidden"); } else { nav.setAttribute("hidden", ""); }
       btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && nav && !nav.hidden) { nav.hidden = true; btn?.setAttribute("aria-expanded", "false"); btn?.setAttribute("aria-label", "Open menu"); btn?.focus(); }
     });
   })();
 </script>

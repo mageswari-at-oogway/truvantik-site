@@ -26,10 +26,10 @@ Node 18+ recommended (built and tested on Node 26).
 
 | Route | File | What it is |
 | --- | --- | --- |
-| `/` | `src/pages/index.astro` | Home — hero, differentiators, live roadmap, entry points, Assess·Build·Deploy, Kron Health proof, CTA |
+| `/` | `src/pages/index.astro` | Home — hero, animated workflow, differentiators, entry points, Assess·Build·Deploy, Tapioca Health proof, CTA |
 | `/services` | `src/pages/services.astro` | Four service lines, each with its own product-moment visual |
 | `/industries` | `src/pages/industries.astro` | Four sectors with animated count-up outcome ranges |
-| `/work` | `src/pages/work.astro` | Case studies — Kron Health + 3 representative scenarios |
+| `/work` | `src/pages/work.astro` | Case studies — Tapioca Health + 3 representative scenarios |
 | `/about` | `src/pages/about.astro` | Story, corporate structure, four commitments, "what we will not do" |
 | `/contact` | `src/pages/contact.astro` | Qualification form (client-side validation) + "what happens next" |
 | `/privacy`, `/terms` | `src/pages/{privacy,terms}.astro` | Legal placeholders (see "Needs real content") |
@@ -38,81 +38,54 @@ Node 18+ recommended (built and tested on Node 26).
 
 ## Design system
 
-### Design thesis
-1. **Editorial, not templated** — warm near-black canvas, generous air, one signature
-   orange→teal gradient as the only recurring "colour event" (headlines, glows, strokes, the mark).
-2. **Depth over boxes** — glass panels floating over a soft animated aurora + fine grain;
-   motion is physical (spring, stagger, glow).
-3. **One geometric language** — the diamond / grid / phase-flow recurs so every product moment
-   reads as one system across all three themes.
+[design.md](./design.md), also served at [/design.md](http://localhost:4321/design.md),
+is the canonical visual reference. It preserves the earlier dark editorial design:
+Outfit, original layouts, full-height desktop sections and animated graphics.
 
-### Tokens — `src/styles/tokens.css`
-Everything reads CSS custom properties. Categories: type (`--font-*`, fluid `--step-*`),
-geometry (`--radius-*`, `--maxw`, `--gutter`, easings), brand hues (`--teal`, `--orange`,
-`--grad`), and per-theme surfaces/ink/border/glow/shadow.
+Saffron & green on neutral charcoal is the site's single palette — one `:root`
+block in `tokens.css`, no theme switcher and no `data-theme` attribute. The
+multicolor logo uses a soft-white top beam, saffron chevron and muted-green
+anchor. Saffron marks actions; green supports workflow outputs. Logo geometry and
+animation timing are unchanged.
 
-### Themes
-Three themes, switched by `data-theme` on `<html>`, persisted to `localStorage` (`tv-theme`),
-with a no-flash inline script in `Base.astro`. The system is an editorial "dossier" direction —
-warm paper, near-black ink, one orange accent, hairline rules, oversized index numerals,
-monospace labels, small tight type. Flat, not glowing.
+The hero keeps its orbital composition with an improved input → core → systems
+sequence. Labels remain visible. There is no visible playback control; animations
+pause offscreen and while the document is hidden. Reduced
+motion uses static diagrams.
 
-- **paper** (default) — warm editorial light
-- **ink** — flat editorial dark (warm charcoal, not navy)
-- **bauhaus** — flat, sharp-cornered, hard offset shadows, primary red/blue/yellow
-- **terminal** — brutalist mono, black + acid-green, CRT scanlines, Space Grotesk / Space Mono
-- **nimbus** — soft organic, peach→lavender gradient, pastel blobs, rounded, Bricolage Grotesque
+- `src/styles/tokens.css`: canonical theme and geometry values.
+- `src/styles/global.css`: original primitives and shared motion governance.
+- `src/components/WorkflowOrbit.astro`: animated workflow.
+- `src/components/Logo.astro`: canonical shared mark.
 
-Themes can restyle fonts, radius, shadows and decorative layers (grid, blobs, scanlines) —
-not just colour — via per-`[data-theme]` blocks in `tokens.css` plus a small flourish section
-at the end of `global.css`.
+The unused BrandGraphic and DeliveryDiagram components have been removed along
+with the theme picker. The former logo picker route and source are also gone.
 
-**Adding a theme is one block:** copy a `[data-theme="x"] { … }` block in `tokens.css` and add
-the name to the `order`/`names` arrays in `src/components/ThemeToggle.astro`.
+## Verification
 
-### Motion (all respect `prefers-reduced-motion`)
-- Reveal-on-scroll (IntersectionObserver, `.reveal` / `.reveal-clip`)
-- Animated aurora backdrop + gradient text pan
-- Signature roadmap state machine (`RoadmapBoard.astro`) — a card advances Assess→Build→Deploy on a timer, only while in view
-- Magnetic primary buttons (`[data-magnetic]`, pointer:fine only)
-- Count-up stats (`[data-count-to]`) on the industries page
-- Phase-flow rail fills on scroll; sprint/orbit/node micro-visuals on services
-
-### Layout
-Full-viewport **scroll-snap** (`scroll-snap-type: y proximity`, `.snap` sections at
-`min-height: 100svh`) on desktop; disabled under reduced-motion and on small screens so tall
-content scrolls normally.
-
-### Components — `src/components/`
-`Logo.astro` (theme-aware diamond mark), `Header.astro` (sticky nav + mobile menu),
-`Footer.astro`, `ThemeToggle.astro`, `RoadmapBoard.astro`, `CtaBand.astro`.
-
----
-
-## Accessibility & performance
-- Semantic HTML, skip link, labelled form controls with inline validation and `aria-invalid`,
-  visible focus rings, `aria-expanded` on the mobile menu, descriptive `aria-label`s.
-- All three themes checked for contrast; motion gated behind `prefers-reduced-motion`.
-- No horizontal overflow at 375 / 768 / desktop.
-- Self-contained: fonts from Google Fonts (preconnected); noise/aurora are inline CSS/data-URI;
-  no images to ship yet (visuals are CSS/SVG).
+Run `npm run build` for all routes. Check mobile navigation, keyboard focus,
+contact validation and narrow-screen overflow after UI changes.
+The main contact form posts to `https://formspree.io/f/xnpnqpow` using vanilla JavaScript AJAX,
+with a native HTML POST fallback when JavaScript is unavailable. No server adapter,
+API key or additional package is required. Recipient routing is managed in Formspree.
+The `/v2/contact` route remains an email-draft preview.
 
 ---
 
 ## Needs real content / confirmation before launch
-- **Form endpoint** — `contact.astro` validates and shows a success state client-side only.
-  Wire the marked `NOTE:` to the CRM/form endpoint, then redirect to the real scheduling URL.
+- **Form delivery** — verify the recipient configuration in Formspree and confirm a
+  real submission reaches the intended inbox after deployment.
 - **Scheduling URL** (Calendly or equivalent) for the "book a call" paths.
 - **Industry outcome ranges** (15–25% clinical time, 5–15% conversion, 20–35% downtime,
   sub-100ms latency) — confirm defensible as published, or soften.
-- **Case studies** — sign-off on the Kron Health / 3BP Labs wording; approval to keep the three
+- **Case studies** — sign-off on the Tapioca Health / 3BP Labs wording; approval to keep the three
   composites labelled as *representative scenarios*, or replace with real published ones.
 - **Data-handling / security wording** for procurement (residency, certifications, model-training
   policy) — currently absent in the source material.
 - **Team / founder bios** if a "meet the team" element is wanted.
 - **Privacy Policy & Terms** — real legal copy (current pages are flagged placeholders).
-- **Logo** — the diamond mark is reconstructed from the live brand as inline SVG; swap for the
-  official vector if one exists.
+- **Logo** — the current T–V vector monogram is settled. Preserve the canonical component
+  and favicon when changing interface colors.
 
 ---
 
