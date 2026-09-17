@@ -174,10 +174,11 @@ Small controls target at least 44px.
 The mobile menu exposes expanded state and Escape returns focus to its toggle.
 Preserve aria-current on navigation.
 
-Keep the contact preview's accessibility repairs: field error associations,
+Keep the contact form's accessibility repairs: field error associations,
 polite announcements, first-invalid-field focus and visible danger colors.
-The form does not deliver messages; never show a sent confirmation without a
-real endpoint. Preserve the illustrative clinical label and all case-study
+The main contact form posts to Formspree, with native POST as the no-JavaScript
+fallback. Show confirmation only after a successful response; preserve entered
+values on failure and expose sending and retry states. Preserve the illustrative clinical label and all case-study
 qualifications.
 
 ## Verification

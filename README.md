@@ -65,13 +65,16 @@ with the theme picker. The former logo picker route and source are also gone.
 
 Run `npm run build` for all routes. Check mobile navigation, keyboard focus,
 contact validation and narrow-screen overflow after UI changes.
-The contact form is explicitly a preview and does not deliver messages.
+The main contact form posts to `https://formspree.io/f/xnpnqpow` using vanilla JavaScript AJAX,
+with a native HTML POST fallback when JavaScript is unavailable. No server adapter,
+API key or additional package is required. Recipient routing is managed in Formspree.
+The `/v2/contact` route remains an email-draft preview.
 
 ---
 
 ## Needs real content / confirmation before launch
-- **Form endpoint** — `contact.astro` validates locally and explicitly explains that messages
-  are not sent. Connect the CRM/form endpoint before enabling real submission.
+- **Form delivery** — verify the recipient configuration in Formspree and confirm a
+  real submission reaches the intended inbox after deployment.
 - **Scheduling URL** (Calendly or equivalent) for the "book a call" paths.
 - **Industry outcome ranges** (15–25% clinical time, 5–15% conversion, 20–35% downtime,
   sub-100ms latency) — confirm defensible as published, or soften.

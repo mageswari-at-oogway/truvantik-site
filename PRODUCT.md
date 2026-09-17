@@ -21,7 +21,7 @@ The supplied site positions the team as engineering-led, with one partner across
 ## Capabilities and constraints
 
 - Existing Astro site, static output, CSS and small browser scripts.
-- Preserve existing routes and contact flow. The contact form has client-side validation but no delivery endpoint; do not imply successful delivery.
+- Preserve existing routes and contact flow. The main contact form validates locally and submits to Formspree; confirm submission only after a successful response. The v2 route remains an email-draft preview.
 - Tapioca Health is a separate product brand, built with 3BP Labs. Representative examples must remain identified as such.
 - Do not invent clients, results, certifications or timelines.
 
